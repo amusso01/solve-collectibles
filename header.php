@@ -39,15 +39,21 @@ $displaySocial = get_theme_mod('display-social');
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'foundry' ); ?></a>
 	<header class="site-header">
-		<div class="site-header__inner content-block">
-			<?php get_template_part( 'components/header/logo' ); ?>
-			<?php get_template_part( 'components/navigation/primary' ); ?>
-			<?php if($displaySocial): ?>
-				<?php get_template_part( 'components/header/social' ); ?>
-			<?php endif ?>
-			<?php get_template_part( 'components/header/hamburger' ); ?>
+		<div class="site-header__inner">
+			<div class="site-header__block site-header__block__navigation">
+				<?php get_template_part( 'components/header/logo' ); ?>
+				<?php get_template_part( 'components/navigation/primary' ); ?>
+			</div>
+			<div class="site-header__block site-header__block__search">
+				<?php get_product_search_form(); ?> 
+			</div>
+			<div class="site-header__block">
+				<?php get_template_part( 'components/navigation/shop' ); ?>
+			</div>
+			<div class="site-header__block site-header__block__hamburger-block">
+				<?php get_template_part( 'components/header/hamburger' ); ?>
+			</div>
 		</div>
-		<!-- <?php get_search_form(); ?> -->
 	</header><!-- .site-header -->
 
 
