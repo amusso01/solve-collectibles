@@ -61,7 +61,7 @@ add_action( 'init', 'wpseed_register_theme_menus');
   5.0 SETUP LOGIN PAGE 
 ==================================================================================*/
 
-$gFontUrl = "https://fonts.googleapis.com/css?family=Girassol&display=swap";
-$fontFamily = "'Girassol', cursive";
+$gFontUrl = "https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap";
+$fontFamily = "'Rubik', sans-serif;";
 $customLogo = get_stylesheet_directory_uri()."/dist/images/foundry-logo.svg";
-$mainColor = "#ff0000";
+$mainColor = "#0a0a0a";

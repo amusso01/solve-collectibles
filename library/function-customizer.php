@@ -28,19 +28,6 @@
 		'label' => 'Text Color'
 	);
 	
-	// link color
-	$txtcolors[] = array(
-		'slug'=>'link_color', 
-		'default' => '#008AB7',
-		'label' => 'Link Color'
-	);
-	
-	// link color ( hover, active )
-	$txtcolors[] = array(
-		'slug'=>'link_color_hover', 
-		'default' => '#9e4059',
-		'label' => 'Link Color (on hover)'
-	);
 
 	// FONT-SIZE
 	$fontsize[] = array(

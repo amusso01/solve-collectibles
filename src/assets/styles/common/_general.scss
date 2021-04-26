@@ -2,12 +2,12 @@
   GENERAL
 ==================================================================================*/
 html {
-	color: $color__text;
-	font-family: $text__fontname;
-	// Make everything look a little nicer in webkit
-	-webkit-font-smoothing: antialiased;
-	font-size: $text__p;
-	font-weight: 400;
+  color: $color__text;
+  font-family: $text__fontname;
+  // Make everything look a little nicer in webkit
+  -webkit-font-smoothing: antialiased;
+  font-size: $text__p;
+  font-weight: 400;
 }
 
 /**
@@ -24,42 +24,45 @@ pre,
 ul,
 li,
 ol {
-	color: $color__text;
+  color: $color__text;
+  letter-spacing: 1.5px;
 }
 
 em,
 i,
 q,
 dfn {
-	font-style: italic;
+  font-style: italic;
 }
 
 sub,
 sup {
-	font-size: 75%;
-	line-height: 0;
-	position: relative;
-	vertical-align: baseline;
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
 }
 
 sup {
-	top: -0.5em;
+  top: -0.5em;
 }
 
 sub {
-	bottom: -0.25em;
+  bottom: -0.25em;
 }
 
 /**
  * Links
  */
 a {
-	color: $color__link;
-	text-decoration: none;
-	font-size: $text__p;
-	&:hover {
-		color: $color__link-hover;
-	}
+  color: $color__link;
+  text-decoration: none;
+  font-size: $text__p;
+  letter-spacing: 1.5px;
+  &:hover {
+    color: $color__link-hover;
+    text-decoration: underline;
+  }
 }
 
 /*
@@ -78,36 +81,42 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0px;
-	font-family: $header__fontname;
+  margin: 0px;
+  font-family: $header__fontname;
 }
 
 h1,
 .h1 {
-	font-size: $text__h1;
+  font-size: $text__h1;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
 h2,
 .h2 {
-	font-size: $text__h1;
+  font-size: $text__h1;
+  font-weight: 500;
 }
 
 h3,
 .h3 {
-	font-size: $text__h3;
+  font-size: $text__h3;
+  font-weight: 500;
 }
 
 h4,
 .h4 {
-	font-size: $text__h4;
+  font-size: $text__h4;
+  font-weight: 500;
 }
 
 h5,
 .h5 {
-	font-size: $text__h5;
+  font-size: $text__h5;
 }
 
 h6,
 .h6 {
-	font-size: $text__h6;
+  font-size: $text__h6;
+  font-weight: 400;
 }

@@ -26,6 +26,11 @@ require get_template_directory() . '/library/function-dev.php';
 // general settings, enqueue, theme support, disable backend-theme-editor & more
 require get_template_directory() . '/library/function-settings.php';
 
+/*==================================================================================
+  WOOCOMMERCE
+==================================================================================*/
+require get_template_directory() . '/library/function-woocommerce.php';
+
 
 /*==================================================================================
   WIDGET AND SIDEBAR

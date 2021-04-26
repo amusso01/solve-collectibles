@@ -53,6 +53,14 @@
 				<?php endif; ?>
 			</div>
 		</div>
+
+		<?php 
+		// If the current user can manage options(ie. an admin)
+		if( current_user_can( 'manage_options' ) ) 
+			// Print the saved global 
+			printf( '<div><strong>Current template:</strong> %s</div>', get_current_template() ); 
+		?>
+		
 	</footer><!-- #colophon -->
 
 </div><!-- #page -->
