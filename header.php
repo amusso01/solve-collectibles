@@ -12,7 +12,6 @@
 
 <?php 
 // Social logic
-
 $displaySocial = get_theme_mod('display-social');
 
 ?>
@@ -38,20 +37,22 @@ $displaySocial = get_theme_mod('display-social');
 
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'foundry' ); ?></a>
+	<?php get_template_part( 'components/header/banner' ) ?>
 	<header class="site-header">
 		<div class="site-header__inner">
 			<div class="site-header__block site-header__block__navigation">
 				<?php get_template_part( 'components/header/logo' ); ?>
-				<?php get_template_part( 'components/navigation/primary' ); ?>
+				<div class="site-header__mobile">
+					<?php get_product_search_form(); ?> 
+					<div id="backParent" class="backToParent">Back</div>
+					<?php get_template_part( 'components/navigation/primary' ); ?>
+				</div>
 			</div>
 			<div class="site-header__block site-header__block__search">
 				<?php get_product_search_form(); ?> 
 			</div>
-			<div class="site-header__block">
+			<div class="site-header__block site-header__block__nav-shop">
 				<?php get_template_part( 'components/navigation/shop' ); ?>
-			</div>
-			<div class="site-header__block site-header__block__hamburger-block">
-				<?php get_template_part( 'components/header/hamburger' ); ?>
 			</div>
 		</div>
 	</header><!-- .site-header -->
