@@ -7,11 +7,10 @@
  * @package Foundry
  */
 
-if ( has_nav_menu( 'footermenu' ) ) :
+if ( has_nav_menu( 'footerthree' ) ) :
     wp_nav_menu([
-        'theme_location'    => 'footermenu',
-        'menu_class'        => 'footer-menu',
-        'menu_id'           => 'menu_footer',
+        'theme_location'    => 'footerthree',
+        'menu_class'        => 'footer-menu-3',
         'container'         => 'nav',
         'container_class'   => 'footer-menu',
         'depth'             => 1

@@ -1,0 +1,136 @@
+// ARCHIVE PARENT CATEGORY
+// header
+.fd-woo__archive-header {
+  background-color: $color__footerBg;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  padding: 30px;
+  column-gap: 40px;
+  row-gap: 30px;
+  .woo-products-header__description {
+    text-align: center;
+    padding: 0px 40px;
+    > h1 {
+      text-transform: uppercase;
+      width: 85%;
+      margin: auto;
+      margin-bottom: 10px;
+    }
+    .subTitle {
+      font-weight: 500;
+      font-size: 21px;
+
+      width: 90%;
+      margin: auto;
+      margin-bottom: 10px;
+    }
+    .term-description {
+      p {
+        margin: auto;
+        font-size: 16px;
+      }
+    }
+  }
+}
+// nav anchor link
+.fd-woo__archive-anchor {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  .anchor-item {
+    border-top: 2px solid $color__dark;
+    border-bottom: 2px solid $color__dark;
+    border-right: 2px solid $color__dark;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    min-height: 75px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: 0.3s;
+    font-size: 21px;
+    &:hover {
+      text-decoration: none;
+      background-color: $color__footerBg;
+    }
+
+    &:last-of-type {
+      border-right: none;
+    }
+  }
+}
+// Most popular
+.fd-woo__most-popular {
+  padding-top: 75px;
+  h3 {
+    padding: 0 1rem;
+    margin-bottom: 25px;
+  }
+  &-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    .fd-woo__most-popular-item {
+      border-top: 2px solid $color__dark;
+      border-bottom: 2px solid $color__dark;
+      border-right: 2px solid $color__dark;
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      padding: 25px 1rem;
+      align-items: center;
+      &:last-of-type {
+        border-right: none;
+      }
+      .fd-woo__most-popular-description {
+        text-align: center;
+        > h2 {
+          font-size: 26px;
+          margin-bottom: 5px;
+        }
+        .cat-title {
+          font-size: 13px;
+          width: 60%;
+          margin: auto;
+          margin-bottom: 25px;
+        }
+        .price {
+          font-weight: 500;
+          margin-bottom: 25px;
+        }
+        .btn-woo {
+          display: inline-flex;
+          flex-direction: column;
+          justify-content: center;
+          position: relative;
+          .add_to_cart_button {
+            background-color: $color__dark;
+            color: $color__bright;
+            padding: 15px 30px;
+            border-radius: 3px;
+            font-weight: 500;
+            margin-bottom: 5px;
+          }
+          .added_to_cart.wc-forward {
+            font-size: 14px;
+            font-weight: 500;
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Packs grid
+.fd-woo__shop-grid {
+  padding-top: 75px;
+  h3 {
+    padding: 0 1rem;
+    margin-bottom: 25px;
+  }
+}

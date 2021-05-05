@@ -201,3 +201,68 @@ function wc_qty_get_cart_qty( $product_id ) {
 	return $running_qty;
 }
 
+
+/**
+* Show only parent category in Archive
+*/
+function exclude_product_cat_children($wp_query) {
+	if ( isset ( $wp_query->query_vars['product_cat'] ) && $wp_query->is_main_query()) {
+		$wp_query->set('tax_query', array(
+				array (
+					'taxonomy' => 'product_cat',
+					'field' => 'slug',
+					'terms' => $wp_query->query_vars['product_cat'],
+					'include_children' => false
+				)
+			)
+		);
+	}
+}
+add_filter('pre_get_posts', 'exclude_product_cat_children');
+
+
+
+// To change add to cart text on single product page
+add_filter( 'woocommerce_product_single_add_to_cart_text', 'woocommerce_custom_single_add_to_cart_text' ); 
+function woocommerce_custom_single_add_to_cart_text() {
+    return __( 'ADD TO BAG', 'woocommerce' ); 
+}
+
+// To change add to cart text on product archives(Collection) page
+add_filter( 'woocommerce_product_add_to_cart_text', 'woocommerce_custom_product_add_to_cart_text' );  
+function woocommerce_custom_product_add_to_cart_text() {
+    return __( 'ADD TO BAG', 'woocommerce' );
+}
+
+
+
+// WOOCOMMERCE ORDER MANIPULATE
+
+/**
+* Remove the breadcrumbs 
+*/
+add_action( 'init', 'woo_remove_wc_breadcrumbs' );
+function woo_remove_wc_breadcrumbs() {
+    remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
+}
+
+/**
+* Remove result count
+*/
+add_action('woocommerce_before_shop_loop', 'remove_result_count' );
+function remove_result_count(){
+	remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
+}
+
+/**
+* Remove catalogue ordering
+*/
+add_action('woocommerce_before_shop_loop', 'remove_catalog_ordering' );
+function remove_catalog_ordering(){
+	remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
+}
+
+
+
+// WOOCOMMERCE ADD HTML
+

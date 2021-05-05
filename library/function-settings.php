@@ -116,6 +116,10 @@ if ( ! function_exists( 'foundry_setup' ) ) :
 			* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 			*/
 		add_theme_support( 'post-thumbnails' );
+		// IMAGE CUSTOM SIZE
+		add_image_size( 'most_popular', 253, 253 ); 
+		// add_image_size( 'homepage-thumb size', 220, 180 ); 
+		// add_image_size( 'fullpage-thumb size', 590, 790 );
 
 		/*
 			* Switch default core markup for search form, comment form, and comments
@@ -325,3 +329,4 @@ if( function_exists('acf_add_options_page') ) {
 	// ));
 	
 }
+
