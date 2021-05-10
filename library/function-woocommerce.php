@@ -19,7 +19,7 @@ if ( ! function_exists( 'foundry_woocommerce_support' ) ) {
 		// Add Product Gallery support.
 		// add_theme_support( 'wc-product-gallery-lightbox' );
 		// add_theme_support( 'wc-product-gallery-zoom' );
-		add_theme_support( 'wc-product-gallery-slider' );
+		// add_theme_support( 'wc-product-gallery-slider' );
 
 		}
 }
@@ -220,7 +220,37 @@ function exclude_product_cat_children($wp_query) {
 }
 add_filter('pre_get_posts', 'exclude_product_cat_children');
 
-
+// CREATE A TEAM TAXONOMY
+add_action( 'init', 'custom_taxonomy_Team' );
+function custom_taxonomy_Team()  {
+$labels = array(
+    'name'                       => 'Teams',
+    'singular_name'              => 'Team',
+    'menu_name'                  => 'Team',
+    'all_items'                  => 'All Teams',
+    'parent_item'                => 'Parent Team',
+    'parent_item_colon'          => 'Parent Team:',
+    'new_item_name'              => 'New Team Name',
+    'add_new_item'               => 'Add New Team',
+    'edit_item'                  => 'Edit Team',
+    'update_item'                => 'Update Team',
+    'separate_items_with_commas' => 'Separate Team with commas',
+    'search_items'               => 'Search Teams',
+    'add_or_remove_items'        => 'Add or remove Teams',
+    'choose_from_most_used'      => 'Choose from the most used Teams',
+);
+$args = array(
+    'labels'                     => $labels,
+    'hierarchical'               => true,
+    'public'                     => true,
+    'show_ui'                    => true,
+    'show_admin_column'          => true,
+    'show_in_nav_menus'          => true,
+    'show_tagcloud'              => true,
+);
+register_taxonomy( 'team', 'product', $args );
+register_taxonomy_for_object_type( 'team', 'product' );
+}
 
 // To change add to cart text on single product page
 add_filter( 'woocommerce_product_single_add_to_cart_text', 'woocommerce_custom_single_add_to_cart_text' ); 
@@ -232,6 +262,27 @@ function woocommerce_custom_single_add_to_cart_text() {
 add_filter( 'woocommerce_product_add_to_cart_text', 'woocommerce_custom_product_add_to_cart_text' );  
 function woocommerce_custom_product_add_to_cart_text() {
     return __( 'ADD TO BAG', 'woocommerce' );
+}
+
+/* OUT OF STOCK WORDING UPDATES */
+add_filter( 'woocommerce_get_availability', 'wcs_custom_get_availability', 1, 2);
+function wcs_custom_get_availability( $availability, $_product ) {
+
+    if ( ! $_product->is_in_stock() ) {
+        $availability['availability'] = __('BE BACK SOON', 'woocommerce');
+    }
+    return $availability;
+}
+
+// For Woocommerce version 3 and above only
+add_filter( 'woocommerce_loop_add_to_cart_link', 'filter_loop_add_to_cart_link', 20, 3 );
+function filter_loop_add_to_cart_link( $button, $product, $args = array() ) {
+    if( $product->is_in_stock() ) return $button;
+
+    // HERE set your button text (when product is not on stock)
+    $button_text = __('BE BACK SOON', 'woocommerce');
+
+    return sprintf( '<a class="button disabled" style="%s">%s</a>', $style, $button_text );
 }
 
 
@@ -262,7 +313,37 @@ function remove_catalog_ordering(){
 	remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
 }
 
+/**
+* Remove related products
+*/
+add_action('woocommerce_after_single_product_summary', 'remove_related_product' );
+function remove_related_product(){
+	remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
+}
 
+/**
+* Remove upsell
+*/
+add_action('woocommerce_after_single_product_summary', 'remove_upsell_display' );
+function remove_upsell_display(){
+	remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
+}
+
+/**
+* Remove product_data_tabs
+*/
+add_filter( 'woocommerce_product_tabs', '__return_empty_array', 98 );
 
 // WOOCOMMERCE ADD HTML
 
+/**
+* Add single products descritpion
+*/
+add_action('woocommerce_after_single_product_summary', 'fd_add_product_description' );
+function fd_add_product_description(){
+	echo	'<section class="fd-single-description">';
+	echo	' <h3>About this card</h3>';
+	the_content();
+	echo	'</section>';
+
+}

@@ -17,10 +17,12 @@
 
 defined( 'ABSPATH' ) || exit;
 global $wp_query;
-$cat = $wp_query->get_queried_object();
-$thumbnail_id = get_term_meta( $cat->term_id, 'thumbnail_id', true );
+$FDcat = $wp_query->get_queried_object();
+$thumbnail_id = get_term_meta( $FDcat->term_id, 'thumbnail_id', true );
 $image = wp_get_attachment_url( $thumbnail_id );
-$secondaryTitle = get_field('title_description', $cat);
+$secondaryTitle = get_field('title_description', $FDcat);
+
+
 
 get_header( 'shop' );
 
@@ -36,7 +38,7 @@ do_action( 'woocommerce_before_main_content' );
 ?>
 <header class="woocommerce-products-header fd-woo__archive-header">
     <div class="woo-products-header__image">
-        <img src="<?php echo $image ?>" alt="<?php echo  $cat->name ?>">
+        <img src="<?php echo $image ?>" alt="<?php echo  $FDcat->name ?>">
     </div>
     <div class="woo-products-header__description">
         <h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
@@ -69,15 +71,19 @@ if ( woocommerce_product_loop() ) {
 
 
 <?php
+$term = get_queried_object();
+
+
 // ARCHIVE NAV BAR ANCHOR LINK
 if(is_product_category()):
-wc_get_template_part( 'custom/custom', 'archive-anchor-nav' ); 
+	if ( $term->parent === 0  ) : 
+		wc_get_template_part( 'custom/custom', 'archive-anchor-nav' ); 
+	endif;
 endif;
 // MOST POPULAR ACF 
-$term = get_queried_object();
 $mostPopular = get_field('most_popular_products', $term);
 
-// CHECK IF IS PARENT CATEGORY
+//Check if it's parent category
 if ( $term->parent === 0  ) : ?>
 
 <section class="fd-woo__most-popular">
@@ -86,7 +92,7 @@ if ( $term->parent === 0  ) : ?>
 	<?php foreach($mostPopular as $popular) :
 		$productObject = wc_get_product( $popular->ID );
 		?>
-	
+
 		<div class="fd-woo__most-popular-item">
 			<img src="<?php echo get_the_post_thumbnail_url( $popular->ID , 'most_popular') ?>" alt="<?php echo $popular->post_title ?>">
 			<div class="fd-woo__most-popular-description">
@@ -99,12 +105,11 @@ if ( $term->parent === 0  ) : ?>
 
 	<?php endforeach;  ?>
 
-
 	</div>
 </section>
 <?php endif; ?>
 
-<section class="fd-woo__shop-grid">
+<section id="packs-list" class="fd-woo__shop-grid">
 	<h3>Packs</h3>
 <?php
 	woocommerce_product_loop_start();
@@ -148,8 +153,116 @@ if ( $term->parent === 0  ) : ?>
  *
  * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
  */
-do_action( 'woocommerce_after_main_content' );
+do_action( 'woocommerce_after_main_content' );?>
 
+
+<section id="teams-list" class="fd-woo__teams">
+	<h3>Football teams</h3>
+	<?php
+	$taxonomy     = 'product_cat';
+	$orderby      = 'name';  
+	$show_count   = 0;      // 1 for yes, 0 for no
+	$pad_counts   = 0;      // 1 for yes, 0 for no
+	$hierarchical = 1;      // 1 for yes, 0 for no  
+	$title        = '';  
+	$empty        = 0;
+	$args = array(
+		'taxonomy'     => $taxonomy,
+		'orderby'      => $orderby,
+		'show_count'   => $show_count,
+		'pad_counts'   => $pad_counts,
+		'hierarchical' => $hierarchical,
+		'title_li'     => $title,
+		'hide_empty'   => $empty
+ );
+$all_categories = get_categories( $args );
+foreach ($all_categories as $cat) {
+
+   if($cat->category_parent == 0) {
+	   $category_id = $cat->term_id;    
+	   $term_objects = get_term_by( 'slug', 'individuals', $taxonomy );
+		$term_ids[] = (int) $term_objects->term_id;   
+
+	   $args2 = array(
+			   'taxonomy'     => $taxonomy,
+			   'child_of'     => 0,
+			   'parent'       => $FDcat->term_id,
+			   'orderby'      => $orderby,
+			   'show_count'   => $show_count,
+			   'pad_counts'   => $pad_counts,
+			   'hierarchical' => $hierarchical,
+			   'title_li'     => $title,
+			   'hide_empty'   => $empty,
+			   'exclude' => $term_ids
+			   
+	   );
+	}       
+}
+	$sub_cats = get_categories( $args2);
+if($sub_cats)  : ?>
+	<ul class="fd-teams-grid">
+
+<?php 	foreach($sub_cats as $sub_category) : 
+			$teamThumbnail_id = get_woocommerce_term_meta( $sub_category->term_id, 'thumbnail_id', true );
+			$teamImage        = wp_get_attachment_image_src( $teamThumbnail_id , 'thumbnail')[0];
+
+?>
+		<li><a href="<?php echo get_term_link($sub_category->slug, 'product_cat'); ?>" title="<?php echo  $sub_category->name ?>"> <img src="<?php echo 	$teamImage  ?>" alt="<?php echo  $sub_category->name ?>"></a></li>
+	<?php endforeach; ?>
+
+	</ul>
+<?php endif; ?>
+
+
+</section>
+
+<section  id="fd-bestSelling" class="fd-woo__shop-bestselling">
+	<h3>Bestselling individual cards</h3>
+	<?php
+	$args = array(
+		'post_type' => 'product',
+		'meta_key' => 'total_sales',
+		'orderby' => 'meta_value_num',
+		'posts_per_page' => 6,
+		'tax_query' => array( 
+			array(
+			  'taxonomy' => 'product_cat',
+			  'field' => 'id',
+			  'terms' => $FDcat->term_id,
+			  'include_children' => false, // (bool) - Whether or not to include children for hierarchical taxonomies. Defaults to true.
+			  'operator' => 'NOT IN' // (string
+			),
+			array(
+				'taxonomy' => 'product_cat',
+				'field' => 'id',
+				'terms' => $FDcat->term_id,
+				'include_children' => true // (bool) - Whether or not to include children for hierarchical taxonomies. Defaults to true.
+
+			  )
+		),
+	);
+	$loop = new WP_Query( $args );
+
+	woocommerce_product_loop_start();
+
+	while ( $loop->have_posts() ) : $loop->the_post(); 
+		/**
+		 * Hook: woocommerce_shop_loop.
+		 */
+		do_action( 'woocommerce_shop_loop' );
+
+		wc_get_template_part( 'content', 'product' );
+	endwhile;
+
+	woocommerce_product_loop_end();	
+	wp_reset_query(); ?>
+	<div class="fd-go-to-individuals">
+		<a href="">SHOP ALL THE INDIVIDUALS CARDS <span><?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span></a>
+	</div>
+<section>
+
+
+<?php 
 /**
  * Hook: woocommerce_sidebar.
  *
