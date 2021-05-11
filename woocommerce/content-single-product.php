@@ -31,7 +31,7 @@ if ( post_password_required() ) {
 	return;
 }
 ?>
-<div id="product-<?php the_ID(); ?>" <?php wc_product_class( '', $product ); ?>>
+<div id="product-<?php the_ID(); ?>" <?php wc_product_class( 'fd-single-product__container', $product ); ?> >
 
 	<?php
 	/**
@@ -72,5 +72,116 @@ if ( post_password_required() ) {
 	do_action( 'woocommerce_after_single_product_summary' );
 	?>
 </div>
+<?php
+// get next and prev products
+// Author: Georgy Bunin (bunin.co.il@gmail.com)
+// forked from https://gist.github.com/2176823
+
+if ( is_singular('product') ) {
+    global $post;
+
+    // get categories
+    $terms = wp_get_post_terms( $post->ID, 'product_cat' );
+    foreach ( $terms as $term ) $cats_array[] = $term->term_id;
+
+    // get all posts in current categories
+    $query_args = array('posts_per_page' => -1, 'post_status' => 'publish', 'post_type' => 'product', 'tax_query' => array(
+        array(
+            'taxonomy' => 'product_cat',
+            'field' => 'id',
+            'terms' => $cats_array
+        )));
+    $r = new WP_Query($query_args);
+
+    // show next and prev only if we have 3 or more
+    if ($r->post_count > 2) {
+
+        $prev_product_id = -1;
+        $next_product_id = -1;
+
+        $found_product = false;
+        $i = 0;
+
+        $current_product_index = $i;
+        $current_product_id = get_the_ID();
+
+        if ($r->have_posts()) {
+            while ($r->have_posts()) {
+                $r->the_post();
+                $current_id = get_the_ID();
+
+                if ($current_id == $current_product_id) {
+                    $found_product = true;
+                    $current_product_index = $i;
+                }
+
+                $is_first = ($current_product_index == 0);
+
+                if ($is_first) {
+                    $prev_product_id = get_the_ID(); // if product is first then 'prev' = last product
+                } else {
+                    if (!$found_product && $current_id != $current_product_id) {
+                        $prev_product_id = get_the_ID();
+                    }
+                }
+
+                if ($i == 0) { // if product is last then 'next' = first product
+                    $next_product_id = get_the_ID();
+                }
+
+                if ($found_product && $i == $current_product_index + 1) {
+                    $next_product_id = get_the_ID();
+                }
+
+                $i++;
+            }?>
+            <div class="fd-single-pagination">
+            
+     
+
+<?php 
+            if ($next_product_id != -1) { ShowLinkToProduct($next_product_id, $cats_array, "PREVIOUS ", true); }
+            if ($prev_product_id != -1) { ShowLinkToProduct($prev_product_id, $cats_array, "NEXT ", false); }
+        }
+        ?>
+               </div>
+
+        <?php 
+
+        wp_reset_query();
+    }
+}
+?>
 
 <?php do_action( 'woocommerce_after_single_product' ); ?>
+
+
+<!-- RELATED PRODUCT FROM THIS CATEGORY -->
+<section class="fd-related-product-category">
+    <h3>More from this collection.</h3>
+    <?php
+    // get all posts in current categories
+    $query_args = array('posts_per_page' => 5, 'post_status' => 'publish', 'post_type' => 'product', 'tax_query' => array(
+        array(
+            'taxonomy' => 'product_cat',
+            'field' => 'id',
+            'terms' => $cats_array
+        )));
+    $thisCat = new WP_Query($query_args);
+    woocommerce_product_loop_start();
+
+	while ( $thisCat->have_posts() ) : $thisCat->the_post(); 
+		/**
+		 * Hook: woocommerce_shop_loop.
+		 */
+		do_action( 'woocommerce_shop_loop' );
+
+		wc_get_template_part( 'content', 'product' );
+	endwhile;
+
+	woocommerce_product_loop_end();	
+	wp_reset_query(); ?>
+</section>
+<aside class="fd-single-goBack">
+    <a onclick="window.history.back()" href="#"><span><?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span> GO BACK</a>
+</aside>

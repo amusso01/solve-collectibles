@@ -247,9 +247,108 @@ $args = array(
     'show_admin_column'          => true,
     'show_in_nav_menus'          => true,
     'show_tagcloud'              => true,
+	'query_var'					 => true,
 );
 register_taxonomy( 'team', 'product', $args );
 register_taxonomy_for_object_type( 'team', 'product' );
+}
+
+
+add_action( 'woocommerce_after_add_to_cart_quantity', 'ts_quantity_plus_sign' );
+
+function ts_quantity_plus_sign() {
+echo '<button type="button" class="plus" >+</button>';
+}
+
+add_action( 'woocommerce_before_add_to_cart_quantity', 'ts_quantity_minus_sign' );
+
+function ts_quantity_minus_sign() {
+echo '<button type="button" class="minus" >-</button>';
+}
+
+add_action( 'wp_footer', 'ts_quantity_plus_minus' );
+
+function ts_quantity_plus_minus() {
+// To run this on the single product page
+if ( ! is_product() ) return;
+?>
+<script type="text/javascript">
+
+jQuery(document).ready(function($){
+
+$('form.cart').on( 'click', 'button.plus, button.minus', function() {
+
+// Get current quantity values
+var qty = $( this ).closest( 'form.cart' ).find( '.qty' );
+var val = parseFloat(qty.val());
+var max = parseFloat(qty.attr( 'max' ));
+var min = parseFloat(qty.attr( 'min' ));
+var step = parseFloat(qty.attr( 'step' ));
+
+// Change the value if plus or minus
+if ( $( this ).is( '.plus' ) ) {
+if ( max && ( max <= val ) ) {
+qty.val( max );
+}
+else {
+qty.val( val + step );
+}
+}
+else {
+if ( min && ( min >= val ) ) {
+qty.val( min );
+}
+else if ( val > 1 ) {
+qty.val( val - step );
+}
+}
+
+});
+
+});
+
+</script>
+<?php
+}
+
+// get next and prev products
+// Author: Georgy Bunin (bunin.co.il@gmail.com)
+// forked from https://gist.github.com/2176823
+function ShowLinkToProduct($post_id, $categories_as_array, $label, $is_prev) {
+    // get post according post id
+    $query_args = array( 'post__in' => array($post_id), 'posts_per_page' => 1, 'post_status' => 'publish', 'post_type' => 'product', 'tax_query' => array(
+        array(
+            'taxonomy' => 'product_cat',
+            'field' => 'id',
+            'terms' => $categories_as_array
+        )));
+    $r_single = new WP_Query($query_args);
+    if ($r_single->have_posts()) {
+        $r_single->the_post();
+        global $product;
+		$cardShortcode = get_field('card_shortcode' , $product->get_id());
+    ?>
+    <ul class="product_list_widget <?php echo $is_prev ? 'prev' : 'next'; ?>">
+        <li><a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_ID()); ?>">
+			<?php if($is_prev): ?>
+				<span class="arrow"><?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span>
+				<?php echo $label; ?>
+			<?php endif; ?>            
+
+            <?php if ( get_the_title() ) {
+					echo '<span class="shortcode" >'.$cardShortcode.' </span>';
+					echo '<span class="title">'. get_the_title().' </span>';
+			}  else {
+				the_ID(); }?>
+			<?php if(!$is_prev): ?>
+				<?php echo $label; ?>
+				<span class="arrow"><?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span>
+			<?php endif; ?>
+        </a></li>
+    </ul>
+    <?php
+        wp_reset_query();
+    }
 }
 
 // To change add to cart text on single product page
@@ -282,7 +381,7 @@ function filter_loop_add_to_cart_link( $button, $product, $args = array() ) {
     // HERE set your button text (when product is not on stock)
     $button_text = __('BE BACK SOON', 'woocommerce');
 
-    return sprintf( '<a class="button disabled" style="%s">%s</a>', $style, $button_text );
+    return sprintf( '<a class="button disabled" style="%s">%s</a>', '', $button_text );
 }
 
 
@@ -334,15 +433,25 @@ function remove_upsell_display(){
 */
 add_filter( 'woocommerce_product_tabs', '__return_empty_array', 98 );
 
+/**
+* Remove single excerpt
+*/
+add_action('woocommerce_single_product_summary', 'remove_single_excerpt' );
+function remove_single_excerpt(){
+	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+}
+
+
 // WOOCOMMERCE ADD HTML
 
 /**
 * Add single products descritpion
 */
-add_action('woocommerce_after_single_product_summary', 'fd_add_product_description' );
+add_action('woocommerce_after_single_product', 'fd_add_product_description' );
 function fd_add_product_description(){
 	echo	'<section class="fd-single-description">';
 	echo	' <h3>About this card</h3>';
+	get_template_part( 'svg-template/svg', 'right-arrow' );
 	the_content();
 	echo	'</section>';
 

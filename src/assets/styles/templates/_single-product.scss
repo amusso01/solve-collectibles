@@ -1,0 +1,313 @@
+.single-product {
+  .fd-single-product__container {
+    display: grid;
+    grid-template-columns: 0.9fr 1fr;
+    padding: 25px 30px;
+    background-color: $color__footerBg;
+    border-bottom: 2px solid $color__dark;
+    column-gap: 50px;
+    .woocommerce-product-gallery {
+      justify-self: center;
+      background-color: $color__bright;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 0px;
+      pointer-events: none;
+    }
+    .summary {
+      padding: 32px 30px;
+      text-align: center;
+      .product_title {
+        font-weight: 400;
+        text-transform: capitalize;
+        margin-bottom: 10px;
+        > span {
+          font-weight: 500;
+        }
+      }
+      .price {
+        font-weight: 500;
+        margin-bottom: 20px;
+      }
+      .stock {
+        display: none;
+      }
+      form.cart {
+        margin-bottom: 60px;
+        .fd-selector-wrapper {
+          display: flex;
+          width: 50%;
+          margin-left: auto;
+          margin-right: auto;
+          padding: 15px 10px;
+          border-top: 2px solid $color__dark;
+          margin-bottom: 10px;
+          .minus,
+          .plus,
+          .quantity {
+            flex-basis: 100%;
+          }
+          .plus,
+          .minus {
+            border: none;
+            background-color: transparent;
+            font-weight: 500;
+            font-size: 21px;
+          }
+          .quantity {
+            input {
+              width: 100%;
+              background-color: transparent;
+              border: none;
+              text-align: center;
+              height: 100%;
+              font-weight: 500;
+              font-size: 21px;
+            }
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+              /* display: none; <- Crashes Chrome on hover */
+              -webkit-appearance: none;
+              margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+            }
+          }
+        }
+        .button {
+          background-color: $color__dark;
+          color: $color__bright;
+          text-align: center;
+          border-radius: 3px;
+          font-weight: 500;
+          font-size: 14px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          padding-left: 20px;
+          padding-right: 20px;
+          width: 50%;
+          margin-left: auto;
+          margin-right: auto;
+          border: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .product_meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      > div {
+        > h4 {
+          margin-bottom: 10px;
+        }
+        > a {
+          font-size: 13px;
+          width: 80%;
+          display: inline-block;
+        }
+      }
+      .fd-meta-single {
+        grid-column: 1/-1;
+      }
+    }
+  }
+  .fd-single-pagination {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 2px solid $color__dark;
+    .prev {
+      border-right: 2px solid $color__dark;
+      a {
+        .arrow {
+          position: relative;
+          top: 2px;
+          display: inline-block;
+          margin-right: 18px;
+          > svg {
+            transform: rotate(180deg);
+          }
+        }
+        .shortcode {
+          display: inline-block;
+          margin-right: 10px;
+          margin-left: 15px;
+        }
+      }
+    }
+    .next {
+      text-align: right;
+      .arrow {
+        position: relative;
+        top: 3px;
+        display: inline-block;
+        margin-left: 18px;
+      }
+      .title {
+        display: inline-block;
+        margin-left: 10px;
+        margin-right: 15px;
+      }
+    }
+    .prev,
+    .next {
+      a {
+        font-weight: 500;
+        padding: 20px 30px;
+        display: inline-block;
+        transition: 0.3s;
+        width: 100%;
+        &:hover {
+          text-decoration: none;
+          background-color: $color__footerBg;
+        }
+        > span {
+          font-weight: 400;
+          &.shortcode {
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+  .fd-single-description {
+    padding: 60px 30px 80px;
+    text-align: center;
+    h3 {
+      margin-bottom: 20px;
+    }
+    svg {
+      display: inline-block;
+      margin: 14px 0px 25px;
+      transform: rotate(270deg);
+      width: 17px;
+    }
+    p {
+      width: 80%;
+      margin: auto;
+    }
+  }
+  .fd-related-product-category {
+    padding-top: 80px;
+    h3 {
+      padding: 0 1rem;
+      margin-bottom: 25px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+      border-top: 2px solid $color__dark;
+      > li {
+        border: 2px solid $color__dark;
+        border-top: none;
+        border-left: none;
+        padding-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 30px;
+        transition: 0.3s;
+        &:hover {
+          background-color: $color__footerBg;
+        }
+        > a {
+          display: block;
+          &:hover {
+            text-decoration: none;
+          }
+        }
+        .woocommerce-loop-product__link {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+        }
+        .attachment-woocommerce_thumbnail {
+          height: auto;
+        }
+        // .woocommerce-loop-product__link {
+        //   padding: 20px 30px;
+        // }
+        .woocommerce-loop-product__title {
+          font-size: 14px;
+          margin-bottom: 45px;
+        }
+        .woocommerce-Price-amount.amount {
+          font-size: 14px;
+          font-weight: 700;
+        }
+        .button {
+          background-color: $color__dark;
+          color: $color__bright;
+          width: 100%;
+          text-align: center;
+          border-radius: 3px;
+          font-weight: 500;
+          margin-bottom: 5px;
+          font-size: 14px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          margin-top: 10px;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        &.outofstock {
+          position: relative;
+          &::after {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            content: "OUT OF STOCK";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(-80%);
+            background-color: rgba(0, 0, 0, 0.2);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: $color__bright;
+            font-weight: 700;
+          }
+          a {
+            pointer-events: none;
+          }
+          .button {
+            background-color: #f0f3f5;
+            color: $color__dark;
+          }
+          &:hover {
+            background-color: transparent;
+          }
+        }
+        .added_to_cart {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+  .fd-single-goBack {
+    border-bottom: 2px solid $color__dark;
+    text-align: center;
+    padding: 20px 0px;
+    a {
+      font-weight: 500;
+      > span {
+        svg {
+          transform: rotate(180deg);
+          width: 16px;
+          display: inline-block;
+          position: relative;
+          top: 2px;
+          margin-right: 7px;
+        }
+      }
+    }
+  }
+}
