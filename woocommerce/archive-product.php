@@ -180,8 +180,15 @@ foreach ($all_categories as $cat) {
 
    if($cat->category_parent == 0) {
 	   $category_id = $cat->term_id;    
+	   $slugBuild = 'individuals-'.$FDcat->slug;
 	   $term_objects = get_term_by( 'slug', 'individuals', $taxonomy );
-		$term_ids[] = (int) $term_objects->term_id;   
+	   if($term_objects){
+		   $term_ids[] = (int) $term_objects->term_id;   	
+	   }
+	   $term_objects = get_term_by( 'slug', $slugBuild, $taxonomy );
+	   if($term_objects){
+		   $term_ids[] = (int) $term_objects->term_id;   	
+	   }
 
 	   $args2 = array(
 			   'taxonomy'     => $taxonomy,
@@ -203,7 +210,7 @@ if($sub_cats)  : ?>
 	<ul class="fd-teams-grid">
 
 <?php 	foreach($sub_cats as $sub_category) : 
-			$teamThumbnail_id = get_woocommerce_term_meta( $sub_category->term_id, 'thumbnail_id', true );
+			$teamThumbnail_id = get_term_meta( $sub_category->term_id, 'thumbnail_id', true );
 			$teamImage        = wp_get_attachment_image_src( $teamThumbnail_id , 'thumbnail')[0];
 
 ?>
@@ -223,7 +230,7 @@ if($sub_cats)  : ?>
 		'post_type' => 'product',
 		'meta_key' => 'total_sales',
 		'orderby' => 'meta_value_num',
-		'posts_per_page' => 6,
+		'posts_per_page' => 5,
 		'tax_query' => array( 
 			array(
 			  'taxonomy' => 'product_cat',
@@ -255,9 +262,25 @@ if($sub_cats)  : ?>
 	endwhile;
 
 	woocommerce_product_loop_end();	
-	wp_reset_query(); ?>
+	wp_reset_query();
+	$term_id  = get_queried_object();
+    $taxonomy = 'product_cat';
+    $slugBuild = 'individuals-'.$term_id->slug;
+    // Get subcategories of the current category
+    $terms    = get_terms([
+        'taxonomy'    => $taxonomy,
+        'slug'       => array($slugBuild, 'individuals'),
+        'parent'      => get_queried_object_id()
+    ]);
+
+    // Loop through product subcategories WP_Term Objects
+    foreach ( $terms as $term ) {
+        $term_link = get_term_link( $term, $taxonomy );
+
+    }
+	?>
 	<div class="fd-go-to-individuals">
-		<a href="">SHOP ALL THE INDIVIDUALS CARDS <span><?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span></a>
+		<a href="<?php echo $term_link ?>">SHOP ALL THE INDIVIDUALS CARDS <span><?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span></a>
 	</div>
 <section>
 

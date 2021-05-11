@@ -7,13 +7,13 @@ defined( 'ABSPATH' ) || exit;
 
 if ( is_product_category() ) {
 
-    $term_id  = get_queried_object_id();
+    $term_id  = get_queried_object();
     $taxonomy = 'product_cat';
-
+    $slugBuild = 'individuals-'.$term_id->slug;
     // Get subcategories of the current category
     $terms    = get_terms([
         'taxonomy'    => $taxonomy,
-        'slug'       => array('individuals'),
+        'slug'       => array($slugBuild, 'individuals'),
         'parent'      => get_queried_object_id()
     ]);
 
