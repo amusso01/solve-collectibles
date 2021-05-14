@@ -161,12 +161,13 @@ if ( is_singular('product') ) {
     <h3>More from this collection.</h3>
     <?php
     // get all posts in current categories
-    $query_args = array('posts_per_page' => 5, 'post_status' => 'publish', 'post_type' => 'product', 'tax_query' => array(
+    $query_args = array('posts_per_page' => 5,'post__not_in' => array($product->get_id()), 'post_status' => 'publish', 'post_type' => 'product', 'tax_query' => array(
         array(
             'taxonomy' => 'product_cat',
             'field' => 'id',
             'terms' => $cats_array
-        )));
+        )
+    ));
     $thisCat = new WP_Query($query_args);
     woocommerce_product_loop_start();
 

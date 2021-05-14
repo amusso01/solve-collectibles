@@ -44,8 +44,6 @@ global $product;
         
         }?>
         <a href="<?php echo get_term_link( $parent[0]) ?>"><?php echo $parentName ;   ?></a>
-
-
        
 
     </div>
@@ -53,7 +51,9 @@ global $product;
     <div class="fd-meta-team">
         <h4>Team</h4>
         <?php  $team = get_the_terms( $product->get_id(), 'team' )[0];?>
-        <a href="<?php echo get_term_link($team->term_id ) ?>"><?php echo $team->name ?></a>
+        <?php if($team) : ?>
+            <a href="<?php echo get_term_link($team->term_id ) ?>"><?php echo $team->name ?></a>
+        <?php endif; ?>
     </div>
    
     <?php 

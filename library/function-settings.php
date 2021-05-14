@@ -82,6 +82,7 @@ if ( ! function_exists( 'foundry_setup' ) ) :
 		wp_register_script( 'foundry-js', get_template_directory_uri() . '/dist/scripts/' . foundry_asset_path( 'main.js' ), array(), '1.0', true );
 		wp_enqueue_script( 'foundry-js' );
 
+
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
@@ -330,3 +331,85 @@ if( function_exists('acf_add_options_page') ) {
 	
 }
 
+
+// AJAX
+
+// function jsforwp_frontend_scripts() {
+// 	global $wp_query;
+// 	wp_enqueue_script('fd_load_more',get_template_directory_uri() .'/ajax/loadMore.js',array('jquery'), '1.0', true);
+// 	wp_localize_script( 
+// 		'fd_load_more',
+// 		'fd_load_more_global',array(
+// 			'ajax_url' => site_url() . '/wp-admin/admin-ajax.php',
+// 			'nonce'	=> wp_create_nonce('nonce_name'),
+// 			'posts' => json_encode( $wp_query->query_vars ),
+// 			'current_page' => get_query_var( 'paged' ) ? get_query_var('paged') : 1,
+// 			'max_page' => $wp_query->max_num_pages
+// 		)
+// 	);
+// }
+// add_action( 'wp_enqueue_scripts', 'jsforwp_frontend_scripts' );
+  
+
+/**
+ * Load next 12 products using AJAX
+ */
+function ajax_next_posts() {
+	check_ajax_referer( 'nonce_name');
+	global $wp_query;
+	$FDcat = $wp_query->get_queried_object();
+	// Build Query
+	$args = array(
+		'post_type'    =>  'product',
+		'paged'        =>  $_POST['page'] + 1,
+		'category_name' => $FDcat->name,
+	);
+
+	
+	$count_results = '0';
+	
+	$ajax_query = new WP_Query( $args );
+	
+	// Results found
+	if( $ajax_query->have_posts() ){
+	
+		// Start "saving" results' HTML
+		$results_html = '';
+		ob_start();
+	
+		while( $ajax_query->have_posts() ) {
+	
+			$ajax_query->the_post();
+			echo wc_get_template_part( 'content', 'product' );
+	
+		}
+		wp_reset_postdata();
+	
+		// "Save" results' HTML as variable
+		$results_html = ob_get_clean();
+	
+	} else {
+	
+		// Start "saving" results' HTML
+		$results_html = '';
+		ob_start();
+	
+		echo "none found!";
+	
+		// "Save" results' HTML as variable
+		$results_html = ob_get_clean();
+	
+	}
+	
+	// Build ajax response
+	$response = array();
+	
+	// 1. value is HTML of new posts and 2. is total count of posts
+	array_push ( $response, $results_html );
+	echo json_encode( $response );
+	
+	// Always use die() in the end of ajax functions
+	die();
+	}
+	add_action('wp_ajax_ajax_next_posts', 'ajax_next_posts');
+	add_action('wp_ajax_nopriv_ajax_next_posts', 'ajax_next_posts');

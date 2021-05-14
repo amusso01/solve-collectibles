@@ -384,6 +384,54 @@ function filter_loop_add_to_cart_link( $button, $product, $args = array() ) {
     return sprintf( '<a class="button disabled" style="%s">%s</a>', '', $button_text );
 }
 
+/**
+* Add custom action for sort by
+*/
+add_action( 'fd_sort_by', 'fdAddSorting' );
+function fdAddSorting(){
+	add_action( 'fd_sort_by', 'woocommerce_catalog_ordering', 30 );
+}
+
+/**
+* Change checkout wording
+*/
+function woocommerce_button_proceed_to_checkout() { ?>
+	<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="checkout-button button alt wc-forward">
+	<?php esc_html_e( 'PROCEED TO CHECKOUT', 'woocommerce' ); ?>
+	</a>
+	<?php
+   }
+
+
+/**
+* Change sort by wording
+*/
+add_filter('woocommerce_catalog_orderby', 'wc_customize_product_sorting');
+
+function wc_customize_product_sorting($sorting_options){
+    $sorting_options = array(
+        'menu_order' => __( 'Sort', 'woocommerce' ),
+        'popularity' => __( 'Popularity', 'woocommerce' ),
+        'rating'     => __( 'Average rating', 'woocommerce' ),
+        'date'       => __( 'Latest', 'woocommerce' ),
+        'price'      => __( 'Price: low to high', 'woocommerce' ),
+        'price-desc' => __( 'Price: high to low', 'woocommerce' ),
+    );
+
+    return $sorting_options;
+}
+
+/**
+ * Change number of products that are displayed per page (shop page)
+ */
+add_filter( 'loop_shop_per_page', 'new_loop_shop_per_page', 20 );
+
+function new_loop_shop_per_page( $cols ) {
+  // $cols contains the current number of products per page based on the value stored on Options –> Reading
+  // Return the number of products you wanna show per page.
+  $cols = -1;
+  return $cols;
+}
 
 
 // WOOCOMMERCE ORDER MANIPULATE

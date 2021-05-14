@@ -1,0 +1,17 @@
+.woocommerce-notices-wrapper {
+  .woocommerce-message {
+    padding: 20px 30px;
+    border-bottom: 2px solid $color__dark;
+    border-top: 2px solid $color__dark;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  .woocommerce-error {
+    padding: 20px 30px;
+    border-bottom: 2px solid $color__error;
+    li {
+      font-weight: 500;
+      font-size: 14px;
+    }
+  }
+}
