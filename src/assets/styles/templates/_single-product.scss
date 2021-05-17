@@ -112,6 +112,11 @@
         grid-column: 1/-1;
       }
     }
+    .stock.out-of-stock {
+      display: block;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
   }
   .fd-single-pagination {
     display: grid;

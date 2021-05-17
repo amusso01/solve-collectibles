@@ -1,8 +1,8 @@
 <?php
 /**
- * Template Name: Cart page
+ * Template Name: Account page
  *
- * The template for displaying the cart page.
+ * The template for displaying the account page.
  * 
  * Template Post Type: page
  *
@@ -12,15 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-
 get_header();
 ?>
 
-<header class="cart-template__header">
+<header class="account-template__header">
     <h1><?php echo get_the_title() ?></h1>
 </header>
 
-<main role="main" class="cart-main page-main">
+<main role="main" class="account-main page-main">
     <?php the_content(); ?>
 </main>
 

@@ -433,6 +433,73 @@ function new_loop_shop_per_page( $cols ) {
   return $cols;
 }
 
+/**
+ * @snippet       Rename "Returning Customer?" @ Checkout Page - WooCommerce
+ * @how-to        Get CustomizeWoo.com FREE
+ * @sourcecode    https://businessbloomer.com/?p=21719
+ * @author        Rodolfo Melogli
+ * @compatible    WC 3.5.4
+ * @donate $9     https://businessbloomer.com/bloomer-armada/
+ */
+ 
+add_filter( 'woocommerce_checkout_login_message', 'bbloomer_return_customer_message' );
+ 
+function bbloomer_return_customer_message() {
+return 'Already have an account?';
+}
+
+/**
+* Modify checkout field
+*/
+add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );
+
+// Our hooked in function - $fields is passed via the filter!
+function custom_override_checkout_fields( $fields ) {
+	// Billing
+     $fields['billing']['billing_first_name']['placeholder'] = 'First Name';
+     $fields['billing']['billing_last_name']['placeholder'] = 'Last Name';
+     $fields['billing']['billing_company']['placeholder'] = 'Company Name';
+     $fields['billing']['billing_city']['placeholder'] = 'Town / City';
+     $fields['billing']['billing_postcode']['placeholder'] = 'Postcode';
+     $fields['billing']['billing_state']['placeholder'] = 'County';
+     $fields['billing']['billing_phone']['placeholder'] = 'Phone';
+     $fields['billing']['billing_email']['placeholder'] = 'Email';
+	 unset($fields['billing']['billing_first_name']['label']);
+	 unset($fields['billing']['billing_last_name']['label']);
+	 unset($fields['billing']['billing_company']['label']);
+	 unset($fields['billing']['billing_city']['label']);
+	 unset($fields['billing']['billing_postcode']['label']);
+	 unset($fields['billing']['billing_state']['label']);
+	 unset($fields['billing']['billing_phone']['label']);
+	 unset($fields['billing']['billing_email']['label']);
+	 unset($fields['billing']['billing_address_1']['label']);
+	 unset($fields['billing']['billing_country']['label']);
+	// Shipping
+		$fields['shipping']['shipping_first_name']['placeholder'] = 'First Name';
+		$fields['shipping']['shipping_last_name']['placeholder'] = 'Last Name';
+		$fields['shipping']['shipping_company']['placeholder'] = 'Company Name';
+		$fields['shipping']['shipping_city']['placeholder'] = 'Town / City';
+		$fields['shipping']['shipping_postcode']['placeholder'] = 'Postcode';
+		$fields['shipping']['shipping_state']['placeholder'] = 'County';
+		$fields['shipping']['shipping_phone']['placeholder'] = 'Phone';
+		$fields['shipping']['shipping_email']['placeholder'] = 'Email';
+		unset($fields['shipping']['shippipng_first_name']['label']);
+		unset($fields['shipping']['shippipng_last_name']['label']);
+		unset($fields['shipping']['shippipng_company']['label']);
+		unset($fields['shipping']['shippipng_city']['label']);
+		unset($fields['shipping']['shippipng_postcode']['label']);
+		unset($fields['shipping']['shippipng_state']['label']);
+		unset($fields['shipping']['shippipng_phone']['label']);
+		unset($fields['shipping']['shippipng_email']['label']);
+		unset($fields['shipping']['shippipng_address_1']['label']);
+		unset($fields['shipping']['shippipng_country']['label']);
+	//  Order Details
+     $fields['order']['order_comments']['placeholder'] = 'Additional note';
+	 unset($fields['order']['order_comments']['label']);
+     return $fields;
+}
+
+
 
 // WOOCOMMERCE ORDER MANIPULATE
 

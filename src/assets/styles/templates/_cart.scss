@@ -132,6 +132,9 @@
           border: none;
         }
       }
+      td[data-title] {
+        text-align: right;
+      }
     }
     .wc-proceed-to-checkout {
       .button {
@@ -151,6 +154,56 @@
         &:hover {
           text-decoration: underline;
         }
+      }
+    }
+  }
+  .coupon-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .coupon {
+      border: 2px solid $color__dark;
+      .input-text {
+        padding: 15px 5px;
+        display: inline-block;
+        border: none;
+      }
+      .button {
+        background-color: $color__dark;
+        color: $color__bright;
+        text-align: center;
+        border-radius: 3px;
+        font-weight: 500;
+        font-size: 14px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-right: 5px;
+        border: none;
+        text-transform: uppercase;
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+    .submit-button {
+      background-color: $color__dark;
+      color: $color__bright;
+      text-align: center;
+      border-radius: 3px;
+      font-weight: 500;
+      font-size: 14px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+      border: none;
+      text-transform: uppercase;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
       }
     }
   }
