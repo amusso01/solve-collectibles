@@ -1,0 +1,44 @@
+.default-template__header {
+  min-height: 180px;
+  background-color: $color__footerBg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  border-bottom: 2px solid $color__dark;
+  h1 {
+    margin-bottom: 16px;
+  }
+}
+.default-main {
+  padding: 80px 30px;
+  @media #{$breakpoint-md-up} {
+    width: 75%;
+    margin: auto;
+  }
+  > p {
+    margin-bottom: 10px;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 15px;
+    margin-top: 20px;
+  }
+  .wp-block-table {
+    table {
+      border-collapse: collapse;
+    }
+    td {
+      border-bottom: 2px solid $color__dark;
+      padding: 10px 0px;
+      &:first-of-type {
+        width: 40%;
+      }
+    }
+  }
+}
