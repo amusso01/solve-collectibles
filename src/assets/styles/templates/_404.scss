@@ -1,0 +1,27 @@
+.main-error {
+  padding: 290px 30px 250px;
+  #section-error-page {
+    position: relative;
+    text-align: center;
+    @media #{$breakpoint-md-up} {
+      width: 75%;
+      margin: auto;
+    }
+    h1 {
+      margin-bottom: 3px;
+      font-size: 45px;
+    }
+    h2 {
+      margin-bottom: 40px;
+    }
+
+    .svg {
+      position: absolute;
+      //   right: 0px;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+    }
+  }
+}

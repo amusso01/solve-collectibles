@@ -17,68 +17,107 @@
 
 defined( 'ABSPATH' ) || exit;
 global $wp_query;
-$FDcat = $wp_query->get_queried_object();
-$thumbnail_id = get_term_meta( $FDcat->term_id, 'thumbnail_id', true );
-$image = wp_get_attachment_url( $thumbnail_id );
-$secondaryTitle = get_field('title_description', $FDcat);
-
-$slugIndividuals = $FDcat->slug;
-$slugIndividualsArray = explode( '-', $slugIndividuals);
-$slugIndividuals = $slugIndividualsArray[0] === 'individuals' ? $slugIndividuals : false ;
-
-$term = get_queried_object();
-$isParent = $term->parent === 0;
-
 
 get_header( 'shop' );
 
-/**
- * Hook: woocommerce_before_main_content.
- *
- * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
- * @hooked woocommerce_breadcrumb - 20
- * @hooked WC_Structured_Data::generate_website_data() - 30
- */
-do_action( 'woocommerce_before_main_content' );
+if(!is_search()) : 
+	$FDcat = $wp_query->get_queried_object();
+	$thumbnail_id = get_term_meta( $FDcat->term_id, 'thumbnail_id', true );
+	$image = wp_get_attachment_url( $thumbnail_id );
+	$secondaryTitle = get_field('title_description', $FDcat);
 
-?>
-<header class="woocommerce-products-header fd-woo__archive-header">
-	<!-- Header Image -->
-	<?php  if(!is_product_tag()) :?>
-		<div class="woo-products-header__image">
-			<img src="<?php echo $image ?>" alt="<?php echo  $FDcat->name ?>">
-		</div>
-	<?php else: ?>
-		<?php 
-		$tagImage = get_field('thumbnail', 'product_tag_'.$FDcat->term_id ) ;
-		$tagImageUrl = wp_get_attachment_image( $tagImage, 'medium' );
-		?>
-		<div class="woo-products-header__image">
-			<?php echo $tagImageUrl ?>
-		</div>
-	<?php endif; ?>
-	<!-- Header description -->
-	<?php if($term->parent === 0) : ?>
+	$slugIndividuals = $FDcat->slug;
+	$slugIndividualsArray = explode( '-', $slugIndividuals);
+	$slugIndividuals = $slugIndividualsArray[0] === 'individuals' ? $slugIndividuals : false ;
+
+	$term = get_queried_object();
+	$isParent = $term->parent === 0;
+
+
+
+
+	/**
+	 * Hook: woocommerce_before_main_content.
+	 *
+	 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+	 * @hooked woocommerce_breadcrumb - 20
+	 * @hooked WC_Structured_Data::generate_website_data() - 30
+	 */
+	do_action( 'woocommerce_before_main_content' );
+
+	?>
+	<header class="woocommerce-products-header fd-woo__archive-header">
+		<!-- Header Image -->
 		<?php  if(!is_product_tag()) :?>
-			<div class="woo-products-header__description">
-				<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
-				<p class="subTitle"><?php echo $secondaryTitle ?></p>
-				<?php
-				/**
-				 * Hook: woocommerce_archive_description.
-				 *
-				 * @hooked woocommerce_taxonomy_archive_description - 10
-				 * @hooked woocommerce_product_archive_description - 10
-				 */
-				do_action( 'woocommerce_archive_description' );
-				?>
+			<div class="woo-products-header__image">
+				<img src="<?php echo $image ?>" alt="<?php echo  $FDcat->name ?>">
 			</div>
 		<?php else: ?>
+			<?php 
+			$tagImage = get_field('thumbnail', 'product_tag_'.$FDcat->term_id ) ;
+			$tagImageUrl = wp_get_attachment_image( $tagImage, 'medium' );
+			?>
+			<div class="woo-products-header__image">
+				<?php echo $tagImageUrl ?>
+			</div>
+		<?php endif; ?>
+		<!-- Header description -->
+		<?php if($term->parent === 0) : ?>
+			<?php  if(!is_product_tag()) :?>
+				<div class="woo-products-header__description">
+					<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
+					<p class="subTitle"><?php echo $secondaryTitle ?></p>
+					<?php
+					/**
+					 * Hook: woocommerce_archive_description.
+					 *
+					 * @hooked woocommerce_taxonomy_archive_description - 10
+					 * @hooked woocommerce_product_archive_description - 10
+					 */
+					do_action( 'woocommerce_archive_description' );
+					?>
+				</div>
+			<?php else: ?>
+				<div class="woo-products-header__description">
+					<?php 
+					$parentCatName = get_term($FDcat->parent, 'product_tag');	
+					?>
+					<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
+					<?php
+					/**
+					 * Hook: woocommerce_archive_description.
+					 *
+					 * @hooked woocommerce_taxonomy_archive_description - 10
+					 * @hooked woocommerce_product_archive_description - 10
+					 */
+					do_action( 'woocommerce_archive_description' );
+					?>
+				</div>
+			<?php endif; ?>
+		<?php elseif(is_product_category( array( 'individuals', $slugIndividuals ) )) : ?>
+			<?php 
+			$parentCatName = get_term($FDcat->parent, 'product_cat');	
+			?>
+			<div class="woo-products-header__description">
+				<h1 class="woocommerce-products-header__title page-title"><?php echo $parentCatName->name ?></h1>
+				<p class="subTitle">Individual Cards</p>
+			<?php
+			/**
+			 * Hook: woocommerce_archive_description.
+			 *
+			 * @hooked woocommerce_taxonomy_archive_description - 10
+			 * @hooked woocommerce_product_archive_description - 10
+			 */
+			do_action( 'woocommerce_archive_description' );
+			?>
+		</div>
+		<?php else : ?>
 			<div class="woo-products-header__description">
 				<?php 
-				$parentCatName = get_term($FDcat->parent, 'product_tag');	
+				$parentCatName = get_term($FDcat->parent, 'product_cat');	
 				?>
 				<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
+				<p class="subTitle"><?php echo $parentCatName->name ?></p>
 				<?php
 				/**
 				 * Hook: woocommerce_archive_description.
@@ -90,108 +129,132 @@ do_action( 'woocommerce_before_main_content' );
 				?>
 			</div>
 		<?php endif; ?>
-	<?php elseif(is_product_category( array( 'individuals', $slugIndividuals ) )) : ?>
-		<?php 
-		$parentCatName = get_term($FDcat->parent, 'product_cat');	
-		?>
-		<div class="woo-products-header__description">
-			<h1 class="woocommerce-products-header__title page-title"><?php echo $parentCatName->name ?></h1>
-			<p class="subTitle">Individual Cards</p>
-		<?php
-        /**
-         * Hook: woocommerce_archive_description.
-         *
-         * @hooked woocommerce_taxonomy_archive_description - 10
-         * @hooked woocommerce_product_archive_description - 10
-         */
-        do_action( 'woocommerce_archive_description' );
-        ?>
-    </div>
-	<?php else : ?>
-		<div class="woo-products-header__description">
-			<?php 
-			$parentCatName = get_term($FDcat->parent, 'product_cat');	
-			?>
-			<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
-			<p class="subTitle"><?php echo $parentCatName->name ?></p>
-			<?php
-			/**
-			 * Hook: woocommerce_archive_description.
-			 *
-			 * @hooked woocommerce_taxonomy_archive_description - 10
-			 * @hooked woocommerce_product_archive_description - 10
-			 */
-			do_action( 'woocommerce_archive_description' );
-			?>
-		</div>
-	<?php endif; ?>
-</header>
-<?php
+	</header>
+	<?php
 
 
-	/**
-	 * Hook: woocommerce_before_shop_loop.
-	 *
-	 * @hooked woocommerce_output_all_notices - 10
-	 * @hooked woocommerce_result_count - 20
-	 * @hooked woocommerce_catalog_ordering - 30
-	 */
-	do_action( 'woocommerce_before_shop_loop' );
+		/**
+		 * Hook: woocommerce_before_shop_loop.
+		 *
+		 * @hooked woocommerce_output_all_notices - 10
+		 * @hooked woocommerce_result_count - 20
+		 * @hooked woocommerce_catalog_ordering - 30
+		 */
+		do_action( 'woocommerce_before_shop_loop' );
 
-?>
+	?>
 
 
-<?php
+	<?php
 
 
 
-// ARCHIVE NAV BAR ANCHOR LINK
-if(is_product_category()):
-	if ( $term->parent === 0  ) : 
-		wc_get_template_part( 'custom/custom', 'archive-anchor-nav' ); 		
-	elseif(is_product_category( array( 'individuals', $slugIndividuals ) )) :
-		wc_get_template_part( 'custom/custom', 'individuals-anchor-nav' ); 
-	else :
+	// ARCHIVE NAV BAR ANCHOR LINK
+	if(is_product_category()):
+		if ( $term->parent === 0 && !is_product_category( array('new-in') ) ) : 
+			wc_get_template_part( 'custom/custom', 'archive-anchor-nav' ); 		
+		elseif(is_product_category( array( 'individuals', $slugIndividuals ) )) :
+			wc_get_template_part( 'custom/custom', 'individuals-anchor-nav' ); 
+		else :
+			wc_get_template_part( 'custom/custom', 'individuals-anchor-nav' ); 
+		endif;
+	else:
 		wc_get_template_part( 'custom/custom', 'individuals-anchor-nav' ); 
 	endif;
-else:
-	wc_get_template_part( 'custom/custom', 'individuals-anchor-nav' ); 
-endif;
-// MOST POPULAR ACF 
-$mostPopular = get_field('most_popular_products', $term);
+	// MOST POPULAR ACF 
+	$mostPopular = get_field('most_popular_products', $term);
 
-//Check if it's parent category and is not product tag
-if ( $term->parent === 0  && !is_product_tag()) : ?>
-<section class="fd-woo__most-popular">
-	<h3>Most popular</h3>
-	<div class="fd-woo__most-popular-grid">
-	<?php foreach($mostPopular as $popular) :
-		$productObject = wc_get_product( $popular->ID );
-		?>
+	//Check if it's parent category and is not product tag
+	if ( $term->parent === 0  && !is_product_tag() && !is_product_category( array('new-in')))  : ?>
+	<section class="fd-woo__most-popular">
+		<h3>Most popular</h3>
+		<div class="fd-woo__most-popular-grid">
+		<?php foreach($mostPopular as $popular) :
+			$productObject = wc_get_product( $popular->ID );
+			?>
 
-		<div class="fd-woo__most-popular-item">
-			<img src="<?php echo get_the_post_thumbnail_url( $popular->ID , 'most_popular') ?>" alt="<?php echo $popular->post_title ?>">
-			<div class="fd-woo__most-popular-description">
-				<h2><?php echo $popular->post_title ?></h2>
-				<p class="cat-title" ><?php woocommerce_page_title(); ?></p>
-				<p class="price"><?php echo wc_price($productObject->get_price()); ?></p>
-				<?php echo do_shortcode( '[add_to_cart id="'.$popular->ID.'" show_price="false" class="btn-woo" style=""]' ) ?>
+			<div class="fd-woo__most-popular-item">
+				<img src="<?php echo get_the_post_thumbnail_url( $popular->ID , 'most_popular') ?>" alt="<?php echo $popular->post_title ?>">
+				<div class="fd-woo__most-popular-description">
+					<h2><?php echo $popular->post_title ?></h2>
+					<p class="cat-title" ><?php woocommerce_page_title(); ?></p>
+					<p class="price"><?php echo wc_price($productObject->get_price()); ?></p>
+					<?php echo do_shortcode( '[add_to_cart id="'.$popular->ID.'" show_price="false" class="btn-woo" style=""]' ) ?>
+				</div>
 			</div>
+
+		<?php endforeach;  ?>
+
 		</div>
-
-	<?php endforeach;  ?>
-
-	</div>
-</section>
-<?php endif; ?>
+	</section>
+	<?php endif; ?>
 
 
-<!-- PACKS -->
-<?php if($isParent) { ?>
+	<!-- PACKS -->
+	<?php if($isParent && !is_product_category( array('new-in'))) { ?>
 
-	<?php if(!is_product_tag()) : ?>
-		<section id="packs-list" class="fd-woo__shop-grid">
-			<h3>Packs</h3>
+		<?php if(!is_product_tag()) : ?>
+			<section id="packs-list" class="fd-woo__shop-grid">
+				<h3>Packs</h3>
+			<?php
+				woocommerce_product_loop_start();
+
+				if ( wc_get_loop_prop( 'total' ) ) {
+					while ( have_posts() ) {
+						the_post();
+
+						/**
+						 * Hook: woocommerce_shop_loop.
+						 */
+						do_action( 'woocommerce_shop_loop' );
+
+						wc_get_template_part( 'content', 'product' );
+					}
+				}
+
+				woocommerce_product_loop_end();
+
+				/**
+				 * Hook: woocommerce_after_shop_loop.
+				 *
+				 * @hooked woocommerce_pagination - 10
+				 */
+				do_action( 'woocommerce_after_shop_loop' );
+
+			?>
+			</section> <!--  fd-woo__shop-grid  -->
+		<?php else : ?>
+			<section id="packs-list" class="fd-woo__shop-grid fd-woo__shop-grid-tag">
+			<?php
+			woocommerce_product_loop_start();
+
+			if ( wc_get_loop_prop( 'total' ) ) {
+				while ( have_posts() ) {
+					the_post();
+					/**
+					 * Hook: woocommerce_shop_loop.
+					 */
+					do_action( 'woocommerce_shop_loop' );
+
+					wc_get_template_part( 'content', 'product' );
+				}
+			}
+
+			woocommerce_product_loop_end();
+
+			/**
+			 * Hook: woocommerce_after_shop_loop.
+			 *
+			 * @hooked woocommerce_pagination - 10
+			 */
+			do_action( 'woocommerce_after_shop_loop' );
+
+			?>
+			</section> <!--  fd-woo__shop-grid  -->
+		<?php endif; ?>
+	<?php } elseif(is_product_category( array( 'individuals', $slugIndividuals ) )){?>
+
+		<section  class="fd-woo__shop-grid fd-woo__shop-grid-individuals">
 		<?php
 			woocommerce_product_loop_start();
 
@@ -218,318 +281,340 @@ if ( $term->parent === 0  && !is_product_tag()) : ?>
 			do_action( 'woocommerce_after_shop_loop' );
 
 		?>
-		</section> <!--  fd-woo__shop-grid  -->
-	<?php else : ?>
-		<section id="packs-list" class="fd-woo__shop-grid fd-woo__shop-grid-tag">
+		</section> <!--  fd-woo__shop-grid-individuals  -->
+		<!-- <?php echo do_shortcode( '[ajax_load_more post_type="product" columns="4" container_type="ul" css_classes="products" posts_per_page="4" transition="fade"  taxonomy="product_cat" taxonomy_terms="'.$FDcat->name.'" taxonomy_operator="IN" button_label=""]' ) ?> -->
+	<?php } else{ ?>
+		<section  class="fd-woo__shop-grid fd-woo__shop-grid-sub-category">
 		<?php
-		woocommerce_product_loop_start();
+			woocommerce_product_loop_start();
 
-		if ( wc_get_loop_prop( 'total' ) ) {
-			while ( have_posts() ) {
-				the_post();
-				/**
-				 * Hook: woocommerce_shop_loop.
-				 */
-				do_action( 'woocommerce_shop_loop' );
+			if ( wc_get_loop_prop( 'total' ) ) {
+				while ( have_posts() ) {
+					the_post();
 
-				wc_get_template_part( 'content', 'product' );
+					/**
+					 * Hook: woocommerce_shop_loop.
+					 */
+					do_action( 'woocommerce_shop_loop' );
+
+					wc_get_template_part( 'content', 'product' );
+				}
 			}
-		}
 
-		woocommerce_product_loop_end();
+			woocommerce_product_loop_end();
 
-		/**
-		 * Hook: woocommerce_after_shop_loop.
-		 *
-		 * @hooked woocommerce_pagination - 10
-		 */
-		do_action( 'woocommerce_after_shop_loop' );
+			/**
+			 * Hook: woocommerce_after_shop_loop.
+			 *
+			 * @hooked woocommerce_pagination - 10
+			 */
+			do_action( 'woocommerce_after_shop_loop' );
 
 		?>
-		</section> <!--  fd-woo__shop-grid  -->
-	<?php endif; ?>
-<?php } elseif(is_product_category( array( 'individuals', $slugIndividuals ) )){?>
-
-	<section  class="fd-woo__shop-grid fd-woo__shop-grid-individuals">
+		</section> <!--  fd-woo__shop-grid-individuals  -->
+	<?php } ?>
 	<?php
-		woocommerce_product_loop_start();
+	/**
+	 * Hook: woocommerce_after_main_content.
+	 *
+	 * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
+	 */
+	do_action( 'woocommerce_after_main_content' );?>
 
-		if ( wc_get_loop_prop( 'total' ) ) {
-			while ( have_posts() ) {
-				the_post();
+	<?php if($isParent && !is_product_tag() && !is_product_category( array('new-in'))) { ?>
+	<!-- TEAM -->
+	<section id="teams-list" class="fd-woo__teams">
+		<h3>Football teams</h3>
+		<?php
+		$taxonomy     = 'product_cat';
+		$orderby      = 'name';  
+		$show_count   = 0;      // 1 for yes, 0 for no
+		$pad_counts   = 0;      // 1 for yes, 0 for no
+		$hierarchical = 1;      // 1 for yes, 0 for no  
+		$title        = '';  
+		$empty        = 0;
+		$args = array(
+			'taxonomy'     => $taxonomy,
+			'orderby'      => $orderby,
+			'show_count'   => $show_count,
+			'pad_counts'   => $pad_counts,
+			'hierarchical' => $hierarchical,
+			'title_li'     => $title,
+			'hide_empty'   => $empty
+	);
+	$all_categories = get_categories( $args );
+	foreach ($all_categories as $cat) {
 
-				/**
-				 * Hook: woocommerce_shop_loop.
-				 */
-				do_action( 'woocommerce_shop_loop' );
-
-				wc_get_template_part( 'content', 'product' );
-			}
+	if($cat->category_parent == 0) {
+		$category_id = $cat->term_id;    
+		$slugBuild = 'individuals-'.$FDcat->slug;
+		$term_objects = get_term_by( 'slug', 'individuals', $taxonomy );
+		if($term_objects){
+			$term_ids[] = (int) $term_objects->term_id;   	
+		}
+		$term_objects = get_term_by( 'slug', $slugBuild, $taxonomy );
+		if($term_objects){
+			$term_ids[] = (int) $term_objects->term_id;   	
 		}
 
-		woocommerce_product_loop_end();
-
-		/**
-		 * Hook: woocommerce_after_shop_loop.
-		 *
-		 * @hooked woocommerce_pagination - 10
-		 */
-		do_action( 'woocommerce_after_shop_loop' );
-
-	?>
-	</section> <!--  fd-woo__shop-grid-individuals  -->
-	<!-- <?php echo do_shortcode( '[ajax_load_more post_type="product" columns="4" container_type="ul" css_classes="products" posts_per_page="4" transition="fade"  taxonomy="product_cat" taxonomy_terms="'.$FDcat->name.'" taxonomy_operator="IN" button_label=""]' ) ?> -->
-<?php } else{ ?>
-	<section  class="fd-woo__shop-grid fd-woo__shop-grid-sub-category">
-	<?php
-		woocommerce_product_loop_start();
-
-		if ( wc_get_loop_prop( 'total' ) ) {
-			while ( have_posts() ) {
-				the_post();
-
-				/**
-				 * Hook: woocommerce_shop_loop.
-				 */
-				do_action( 'woocommerce_shop_loop' );
-
-				wc_get_template_part( 'content', 'product' );
-			}
-		}
-
-		woocommerce_product_loop_end();
-
-		/**
-		 * Hook: woocommerce_after_shop_loop.
-		 *
-		 * @hooked woocommerce_pagination - 10
-		 */
-		do_action( 'woocommerce_after_shop_loop' );
-
-	?>
-	</section> <!--  fd-woo__shop-grid-individuals  -->
-<?php } ?>
-<?php
-/**
- * Hook: woocommerce_after_main_content.
- *
- * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
- */
-do_action( 'woocommerce_after_main_content' );?>
-
-<?php if($isParent && !is_product_tag()) { ?>
-<!-- TEAM -->
-<section id="teams-list" class="fd-woo__teams">
-	<h3>Football teams</h3>
-	<?php
-	$taxonomy     = 'product_cat';
-	$orderby      = 'name';  
-	$show_count   = 0;      // 1 for yes, 0 for no
-	$pad_counts   = 0;      // 1 for yes, 0 for no
-	$hierarchical = 1;      // 1 for yes, 0 for no  
-	$title        = '';  
-	$empty        = 0;
-	$args = array(
-		'taxonomy'     => $taxonomy,
-		'orderby'      => $orderby,
-		'show_count'   => $show_count,
-		'pad_counts'   => $pad_counts,
-		'hierarchical' => $hierarchical,
-		'title_li'     => $title,
-		'hide_empty'   => $empty
- );
-$all_categories = get_categories( $args );
-foreach ($all_categories as $cat) {
-
-   if($cat->category_parent == 0) {
-	   $category_id = $cat->term_id;    
-	   $slugBuild = 'individuals-'.$FDcat->slug;
-	   $term_objects = get_term_by( 'slug', 'individuals', $taxonomy );
-	   if($term_objects){
-		   $term_ids[] = (int) $term_objects->term_id;   	
-	   }
-	   $term_objects = get_term_by( 'slug', $slugBuild, $taxonomy );
-	   if($term_objects){
-		   $term_ids[] = (int) $term_objects->term_id;   	
-	   }
-
-	   $args2 = array(
-			   'taxonomy'     => $taxonomy,
-			   'child_of'     => 0,
-			   'parent'       => $FDcat->term_id,
-			   'orderby'      => $orderby,
-			   'show_count'   => $show_count,
-			   'pad_counts'   => $pad_counts,
-			   'hierarchical' => $hierarchical,
-			   'title_li'     => $title,
-			   'hide_empty'   => $empty,
-			   'exclude' => $term_ids
-			   
-	   );
-	}       
-}
-	$sub_cats = get_categories( $args2);
-if($sub_cats)  : ?>
-	<ul class="fd-teams-grid">
-
-<?php 	foreach($sub_cats as $sub_category) : 
-			$teamThumbnail_id = get_term_meta( $sub_category->term_id, 'thumbnail_id', true );
-			$teamImage        = wp_get_attachment_image_src( $teamThumbnail_id , 'thumbnail')[0];
-
-?>
-		<li><a href="<?php echo get_term_link($sub_category->slug, 'product_cat'); ?>" title="<?php echo  $sub_category->name ?>"> <img src="<?php echo 	$teamImage  ?>" alt="<?php echo  $sub_category->name ?>"></a></li>
-	<?php endforeach; ?>
-
-	</ul>
-<?php endif; ?>
-</section>
-
-<?php } ?>
-
-
-<?php if($isParent) { ?>
-<!-- TAG COLLECTIONS -->
-<?php
-$tags_by_name = array();
-$products_loop = new WP_Query( array(
-	'post_type' => 'product',
-	'showposts' => -1,
-	'tax_query' => array_merge( array(
-		'relation'  => 'AND',
-		array(
-			'taxonomy' => 'product_cat',
-			'terms'    => array( $FDcat->term_id ),
-			'field'   => 'term_id'
-		)
-	), WC()->query->get_tax_query() ),
-
-	'meta_query' => array_merge( array(
-
-		// You can optionally add extra meta queries here
-
-	), WC()->query->get_meta_query() )
-) );
-
-?>
-
-    <?php
-
-    while ( $products_loop->have_posts() ) {
-        $products_loop->the_post();
-      global $product;
-	
-	  $tags = get_the_terms( $product->get_id(), 'product_tag' );
-	  if($tags){
-		  
-			
-			foreach($tags as $singleTag):
+		$args2 = array(
+				'taxonomy'     => $taxonomy,
+				'child_of'     => 0,
+				'parent'       => $FDcat->term_id,
+				'orderby'      => $orderby,
+				'show_count'   => $show_count,
+				'pad_counts'   => $pad_counts,
+				'hierarchical' => $hierarchical,
+				'title_li'     => $title,
+				'hide_empty'   => $empty,
+				'exclude' => $term_ids
 				
-				if(!in_array($singleTag->name, $tags_by_name)){
-					$tags_by_name[$singleTag->slug] = $singleTag->name;
-				}
-			endforeach;
-		}
-    }
-    wp_reset_postdata(); 
-	?>
+		);
+		}       
+	}
+		$sub_cats = get_categories( $args2);
+	if($sub_cats)  : ?>
+		<ul class="fd-teams-grid">
 
-	<?php if(!empty($tags_by_name)) : ?>
-	<section class="fd-tag-panini">
-		<h3>Collections</h3>
-		<ul class="fd-tags__grid">
-			<?php foreach($tags_by_name as $tagSlug => $tagName) :?>
-			<?php 
-			$tagId = get_term_by('slug', $tagSlug, 'product_tag');
-			$tagImage = get_field('thumbnail', $tagId ) ;
-			$tagImageUrl = wp_get_attachment_image( $tagImage, 'woocommerce_thumbnail' );
-			?>
-			<li>
-				<a href="<?php echo get_term_link($tagSlug, 'product_tag');  ?>"> 
-		
-						<?php echo $tagImageUrl; ?> 
-				
-					<p><?php echo $tagName ?></p>
-				</a>
-			</li>
-			<?php endforeach; ?>
+	<?php 	foreach($sub_cats as $sub_category) : 
+				$teamThumbnail_id = get_term_meta( $sub_category->term_id, 'thumbnail_id', true );
+				$teamImage        = wp_get_attachment_image_src( $teamThumbnail_id , 'thumbnail')[0];
+
+	?>
+			<li><a href="<?php echo get_term_link($sub_category->slug, 'product_cat'); ?>" title="<?php echo  $sub_category->name ?>"> <img src="<?php echo 	$teamImage  ?>" alt="<?php echo  $sub_category->name ?>"></a></li>
+		<?php endforeach; ?>
+
 		</ul>
+	<?php endif; ?>
 	</section>
-	<?php endif ;?>
 
-<?php } ?>
+	<?php } ?>
 
-<?php if($isParent && !is_product_tag()) { ?>
-<!-- BEST SELLING -->
-<section  id="fd-bestSelling" class="fd-woo__shop-bestselling">
-	<h3>Bestselling individual cards</h3>
+
+	<?php if($isParent && !is_product_category( array('new-in'))) { ?>
+	<!-- TAG COLLECTIONS -->
 	<?php
-	$args = array(
+	$tags_by_name = array();
+	$products_loop = new WP_Query( array(
 		'post_type' => 'product',
-		'meta_key' => 'total_sales',
-		'orderby' => 'meta_value_num',
-		'posts_per_page' => 5,
-		'tax_query' => array( 
+		'showposts' => -1,
+		'tax_query' => array_merge( array(
+			'relation'  => 'AND',
 			array(
-			  'taxonomy' => 'product_cat',
-			  'field' => 'id',
-			  'terms' => $FDcat->term_id,
-			  'include_children' => false, // (bool) - Whether or not to include children for hierarchical taxonomies. Defaults to true.
-			  'operator' => 'NOT IN' // (string
-			),
-			array(
+				'taxonomy' => 'product_cat',
+				'terms'    => array( $FDcat->term_id ),
+				'field'   => 'term_id'
+			)
+		), WC()->query->get_tax_query() ),
+
+		'meta_query' => array_merge( array(
+
+			// You can optionally add extra meta queries here
+
+		), WC()->query->get_meta_query() )
+	) );
+
+	?>
+
+		<?php
+
+		while ( $products_loop->have_posts() ) {
+			$products_loop->the_post();
+		global $product;
+		
+		$tags = get_the_terms( $product->get_id(), 'product_tag' );
+		if($tags){
+			
+				
+				foreach($tags as $singleTag):
+					
+					if(!in_array($singleTag->name, $tags_by_name)){
+						$tags_by_name[$singleTag->slug] = $singleTag->name;
+					}
+				endforeach;
+			}
+		}
+		wp_reset_postdata(); 
+		?>
+
+		<?php if(!empty($tags_by_name)) : ?>
+		<section class="fd-tag-panini">
+			<h3>Collections</h3>
+			<ul class="fd-tags__grid">
+				<?php foreach($tags_by_name as $tagSlug => $tagName) :?>
+				<?php 
+				$tagId = get_term_by('slug', $tagSlug, 'product_tag');
+				$tagImage = get_field('thumbnail', $tagId ) ;
+				$tagImageUrl = wp_get_attachment_image( $tagImage, 'woocommerce_thumbnail' );
+				?>
+				<li>
+					<a href="<?php echo get_term_link($tagSlug, 'product_tag');  ?>"> 
+			
+							<?php echo $tagImageUrl; ?> 
+					
+						<p><?php echo $tagName ?></p>
+					</a>
+				</li>
+				<?php endforeach; ?>
+			</ul>
+		</section>
+		<?php endif ;?>
+
+	<?php } ?>
+
+	<?php if($isParent && !is_product_tag() && !is_product_category( array('new-in'))) { ?>
+	<!-- BEST SELLING -->
+	<section  id="fd-bestSelling" class="fd-woo__shop-bestselling">
+		<h3>Bestselling individual cards</h3>
+		<?php
+		$args = array(
+			'post_type' => 'product',
+			'meta_key' => 'total_sales',
+			'orderby' => 'meta_value_num',
+			'posts_per_page' => 5,
+			'tax_query' => array( 
+				array(
 				'taxonomy' => 'product_cat',
 				'field' => 'id',
 				'terms' => $FDcat->term_id,
-				'include_children' => true // (bool) - Whether or not to include children for hierarchical taxonomies. Defaults to true.
+				'include_children' => false, // (bool) - Whether or not to include children for hierarchical taxonomies. Defaults to true.
+				'operator' => 'NOT IN' // (string
+				),
+				array(
+					'taxonomy' => 'product_cat',
+					'field' => 'id',
+					'terms' => $FDcat->term_id,
+					'include_children' => true // (bool) - Whether or not to include children for hierarchical taxonomies. Defaults to true.
 
-			  )
-		),
-	);
-	$loop = new WP_Query( $args );
+				)
+			),
+		);
+		$loop = new WP_Query( $args );
 
-	woocommerce_product_loop_start();
+		woocommerce_product_loop_start();
 
-	while ( $loop->have_posts() ) : $loop->the_post(); 
-		/**
-		 * Hook: woocommerce_shop_loop.
-		 */
-		do_action( 'woocommerce_shop_loop' );
+		while ( $loop->have_posts() ) : $loop->the_post(); 
+			/**
+			 * Hook: woocommerce_shop_loop.
+			 */
+			do_action( 'woocommerce_shop_loop' );
 
-		wc_get_template_part( 'content', 'product' );
-	endwhile;
+			wc_get_template_part( 'content', 'product' );
+		endwhile;
 
-	woocommerce_product_loop_end();	
-	wp_reset_query();
-	$term_id  = get_queried_object();
-    $taxonomy = 'product_cat';
-    $slugBuild = 'individuals-'.$term_id->slug;
-    // Get subcategories of the current category
-    $terms    = get_terms([
-        'taxonomy'    => $taxonomy,
-        'slug'       => array($slugBuild, 'individuals'),
-        'parent'      => get_queried_object_id()
-    ]);
+		woocommerce_product_loop_end();	
+		wp_reset_query();
+		$term_id  = get_queried_object();
+		$taxonomy = 'product_cat';
+		$slugBuild = 'individuals-'.$term_id->slug;
+		// Get subcategories of the current category
+		$terms    = get_terms([
+			'taxonomy'    => $taxonomy,
+			'slug'       => array($slugBuild, 'individuals'),
+			'parent'      => get_queried_object_id()
+		]);
 
-    // Loop through product subcategories WP_Term Objects
-    foreach ( $terms as $term ) {
-        $term_link = get_term_link( $term, $taxonomy );
+		// Loop through product subcategories WP_Term Objects
+		foreach ( $terms as $term ) {
+			$term_link = get_term_link( $term, $taxonomy );
 
-    }
+		}
+		?>
+		<div class="fd-go-to-individuals">
+			<a href="<?php echo $term_link ?>">SHOP ALL THE INDIVIDUALS CARDS <span><?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span></a>
+		</div>
+	<section>
+
+	<?php } ?>
+
+
+	<?php 
+	/**
+	 * Hook: woocommerce_sidebar.
+	 *
+	 * @hooked woocommerce_get_sidebar - 10
+	 */
+	do_action( 'woocommerce_sidebar' );
+else: ?>
+<!-- SEARCH -->
+	<header class="woocommerce-products-header fd-woo__search-header">
+		<div class="woo-products-header__description">
+	
+			<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
+
+			<?php
+			/**
+			 * Hook: woocommerce_archive_description.
+			 *
+			 * @hooked woocommerce_taxonomy_archive_description - 10
+			 * @hooked woocommerce_product_archive_description - 10
+			 */
+			do_action( 'woocommerce_archive_description' );
+			?>
+		</div>
+	</header>
+	<?php
+
+
+	/**
+	 * Hook: woocommerce_before_shop_loop.
+	 *
+	 * @hooked woocommerce_output_all_notices - 10
+	 * @hooked woocommerce_result_count - 20
+	 * @hooked woocommerce_catalog_ordering - 30
+	 */
+	do_action( 'woocommerce_before_shop_loop' );
+
+	// ARCHIVE NAV BAR ANCHOR LINK
+	wc_get_template_part( 'custom/custom', 'individuals-anchor-nav' ); 
 	?>
-	<div class="fd-go-to-individuals">
-		<a href="<?php echo $term_link ?>">SHOP ALL THE INDIVIDUALS CARDS <span><?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span></a>
-	</div>
-<section>
+		<section  class="fd-woo__shop-grid fd-woo__shop-grid-sub-category">
+		<?php
+		if( $wp_query->have_posts() ){
+			// There is a post
+			woocommerce_product_loop_start();
 
-<?php } ?>
+			if ( wc_get_loop_prop( 'total' ) ) {
+				while ( have_posts() ) {
+					the_post();
 
+					/**
+					 * Hook: woocommerce_shop_loop.
+					 */
+					do_action( 'woocommerce_shop_loop' );
 
-<?php 
-/**
- * Hook: woocommerce_sidebar.
- *
- * @hooked woocommerce_get_sidebar - 10
- */
-do_action( 'woocommerce_sidebar' );
+					wc_get_template_part( 'content', 'product' );
+				}
+			}
+
+			woocommerce_product_loop_end();
+
+			/**
+			 * Hook: woocommerce_after_shop_loop.
+			 *
+			 * @hooked woocommerce_pagination - 10
+			 */
+			do_action( 'woocommerce_after_shop_loop' );
+		} else {
+			// No results?>
+			<div class="noresult-search">
+				<h2>Sorry there are no result for your search</h2>
+			</div>
+
+		<?php
+		}
+		
+
+		?>
+		
+		</section> <!--  fd-woo__shop-grid-individuals  -->
+ <?php
+ 	/**
+	 * Hook: woocommerce_after_main_content.
+	 *
+	 * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
+	 */
+	do_action( 'woocommerce_after_main_content' );
+endif;
 
 get_footer( 'shop' );

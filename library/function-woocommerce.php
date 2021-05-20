@@ -571,3 +571,4 @@ function fd_add_product_description(){
 	echo	'</section>';
 
 }
+
