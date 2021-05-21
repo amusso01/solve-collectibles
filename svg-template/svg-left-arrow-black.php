@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37"><g data-name="Group 201"><path data-name="Rectangle 1311" d="M0 0h37v37H0z"/><g data-name="Component 3 – 29"><path data-name="Path 56166" d="M19.865 11l-6.082 6.863 6.082 7.629" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/></g></g></svg>

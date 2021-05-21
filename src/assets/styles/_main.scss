@@ -1,3 +1,6 @@
+// Required Core Stylesheet
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
+
 //Custom styles start here
 
 // Common
@@ -17,6 +20,7 @@
 @import "components/header";
 @import "components/footer";
 @import "components/woocomponents";
+@import "components/carousel";
 
 // Templates
 @import "templates/archive";
@@ -32,3 +36,4 @@
 @import "templates/404";
 @import "templates/search";
 @import "templates/order-details";
+@import "templates/home";
