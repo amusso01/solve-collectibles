@@ -9,15 +9,23 @@
     border-bottom: 2px solid $color__dark;
     .slide-text {
       position: absolute;
-      width: 65vw;
+      width: 100vw;
       border: 2px solid $color__dark;
       background-color: $color__bright;
       bottom: 0px;
       left: 0px;
       border-bottom: none;
       padding: 40px 30px;
+      @media #{$breakpoint-md-up} {
+        width: 65vw;
+      }
       h2 {
         margin-bottom: 25px;
+        font-size: 23px;
+        white-space: pre-line;
+        @media #{$breakpoint-md-up} {
+          font-size: 35px;
+        }
       }
       .button {
         background-color: $color__dark;

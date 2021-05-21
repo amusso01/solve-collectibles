@@ -25,13 +25,8 @@ export default {
 		  loginSwitch();
 		}
 
-	
-	},
-
-	finalize() {
 		// JavaScript to be fired on all pages, after page specific JS is fired
 		const mediaQuery = window.matchMedia('(min-width: 1040px)')
-
 		function handleTabletChange(e) {
 			// Check if the media query is true
 			if (!e.matches) {
@@ -45,12 +40,21 @@ export default {
 				dropdown();
 			}
 		}
+			// Register event listener
+			mediaQuery.addListener(handleTabletChange)
 		
-		// Register event listener
-		mediaQuery.addListener(handleTabletChange)
+			// Initial check
+			handleTabletChange(mediaQuery)
+
+	
+	},
+
+	finalize() {
 		
-		// Initial check
-		handleTabletChange(mediaQuery)
+
+	
+		
+	
 
 	},
 };

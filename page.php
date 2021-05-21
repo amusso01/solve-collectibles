@@ -48,7 +48,10 @@ endif;
 <?php endif; ?>
 
 </main><!-- #main -->
-<section class="about-founder">
+
+<?php if(is_page('about')) : ?>
+
+	<section class="about-founder">
 	<div class="founder-image founder-item" style="background-image:url(<?php echo $founder['image']['url'] ?>);">
 		
 	</div>
@@ -92,5 +95,8 @@ endif;
 		<?php endforeach; ?>
 	</div>
 </section>
+
+<?php endif; ?>
+
 <?php
 get_footer();

@@ -7,9 +7,8 @@
     }
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       border-top: 2px solid $color__dark;
-
       > li {
         border: 2px solid $color__dark;
         border-top: none;
@@ -130,10 +129,14 @@
     .entry-content {
       border: 2px solid $color__dark;
       background-color: $color__bright;
-      padding: 80px 45px;
+      padding: 80px 10px;
       text-align: center;
-      max-width: 60vw;
+
       margin: auto;
+      @media #{$breakpoint-md-up} {
+        padding: 80px 45px;
+        max-width: 60vw;
+      }
     }
   }
   .home-banner {
@@ -147,10 +150,13 @@
     justify-content: center;
     .banner-info {
       text-align: center;
-      width: 40vw;
+
       margin: auto;
       background-color: rgba($color__dark, 0.4);
       padding: 15px;
+      @media #{$breakpoint-md-up} {
+        width: 40vw;
+      }
       p,
       h2 {
         color: $color__bright;
@@ -181,9 +187,12 @@
     }
   }
   .shopby {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-top: 2px solid $color__dark;
+    display: none;
+    @media #{$breakpoint-md-up} {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 2px solid $color__dark;
+    }
     &-single {
       justify-self: center;
       align-self: center;
