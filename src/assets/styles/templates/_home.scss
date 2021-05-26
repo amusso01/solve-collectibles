@@ -20,6 +20,7 @@
         justify-content: space-between;
         padding: 20px 30px;
         transition: 0.3s;
+        position: relative;
         &:hover {
           background-color: $color__footerBg;
         }

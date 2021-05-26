@@ -1,0 +1,73 @@
+#fdFilter {
+  position: absolute;
+  background-color: $color__bright;
+  right: -900px;
+  top: 0px;
+  z-index: 85;
+  border-left: 2px solid $color__dark;
+  border-bottom: 2px solid $color__dark;
+  padding: 45px 20px;
+  transition: right 0.4s;
+  &.filter-open {
+    right: 0px;
+  }
+  .filter-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    text-align: right;
+    font-weight: 500;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .wpfFilterButtons {
+    text-align: center;
+    margin-top: 40px;
+    .wpfFilterButton.wpfButton {
+      background-color: $color__dark;
+      color: $color__bright;
+      width: 100%;
+      text-align: center;
+      border-radius: 3px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      font-size: 14px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      margin-top: 10px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .wpfFilterWrapper {
+    margin-bottom: 15px;
+  }
+}
+
+.fd-woo__individuals-anchor {
+  display: flex;
+  align-items: center;
+  position: relative;
+  .fd-filter-button {
+    margin-left: 60px;
+    p {
+      font-size: 18px;
+      font-weight: 500;
+      &:hover {
+        cursor: pointer;
+      }
+      span {
+        margin-left: 23px;
+        > svg {
+          width: 11px;
+          height: 11px;
+        }
+      }
+    }
+  }
+  .woocommerce-ordering .orderby {
+    width: 95px;
+  }
+}

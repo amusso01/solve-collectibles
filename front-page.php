@@ -27,7 +27,7 @@ get_header();
 			'posts_per_page' => '5',
 			'meta_key' => 'total_sales',
 			'orderby' => 'meta_value_num',
-			'meta_query' => WC()->query->get_meta_query()
+			// 'meta_query' => WC()->query->get_meta_query()
 		);
 	
 		$best_sell_products_query = new WP_Query($query_args );

@@ -4,6 +4,7 @@ import hamburger from "./../part/hamburger";
 import dropdown from "./../part/dropdown";
 import mobileMenu from "./../part/mobileMenu";
 import loginSwitch from "../part/loginSwitch"
+import fdFilter from "./../part/filter"
 
 export default {
 	init() {
@@ -23,6 +24,12 @@ export default {
 		if (typeof(isLogin) != 'undefined' && isLogin != null)
 		{
 		  loginSwitch();
+		}
+
+		const hasFilter = document.getElementById('fdFilterButton');
+		if (typeof(hasFilter) != 'undefined' && hasFilter != null)
+		{
+			fdFilter();
 		}
 
 		// JavaScript to be fired on all pages, after page specific JS is fired

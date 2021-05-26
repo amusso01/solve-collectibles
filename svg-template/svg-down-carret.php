@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17.309" height="8.8" viewBox="0 0 17.309 8.8"><g data-name="Component 3 – 12"><path data-name="Path 56166" d="M1.411 1.412l6.863 6.082 7.629-6.082" fill="none" stroke="#000" stroke-linecap="round" stroke-width="2"/></g></svg>

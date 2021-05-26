@@ -59,9 +59,8 @@
 // nav anchor link
 .fd-woo__archive-anchor {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
   .anchor-item {
-    grid-column: span 3;
     border-top: 2px solid $color__dark;
     border-bottom: 2px solid $color__dark;
     border-right: 2px solid $color__dark;
@@ -75,7 +74,6 @@
     transition: 0.3s;
     font-size: 18px;
     @media #{$breakpoint-sm-up} {
-      grid-column: span 2;
       font-size: 21px;
     }
     &:hover {
@@ -84,12 +82,6 @@
     }
     &:last-of-type {
       border-right: none;
-      grid-column: span 6;
-      border-top: none;
-      @media #{$breakpoint-sm-up} {
-        border-top: 2px solid $color__dark;
-        grid-column: span 2;
-      }
     }
   }
 }
@@ -191,10 +183,10 @@
   .products {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-
     border-top: 2px solid $color__dark;
     > li {
       border: 2px solid $color__dark;
+      position: relative;
       border-top: none;
       border-left: none;
       padding-bottom: 20px;
@@ -302,11 +294,11 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     border-top: 2px solid $color__dark;
-
     > li {
       border: 2px solid $color__dark;
       border-top: none;
       border-left: none;
+      position: relative;
       padding-bottom: 20px;
       display: flex;
       flex-direction: column;
@@ -412,18 +404,18 @@
       }
     }
   }
-  .fd-go-to-individuals {
-    min-height: 90px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    font-weight: 500;
-    span {
-      margin-left: 20px;
-      position: relative;
-      top: 2px;
-    }
+}
+.fd-go-to-individuals {
+  min-height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  span {
+    margin-left: 20px;
+    position: relative;
+    top: 2px;
   }
 }
 

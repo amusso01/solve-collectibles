@@ -194,12 +194,14 @@ if(!is_search()) :
 	<?php if($isParent && !is_product_category( array('new-in'))) { ?>
 
 		<?php if(!is_product_tag()) : ?>
+			
+			<?php
+
+				if ( wc_get_loop_prop( 'total' ) ) { ?>
 			<section id="packs-list" class="fd-woo__shop-grid">
 				<h3>Packs</h3>
-			<?php
-				woocommerce_product_loop_start();
-
-				if ( wc_get_loop_prop( 'total' ) ) {
+				<?php 
+					woocommerce_product_loop_start();
 					while ( have_posts() ) {
 						the_post();
 
@@ -323,8 +325,7 @@ if(!is_search()) :
 
 	<?php if($isParent && !is_product_tag() && !is_product_category( array('new-in'))) { ?>
 	<!-- TEAM -->
-	<section id="teams-list" class="fd-woo__teams">
-		<h3>Football teams</h3>
+	
 		<?php
 		$taxonomy     = 'product_cat';
 		$orderby      = 'name';  
@@ -374,6 +375,8 @@ if(!is_search()) :
 	}
 		$sub_cats = get_categories( $args2);
 	if($sub_cats)  : ?>
+	<section id="teams-list" class="fd-woo__teams">
+		<h3>Football teams</h3>
 		<ul class="fd-teams-grid">
 
 	<?php 	foreach($sub_cats as $sub_category) : 
@@ -385,8 +388,8 @@ if(!is_search()) :
 		<?php endforeach; ?>
 
 		</ul>
-	<?php endif; ?>
 	</section>
+	<?php endif; ?>
 
 	<?php } ?>
 
@@ -464,8 +467,7 @@ if(!is_search()) :
 
 	<?php if($isParent && !is_product_tag() && !is_product_category( array('new-in'))) { ?>
 	<!-- BEST SELLING -->
-	<section  id="fd-bestSelling" class="fd-woo__shop-bestselling">
-		<h3>Bestselling individual cards</h3>
+
 		<?php
 		$args = array(
 			'post_type' => 'product',
@@ -491,19 +493,25 @@ if(!is_search()) :
 		);
 		$loop = new WP_Query( $args );
 
-		woocommerce_product_loop_start();
+		if($loop->have_posts()) : ?>
+	<section  id="fd-bestSelling" class="fd-woo__shop-bestselling">
+		<h3>Bestselling individual cards</h3>
 
-		while ( $loop->have_posts() ) : $loop->the_post(); 
-			/**
-			 * Hook: woocommerce_shop_loop.
-			 */
-			do_action( 'woocommerce_shop_loop' );
+<?php
+			woocommerce_product_loop_start();
 
-			wc_get_template_part( 'content', 'product' );
-		endwhile;
+			while ( $loop->have_posts() ) : $loop->the_post(); 
+				/**
+				 * Hook: woocommerce_shop_loop.
+				 */
+				do_action( 'woocommerce_shop_loop' );
 
-		woocommerce_product_loop_end();	
-		wp_reset_query();
+				wc_get_template_part( 'content', 'product' );
+			endwhile;
+
+			woocommerce_product_loop_end();	
+			wp_reset_query();
+		endif;
 		$term_id  = get_queried_object();
 		$taxonomy = 'product_cat';
 		$slugBuild = 'individuals-'.$term_id->slug;
@@ -520,9 +528,11 @@ if(!is_search()) :
 
 		}
 		?>
+		<?php if($terms) : ?>
 		<div class="fd-go-to-individuals">
 			<a href="<?php echo $term_link ?>">SHOP ALL THE INDIVIDUALS CARDS <span><?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span></a>
 		</div>
+		<?php endif; ?> 
 	<section>
 
 	<?php } ?>

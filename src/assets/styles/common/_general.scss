@@ -9,9 +9,11 @@ html {
   font-size: $text__p;
   font-weight: 400;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /**

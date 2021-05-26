@@ -254,6 +254,11 @@ register_taxonomy_for_object_type( 'team', 'product' );
 }
 
 
+
+
+/**
+* Qty Selector
+*/
 add_action( 'woocommerce_after_add_to_cart_quantity', 'ts_quantity_plus_sign' );
 
 function ts_quantity_plus_sign() {
@@ -449,6 +454,18 @@ return 'Already have an account?';
 }
 
 /**
+*  Redirect shop to home
+*/
+function custom_shop_page_redirect() {
+    if( is_shop() && !is_search()){
+        wp_redirect( site_url( '/' ) );
+        exit();
+    }
+}
+add_action( 'template_redirect', 'custom_shop_page_redirect' );
+
+
+/**
 * Modify checkout field
 */
 add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );
@@ -571,4 +588,5 @@ function fd_add_product_description(){
 	echo	'</section>';
 
 }
+
 
