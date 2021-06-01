@@ -376,7 +376,11 @@ if(!is_search()) :
 		$sub_cats = get_categories( $args2);
 	if($sub_cats)  : ?>
 	<section id="teams-list" class="fd-woo__teams">
+	<?php if($wp_query->query['product_cat'] === 'minecraft-adventure-trading-cards') : ?>
+		<h3>Dungeons SquishMe's</h3>
+	<?php else: ?>
 		<h3>Football teams</h3>
+	<?php endif; ?>
 		<ul class="fd-teams-grid">
 
 	<?php 	foreach($sub_cats as $sub_category) : 

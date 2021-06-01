@@ -86,8 +86,13 @@ if ( is_product_category() ) {
 
 
    <?php if($sub_cats)  : ?>
-        <a class="anchor-item" href="#teams-list">TEAMS <span>        <?php get_template_part( 'svg-template/svg', 'down-arrow' ) ?></span></a>
-    <?php endif; ?>
+	<?php global $wp_query;  ?>
+		<?php if($wp_query->query['product_cat'] === 'minecraft-adventure-trading-cards') : ?>
+      	  	<a class="anchor-item" href="#teams-list">Dungeons SquishMe's <span>        <?php get_template_part( 'svg-template/svg', 'down-arrow' ) ?></span></a>
+		<?php else: ?>
+			<a class="anchor-item" href="#teams-list">TEAMS <span>        <?php get_template_part( 'svg-template/svg', 'down-arrow' ) ?></span></a>
+		<?php endif; ?>
+	<?php endif; ?>
 
 
 <?php if($terms)  : ?>

@@ -16,3 +16,26 @@
     }
   }
 }
+
+// PAGINATION
+.woocommerce-pagination {
+  padding: 20px 30px;
+  border-bottom: 2px solid $color__dark;
+  .page-numbers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > li {
+      padding: 5px 15px;
+      border-right: 2px solid $color__dark;
+      &:last-of-type {
+        border-right: none;
+      }
+      .current {
+        padding: 0px 10px;
+        background-color: $color__dark;
+        color: $color__bright;
+      }
+    }
+  }
+}

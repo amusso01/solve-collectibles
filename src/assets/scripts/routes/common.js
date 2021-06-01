@@ -5,6 +5,7 @@ import dropdown from "./../part/dropdown";
 import mobileMenu from "./../part/mobileMenu";
 import loginSwitch from "../part/loginSwitch"
 import fdFilter from "./../part/filter"
+import addToCart from "./../part/addToCart"
 
 export default {
 	init() {
@@ -14,6 +15,9 @@ export default {
 		// kick off the polyfill!
 		smoothscroll.polyfill();
 
+
+
+		addToCart();
 
 
 		// Lazy load image with lozad.js https://github.com/ApoorvSaxena/lozad.js
