@@ -20,4 +20,13 @@ defined( 'ABSPATH' ) || exit;
         <?php echo do_shortcode('[wpf-filters id=1]') ?>   
     </div>
 
+    <div id="layoutSelector" class="layout-view">
+        <div class="layout-view__single" id="tiles">
+            Tiles
+        </div>
+        <div class="layout-view__single" id="grid">
+            Grid
+        </div>
+    </div>
+
 </section>

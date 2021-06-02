@@ -125,4 +125,30 @@ footer.site-footer {
       }
     }
   }
+  .fd-mailchimp__container {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: flex-start;
+    .wpcf7-email {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border: 2px solid $color__dark;
+      width: 95%;
+      padding-left: 5px;
+    }
+    .wpcf7-submit {
+      background-color: $color__dark;
+      color: $color__bright;
+      width: 100%;
+      text-align: center;
+      border-radius: 3px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      font-size: 14px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      margin-top: 0px;
+      border: none;
+    }
+  }
 }

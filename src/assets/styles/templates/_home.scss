@@ -67,6 +67,9 @@
             text-decoration: underline;
           }
         }
+        .grid_button {
+          display: none;
+        }
         .button {
           background-color: $color__dark;
           color: $color__bright;
@@ -95,6 +98,33 @@
             pointer-events: none;
             transition: opacity 0.3s;
           }
+          &::before {
+            content: "1 Card added";
+            color: $color__bright;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            z-index: 7;
+            font-size: 16px;
+            font-weight: 500;
+            position: absolute;
+            background-color: rgba($color__dark, 0.6);
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+          }
+          &.add {
+            pointer-events: none;
+            &::before {
+              opacity: 1;
+              pointer-events: all;
+            }
+          }
           &.disabled {
             pointer-events: none;
             cursor: not-allowed;
@@ -109,7 +139,7 @@
         }
         .added_to_cart {
           position: absolute;
-          top: 50%;
+          top: 30%;
           padding: 8px;
           width: 100%;
           background: $color__dark;
@@ -133,7 +163,6 @@
             justify-content: center;
             transform: translateY(-80%);
             background-color: rgba(0, 0, 0, 0.2);
-
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             color: $color__bright;

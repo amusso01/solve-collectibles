@@ -63,5 +63,6 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	 * @hooked woocommerce_template_loop_add_to_cart - 10
 	 */
 	do_action( 'woocommerce_after_shop_loop_item' );
+	echo "<a class='button add_to_cart_button ajax_add_to_cart grid_button' href='".$product->add_to_cart_url()."' data-quantity='1' data-product_id='".$product->get_id()."' data-product_sku='".$product->get_sku()."' rel='nofollow'>+</a>";
 	?>
 </li>

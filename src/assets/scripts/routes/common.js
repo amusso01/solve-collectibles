@@ -6,6 +6,7 @@ import mobileMenu from "./../part/mobileMenu";
 import loginSwitch from "../part/loginSwitch"
 import fdFilter from "./../part/filter"
 import addToCart from "./../part/addToCart"
+import layoutView from "./../part/layoutView"
 
 export default {
 	init() {
@@ -23,6 +24,12 @@ export default {
 		// Lazy load image with lozad.js https://github.com/ApoorvSaxena/lozad.js
 		const observer = lozad(); // lazy loads elements with default selector as '.lozad'
 		observer.observe();
+
+		// Layout View
+		const isLayout = document.getElementById('layoutSelector');
+		if (typeof(isLayout) != 'undefined' && isLayout != null){
+			layoutView();
+		}
 
 		const isLogin = document.getElementById('customer_login');
 		if (typeof(isLogin) != 'undefined' && isLogin != null)

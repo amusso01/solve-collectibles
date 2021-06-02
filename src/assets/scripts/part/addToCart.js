@@ -10,10 +10,15 @@ export default function addToCart(){
          let thisButton = e.target
         thisButton.classList.add('disabled');
 
-        setTimeout(() => {
-            let viewCart = thisButton.nextSibling;
+        let spinner = setTimeout(() => {
             thisButton.classList.remove('disabled');
-        }, 3000);
+            thisButton.classList.add('add');
+        }, 2500);
+
+        setTimeout(() => {
+            clearTimeout(spinner);
+            thisButton.classList.remove('add')
+        }, 3800);
      }
 
 }

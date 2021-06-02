@@ -572,6 +572,18 @@ function custom_override_checkout_fields( $fields ) {
 
 
 
+/**
+* Decimal displaying
+*/
+
+add_filter( 'formatted_woocommerce_price', 'ts_woo_decimal_price', 10, 5 );
+function ts_woo_decimal_price( $formatted_price, $price, $decimal_places, $decimal_separator, $thousand_separator ) {
+	$unit = number_format( intval( $price ), 0, $decimal_separator, $thousand_separator );
+	$decimal = sprintf( '%02d', ( $price - intval( $price ) ) * 100 );
+	return $unit . '<span>' . $decimal_separator. $decimal . '</span>';
+}
+
+
 // WOOCOMMERCE ORDER MANIPULATE
 
 /**

@@ -47,7 +47,9 @@
 				<div class="site-footer__right site-footer__grid-item">
 					<h3>Subscribe</h3>
 					<p>Subscribe to our mailing list to be automatically entered in to our weekly giveaways</p>
-					<div class="subscribe-container"></div>
+					<div class="subscribe-container">
+						<?php echo do_shortcode( '[contact-form-7 id="32259" title="Mailchimp"]' ) ?>
+					</div>
 
 					<div class="site-footer__social">
 						<ul>
