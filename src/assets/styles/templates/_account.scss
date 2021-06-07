@@ -12,7 +12,9 @@
   }
 }
 .account-main {
-  padding: 80px 30px;
+  .account-wrapper {
+    padding: 80px 30px;
+  }
   //   Rest password
   .woocommerce-ResetPassword {
     text-align: center;

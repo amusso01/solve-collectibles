@@ -125,9 +125,14 @@ footer.site-footer {
       }
     }
   }
+  .wpcf7 form.sent .wpcf7-response-output {
+    border: none !important;
+    padding: 0px;
+    margin: 0px;
+    margin-bottom: 20px;
+  }
   .fd-mailchimp__container {
     display: flex;
-    margin-bottom: 20px;
     align-items: flex-start;
     .wpcf7-email {
       padding-top: 10px;

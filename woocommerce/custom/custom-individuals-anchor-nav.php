@@ -22,10 +22,10 @@ defined( 'ABSPATH' ) || exit;
 
     <div id="layoutSelector" class="layout-view">
         <div class="layout-view__single" id="tiles">
-            Tiles
+            <?php get_template_part( 'svg-template/svg', 'tiles-solve' ) ?> Tiles 
         </div>
         <div class="layout-view__single" id="grid">
-            Grid
+        <?php get_template_part( 'svg-template/svg', 'grid-solve' ) ?> Grid
         </div>
     </div>
 

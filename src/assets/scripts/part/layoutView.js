@@ -4,8 +4,8 @@ export default function layoutView(){
 
     layoutButton.forEach(el=>{
         el.addEventListener('click', (e)=>{
-            console.log(cardsGrid);
-            if(e.target.id === 'grid'){
+            console.log();
+            if(e.target.id === 'grid' || e.target.closest('#grid')){
                 if(!cardsGrid.classList.contains('grid-view')){
                     cardsGrid.classList.add('grid-view');
                 }

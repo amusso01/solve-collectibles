@@ -18,6 +18,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 45px;
+    background-color: $color__bright;
   }
   .woo-products-header__description {
     text-align: center;
@@ -97,6 +99,12 @@
       font-weight: 500;
       transition: 0.3s;
       font-size: 18px;
+      width: 100%;
+      -moz-appearance: none; /* Firefox */
+      -webkit-appearance: none; /* Safari and Chrome */
+      appearance: none;
+      background: url("./../images/carret-down.svg") no-repeat right white;
+      background-position: right 30px;
     }
   }
 }
@@ -161,6 +169,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
+            display: none;
           }
         }
       }
@@ -285,7 +294,7 @@
             pointer-events: all;
           }
         }
-        &.disabled {
+        &.FdDisabled {
           pointer-events: none;
           cursor: not-allowed;
           &::after {
@@ -338,6 +347,7 @@
         font-weight: 500;
         opacity: 1;
         transition: 0.3s;
+        display: none;
       }
     }
   }
@@ -470,7 +480,7 @@
             pointer-events: all;
           }
         }
-        &.disabled {
+        &.FdDisabled {
           pointer-events: none;
           cursor: not-allowed;
           &::after {
@@ -493,6 +503,7 @@
         font-weight: 500;
         opacity: 1;
         transition: 0.3s;
+        display: none;
       }
       &.outofstock {
         position: relative;

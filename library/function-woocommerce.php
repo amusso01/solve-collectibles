@@ -262,7 +262,7 @@ register_taxonomy_for_object_type( 'team', 'product' );
 add_action( 'woocommerce_after_add_to_cart_quantity', 'ts_quantity_plus_sign' );
 
 function ts_quantity_plus_sign() {
-echo '<button type="button" class="plus" >+</button>';
+echo '<button type="button" class="plus" title="Maximum limit of 3" >+</button>';
 }
 
 add_action( 'woocommerce_before_add_to_cart_quantity', 'ts_quantity_minus_sign' );
@@ -649,7 +649,6 @@ add_action('woocommerce_after_single_product', 'fd_add_product_description' );
 function fd_add_product_description(){
 	echo	'<section class="fd-single-description">';
 	echo	' <h3>About this card</h3>';
-	get_template_part( 'svg-template/svg', 'right-arrow' );
 	the_content();
 	echo	'</section>';
 

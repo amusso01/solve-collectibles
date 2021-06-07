@@ -24,7 +24,7 @@
 					<div class="site-footer__menus">
 						<div class="site-footer__menu"><?php get_template_part( 'components/navigation/footer1' ); ?></div>
 						<div class="site-footer__menu"><?php get_template_part( 'components/navigation/footer-2' ); ?></div>
-						<div class="site-footer__menu"><?php get_template_part( 'components/navigation/footer-3' ); ?></div>
+						<!-- <div class="site-footer__menu"><?php get_template_part( 'components/navigation/footer-3' ); ?></div> -->
 						<div class="site-footer__menu">
 							<ul>
 								<li>0330 122 8509</li>

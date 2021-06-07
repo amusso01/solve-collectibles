@@ -21,6 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 do_action( 'woocommerce_before_customer_login_form' ); ?>
 
+<div class="account-wrapper">
+
+
 <?php if ( 'yes' === get_option( 'woocommerce_enable_myaccount_registration' ) ) : ?>
 
 
@@ -135,6 +138,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 
 	</div>
 
+</div>
 </div>
 <?php endif; ?>
 

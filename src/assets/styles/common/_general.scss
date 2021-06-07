@@ -31,7 +31,7 @@ ul,
 li,
 ol {
   color: $color__text;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.5px;
 }
 
 em,
@@ -64,7 +64,7 @@ a {
   color: $color__link;
   text-decoration: none;
   font-size: $text__p;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.5px;
   &:hover {
     color: $color__link-hover;
     text-decoration: underline;
@@ -96,6 +96,7 @@ h1,
   font-size: $text__h1;
   text-transform: uppercase;
   font-weight: 500;
+  line-height: 40px;
 }
 
 h2,

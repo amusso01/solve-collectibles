@@ -1,15 +1,15 @@
 #fdFilter {
   position: absolute;
   background-color: $color__bright;
-  right: -900px;
-  top: 0px;
+  left: -900px;
+  top: 77px;
   z-index: 85;
-  border-left: 2px solid $color__dark;
+  border-right: 2px solid $color__dark;
   border-bottom: 2px solid $color__dark;
   padding: 45px 20px;
-  transition: right 0.4s;
+  transition: left 0.4s;
   &.filter-open {
-    right: 0px;
+    left: 0px;
   }
   .filter-close {
     position: absolute;
@@ -41,8 +41,35 @@
       }
     }
   }
+  .wpfFilterVerScroll {
+    padding-right: 10px;
+  }
+  .wpfClearButton {
+    background-color: transparent;
+    color: $color__dark;
+    width: 100%;
+    text-align: left;
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 12px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 10px;
+  }
   .wpfFilterWrapper {
     margin-bottom: 15px;
+  }
+  .wpfFilterWrapper .wpfCheckbox > label::before {
+    border: 2px solid $color__dark !important;
+  }
+  .ui-slider.ui-widget-content .ui-slider-handle:hover,
+  .ui-slider.ui-widget-content .ui-slider-handle.ui-state-hover,
+  .ui-slider.ui-widget-content .ui-slider-handle.ui-state-active {
+    border-color: $color__dark !important;
+    background-color: $color__dark !important;
+  }
+  .ui-slider.ui-widget-content .ui-slider-handle {
+    border-radius: 50%;
   }
 }
 
@@ -59,11 +86,7 @@
         cursor: pointer;
       }
       span {
-        margin-left: 23px;
-        > svg {
-          width: 11px;
-          height: 11px;
-        }
+        margin-left: 70px;
       }
     }
   }

@@ -125,7 +125,7 @@
               pointer-events: all;
             }
           }
-          &.disabled {
+          &.FdDisabled {
             pointer-events: none;
             cursor: not-allowed;
             &::after {
@@ -148,6 +148,7 @@
           font-weight: 500;
           opacity: 1;
           transition: 0.3s;
+          display: none;
         }
         &.outofstock {
           position: relative;

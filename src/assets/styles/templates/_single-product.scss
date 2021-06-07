@@ -78,7 +78,7 @@
             }
           }
         }
-        .button {
+        .single_add_to_cart_button {
           background-color: $color__dark;
           color: $color__bright;
           text-align: center;
@@ -92,9 +92,62 @@
           width: 50%;
           margin-left: auto;
           margin-right: auto;
+          margin-bottom: 8px;
           border: none;
+          cursor: pointer;
           &:hover {
             text-decoration: underline;
+          }
+          &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background-image: url("./../images/spinning.gif");
+            z-index: 5;
+            position: absolute;
+            background-color: rgba($color__bright, 0.6);
+            top: 0;
+            left: 0;
+            background-position: center center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+          }
+          &::before {
+            content: "1 Card added";
+            color: $color__bright;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            z-index: 7;
+            font-size: 16px;
+            font-weight: 500;
+            position: absolute;
+            background-color: rgba($color__dark, 0.6);
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+          }
+          &.add {
+            pointer-events: none;
+            &::before {
+              opacity: 1;
+              pointer-events: all;
+            }
+          }
+          &.FdDisabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            &::after {
+              opacity: 1;
+              pointer-events: all;
+            }
           }
         }
       }
@@ -207,6 +260,9 @@
       transform: rotate(270deg);
       width: 17px;
     }
+    ul {
+      list-style: none;
+    }
     p {
       width: 80%;
       margin: auto;
@@ -276,6 +332,57 @@
           padding-top: 10px;
           padding-bottom: 10px;
           margin-top: 10px;
+          &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background-image: url("./../images/spinning.gif");
+            z-index: 5;
+            position: absolute;
+            background-color: rgba($color__bright, 0.6);
+            top: 0;
+            left: 0;
+            background-position: center center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+          }
+          &::before {
+            content: "1 Card added";
+            color: $color__bright;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            z-index: 7;
+            font-size: 16px;
+            font-weight: 500;
+            position: absolute;
+            background-color: rgba($color__dark, 0.6);
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+          }
+          &.add {
+            pointer-events: none;
+            &::before {
+              opacity: 1;
+              pointer-events: all;
+            }
+          }
+          &.FdDisabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            &::after {
+              opacity: 1;
+              pointer-events: all;
+            }
+          }
           &:hover {
             text-decoration: underline;
           }
@@ -311,8 +418,21 @@
             background-color: transparent;
           }
         }
+        .grid_button {
+          display: none;
+        }
         .added_to_cart {
-          font-size: 13px;
+          position: absolute;
+          top: 30%;
+          padding: 8px;
+          width: 100%;
+          background: $color__dark;
+          color: $color__bright;
+          text-align: center;
+          font-weight: 500;
+          opacity: 1;
+          transition: 0.3s;
+          display: none;
         }
       }
     }

@@ -6,6 +6,7 @@ import mobileMenu from "./../part/mobileMenu";
 import loginSwitch from "../part/loginSwitch"
 import fdFilter from "./../part/filter"
 import addToCart from "./../part/addToCart"
+import singleAddToCart from "./../part/singleAddToCart"
 import layoutView from "./../part/layoutView"
 
 export default {
@@ -19,6 +20,8 @@ export default {
 
 
 		addToCart();
+
+		singleAddToCart();
 
 
 		// Lazy load image with lozad.js https://github.com/ApoorvSaxena/lozad.js

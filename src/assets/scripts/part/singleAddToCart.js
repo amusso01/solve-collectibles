@@ -1,13 +1,11 @@
 export default function addToCart(){
   
-    const ajaxButton = document.querySelectorAll('.ajax_add_to_cart');
+    const ajaxButton = document.querySelector('.single_add_to_cart_button');
 
-    ajaxButton.forEach(element => {
-        element.addEventListener('click', animaAdd);
-    });
+    ajaxButton.addEventListener('click', animaAdd);
 
      function animaAdd(e){
-         let thisButton = e.target
+        let thisButton = e.target
         thisButton.classList.add('FdDisabled');
 
         let spinner = setTimeout(() => {
