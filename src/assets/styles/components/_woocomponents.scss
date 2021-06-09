@@ -26,8 +26,11 @@
     justify-content: center;
     align-items: center;
     > li {
-      padding: 5px 15px;
+      padding: 5px 9px;
       border-right: 2px solid $color__dark;
+      @media #{$breakpoint-md-up} {
+        padding: 5px 15px;
+      }
       &:last-of-type {
         border-right: none;
       }

@@ -21,8 +21,10 @@ export default {
 
 		addToCart();
 
+		const isSingleProduct = document.querySelector('.summary .single_add_to_cart_button');
+		if (typeof(isSingleProduct) != 'undefined' && isSingleProduct != null){
 		singleAddToCart();
-
+		}
 
 		// Lazy load image with lozad.js https://github.com/ApoorvSaxena/lozad.js
 		const observer = lozad(); // lazy loads elements with default selector as '.lozad'

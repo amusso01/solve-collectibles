@@ -41,12 +41,17 @@
   //   cart full
   .fd-cart__full-grid {
     display: grid;
-    grid-template-columns: 2.2fr 1fr;
+    grid-template-columns: 1fr;
+    row-gap: 50px;
     padding: 80px 30px;
     column-gap: 40px;
     @media #{$breakpoint-md-up} {
       width: 88%;
       margin: auto;
+      grid-template-columns: 2.2fr 1fr;
+    }
+    .woocommerce-cart-form {
+      overflow-x: auto;
     }
     table.woocommerce-cart-form__contents {
       width: 100%;

@@ -1,10 +1,25 @@
 .fd-woo__individuals-anchor {
   .layout-view {
-    margin-left: auto;
     display: flex;
+    grid-column: 1 / -1;
+    border-top: 2px solid $color__dark;
+    padding: 10px 0px;
+    @media #{$breakpoint-md-up} {
+      margin-left: auto;
+      border-top: none;
+      padding: 0px 0px;
+    }
     &__single {
       padding: 5px 20px;
       font-weight: 500;
+      flex-basis: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @media #{$breakpoint-md-up} {
+        flex-basis: auto;
+        display: inline-block;
+      }
       &:hover {
         cursor: pointer;
       }
@@ -16,6 +31,9 @@
       }
       > svg {
         margin-right: 3px;
+      }
+      &.active {
+        background-color: $color__footerBg;
       }
     }
   }

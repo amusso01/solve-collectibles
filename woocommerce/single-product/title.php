@@ -20,4 +20,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 $shortcode = get_field('card_shortcode' );
 ?>
-<h1 class="product_title entry-title"><span><?php echo $shortcode ?> </span><?php echo get_the_title() ?></h1>
+<h1 class="product_title entry-title"><span><?php echo $shortcode ?> </span> <?php echo get_the_title() ?></h1>

@@ -29,6 +29,10 @@
         margin-bottom: 10px;
         > span {
           font-weight: 500;
+          display: block;
+          @media #{$breakpoint-md-up} {
+            display: inline-block;
+          }
         }
       }
       .price {
@@ -42,12 +46,15 @@
         margin-bottom: 60px;
         .fd-selector-wrapper {
           display: flex;
-          width: 50%;
+          width: 100%;
           margin-left: auto;
           margin-right: auto;
           padding: 15px 10px;
           border-top: 2px solid $color__dark;
           margin-bottom: 10px;
+          @media #{$breakpoint-md-up} {
+            width: 50%;
+          }
           .minus,
           .plus,
           .quantity {
@@ -89,12 +96,15 @@
           padding-bottom: 10px;
           padding-left: 20px;
           padding-right: 20px;
-          width: 50%;
+          width: 100%;
           margin-left: auto;
           margin-right: auto;
           margin-bottom: 8px;
           border: none;
           cursor: pointer;
+          @media #{$breakpoint-md-up} {
+            width: 50%;
+          }
           &:hover {
             text-decoration: underline;
           }
@@ -150,11 +160,18 @@
             }
           }
         }
+        .added_to_cart {
+          display: none;
+        }
       }
     }
     .product_meta {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      row-gap: 20px;
+      grid-template-columns: 1fr;
+      @media #{$breakpoint-sm-up} {
+        grid-template-columns: 1fr 1fr;
+      }
       > div {
         > h4 {
           margin-bottom: 10px;
@@ -240,13 +257,17 @@
           font-weight: 400;
           &.shortcode {
             font-weight: 500;
+            display: none;
+            @media #{$breakpoint-sm-up} {
+              display: inline-block;
+            }
           }
         }
       }
     }
   }
   .fd-single-description {
-    padding: 60px 0px 30px;
+    padding: 60px 15px 30px;
     text-align: center;
     @media #{$breakpoint-md-up} {
       padding: 60px 30px 80px;
@@ -337,6 +358,7 @@
             width: 100%;
             height: 100%;
             background-image: url("./../images/spinning.gif");
+            background-size: 50%;
             z-index: 5;
             position: absolute;
             background-color: rgba($color__bright, 0.6);

@@ -134,6 +134,10 @@
             .menu-item {
               > a {
                 padding: 5px 0px;
+                font-size: 16px;
+                @media #{$breakpoint-md-up} {
+                  font-size: 18px;
+                }
                 &::after {
                   display: none;
                 }
@@ -185,17 +189,14 @@
   .site-header__nav-shop {
     flex-basis: 100%;
     align-self: stretch;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    @media #{$breakpoint-md-up} {
-      grid-template-columns: repeat(4, 1fr);
-    }
+    display: flex;
     > a {
       border-right: 2px solid $color__dark;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       transition: 0.2s;
+      flex-basis: 100%;
       &:last-of-type {
         border-right: none;
       }
@@ -236,8 +237,8 @@
   height: auto;
   .backToParent {
     position: absolute;
-    top: 165px;
-    right: 1.5rem;
+    top: 155px;
+    right: 1.2rem;
     z-index: 10;
     opacity: 0;
     pointer-events: none;

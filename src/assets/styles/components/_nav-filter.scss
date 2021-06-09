@@ -74,11 +74,27 @@
 }
 
 .fd-woo__individuals-anchor {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   position: relative;
+  column-gap: 15px;
+  justify-content: center;
+  @media #{$breakpoint-md-up} {
+    display: flex;
+    align-items: center;
+  }
   .fd-filter-button {
-    margin-left: 60px;
+    justify-self: center;
+    align-self: center;
+    min-height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media #{$breakpoint-md-up} {
+      margin-left: 60px;
+      grid-column: span 1;
+    }
+
     p {
       font-size: 18px;
       font-weight: 500;
@@ -87,7 +103,19 @@
       }
       span {
         margin-left: 70px;
+        display: none;
+        @media #{$breakpoint-sm-up} {
+          display: inline;
+        }
       }
+    }
+  }
+  .woocommerce-ordering {
+    justify-self: center;
+    align-self: center;
+
+    @media #{$breakpoint-md-up} {
+      grid-column: span 1;
     }
   }
   .woocommerce-ordering .orderby {

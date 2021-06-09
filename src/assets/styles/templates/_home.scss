@@ -87,6 +87,7 @@
             width: 100%;
             height: 100%;
             background-image: url("./../images/spinning.gif");
+            background-size: 50%;
             z-index: 5;
             position: absolute;
             background-color: rgba($color__bright, 0.6);
@@ -185,6 +186,7 @@
   }
   .home-content {
     background-size: cover;
+    background-position: center;
     padding: 30px;
     min-height: 540px;
     display: flex;
@@ -193,7 +195,7 @@
     .entry-content {
       border: 2px solid $color__dark;
       background-color: $color__bright;
-      padding: 80px 10px;
+      padding: 80px 15px;
       text-align: center;
 
       margin: auto;

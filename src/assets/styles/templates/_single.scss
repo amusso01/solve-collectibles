@@ -12,9 +12,18 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-right: 75px;
+
+    @media #{$breakpoint-md-up} {
+      padding-right: 75px;
+    }
     h1 {
       margin-bottom: 15px;
+      margin-top: 20px;
+      font-size: 24px;
+      @media #{$breakpoint-md-up} {
+        font-size: 35px;
+        margin-top: 0px;
+      }
     }
     .date {
       margin-top: 15px;
@@ -23,29 +32,50 @@
   }
 }
 .single-main {
-  padding: 80px 30px;
+  padding: 40px 30px;
   display: grid;
   grid-template-columns: 1fr;
   @media #{$breakpoint-md-up} {
     grid-template-columns: 2fr 10fr;
+    padding: 80px 30px;
   }
   column-gap: 25px;
   margin-bottom: 30px;
+  row-gap: 20px;
   @media #{$breakpoint-md-up} {
     width: 75%;
     margin: auto;
     margin-bottom: 30px;
   }
   .fd-single-share {
-    justify-self: center;
+    justify-self: flex-start;
+    @media #{$breakpoint-md-up} {
+      justify-self: center;
+    }
     ul {
       list-style: none;
       margin-top: 20px;
+      display: flex;
+      @media #{$breakpoint-md-up} {
+        display: inline-block;
+      }
+      li {
+        margin-right: 10px;
+        @media #{$breakpoint-md-up} {
+          margin-right: 0px;
+        }
+      }
     }
   }
   .post {
     .entry-header {
       margin-bottom: 20px;
+      h1 {
+        font-size: 24px;
+        @media #{$breakpoint-md-up} {
+          font-size: 35px;
+        }
+      }
     }
   }
 }

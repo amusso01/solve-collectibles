@@ -10,7 +10,9 @@
 ?>
 
 <nav class="site-header__nav-shop">
-    <a href="<?php echo site_url('/rewards') ?>" title="Rewards"><?php get_template_part( 'svg-template/svg', 'rewards' ) ?></a>
+    <?php if(is_user_logged_in()) : ?>
+    <a href="<?php echo site_url('/product-category/rewards') ?>" title="Rewards"><?php get_template_part( 'svg-template/svg', 'rewards' ) ?></a>
+    <?php endif; ?>
     <a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>"  title="Account"><?php get_template_part( 'svg-template/svg', 'account' ) ?></a>
     <a href="<?php echo wc_get_cart_url() ?>" title="Cart"><?php get_template_part( 'svg-template/svg', 'bag' ) ?></a>
     <a href="<?php echo site_url('/wish-list') ?>" title="Wish List"><?php get_template_part( 'svg-template/svg', 'wish' ) ?></a>

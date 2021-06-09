@@ -15,9 +15,10 @@
       bottom: 0px;
       left: 0px;
       border-bottom: none;
-      padding: 40px 30px;
+      padding: 75px 30px;
       @media #{$breakpoint-md-up} {
         width: 65vw;
+        padding: 40px 30px;
       }
       h2 {
         margin-bottom: 25px;

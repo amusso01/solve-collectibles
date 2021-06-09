@@ -19,6 +19,18 @@ defined( 'ABSPATH' ) || exit;
 global $wp_query;
 
 get_header( 'shop' );
+$term = get_queried_object();
+
+
+
+if ( is_product_category('rewards') || $term->parent === 2567) {
+	
+	wc_get_template_part( 'custom/custom', 'archive-product-rewards' ); 
+
+} else {
+
+
+
 
 if(!is_search()) : 
 	$FDcat = $wp_query->get_queried_object();
@@ -30,7 +42,6 @@ if(!is_search()) :
 	$slugIndividualsArray = explode( '-', $slugIndividuals);
 	$slugIndividuals = $slugIndividualsArray[0] === 'individuals' ? $slugIndividuals : false ;
 
-	$term = get_queried_object();
 	$isParent = $term->parent === 0;
 
 
@@ -323,8 +334,8 @@ if(!is_search()) :
 	 */
 	do_action( 'woocommerce_after_main_content' );?>
 
-	<?php if($isParent && !is_product_tag() && !is_product_category( array('new-in'))) { ?>
 	<!-- TEAM -->
+	<?php if($isParent && !is_product_tag() && !is_product_category( array('new-in'))) { ?>
 	
 		<?php
 		$taxonomy     = 'product_cat';
@@ -630,5 +641,7 @@ else: ?>
 	 */
 	do_action( 'woocommerce_after_main_content' );
 endif;
+
+}
 
 get_footer( 'shop' );

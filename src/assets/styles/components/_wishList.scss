@@ -10,3 +10,14 @@
     }
   }
 }
+.iziToast-wrapper {
+  display: none !important;
+}
+.alg-wc-wl-btn.add i,
+.alg-wc-wl-btn2.add i {
+  opacity: 0.4;
+}
+.alg-wc-wl-btn.remove i:first-child,
+.alg-wc-wl-btn2.remove i:first-child {
+  color: $color__dark;
+}

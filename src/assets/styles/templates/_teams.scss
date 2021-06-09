@@ -7,7 +7,12 @@
   justify-content: center;
   padding: 30px;
   h1 {
-    margin-bottom: 16px;
+    margin-bottom: 19px;
+    font-size: 29px;
+    @media #{$breakpoint-md-up} {
+      font-size: 35px;
+      margin-bottom: 16px;
+    }
   }
   .teams-content {
     text-align: center;
@@ -23,7 +28,7 @@
 .teams-main {
   .teams-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     border-top: 2px solid $color__dark;
   }
   .team {

@@ -639,6 +639,31 @@ function remove_single_excerpt(){
 	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
 }
 
+// Redirect user not login for rewards page
+add_action( 'template_redirect', 'redirect_if_user_not_logged_in' );
+
+function redirect_if_user_not_logged_in() {
+
+	if ( is_product_category('rewards')&& ! is_user_logged_in() ) { //example can be is_page(23) where 23 is page ID
+
+		wp_redirect( site_url('/') ); 
+ 
+     exit;// never forget this exit since its very important for the wp_redirect() to have the exit / die
+   
+   }
+   
+}
+
+// Pulling shortcode in the loop title
+remove_action( 'woocommerce_shop_loop_item_title','woocommerce_template_loop_product_title', 10 );
+add_action('woocommerce_shop_loop_item_title', 'abChangeProductsTitle', 10 );
+function abChangeProductsTitle() {
+	$id = get_the_ID();
+	$shortcode = get_field('card_shortcode' , $id);
+
+    echo '<h2 class="woocommerce-loop-product__title">'. $shortcode. '-' . get_the_title() . '</h2>';
+}
+
 
 // WOOCOMMERCE ADD HTML
 
