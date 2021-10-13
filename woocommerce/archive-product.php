@@ -409,7 +409,9 @@ if(!is_search()) :
 	<?php } ?>
 
 
-	<?php if($isParent && !is_product_category( array('new-in'))) { ?>
+	<?php if($isParent && !is_product_category( array('new-in', 'match-attax-2021-22', 'euro-2020-stickers'))) { ?>
+
+
 	<!-- TAG COLLECTIONS -->
 	<?php
 	$tags_by_name = array();
@@ -431,6 +433,8 @@ if(!is_search()) :
 
 		), WC()->query->get_meta_query() )
 	) );
+
+
 
 	?>
 

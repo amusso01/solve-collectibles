@@ -7,7 +7,7 @@
     }
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
       border-top: 2px solid $color__dark;
       > li {
         border: 2px solid $color__dark;
