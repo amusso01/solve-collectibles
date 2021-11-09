@@ -12,9 +12,7 @@
   }
 }
 .account-main {
-  .account-wrapper {
-    padding: 80px 30px;
-  }
+  padding: 80px 30px;
   //   Rest password
   .woocommerce-ResetPassword {
     text-align: center;
@@ -67,20 +65,39 @@
   // My account dashboard
   .fd-myaccount-wrapper {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr;
     column-gap: 70px;
+    margin-top: 50px;
+    margin-bottom: 100px;
     @media #{$breakpoint-md-up} {
       width: 85%;
       margin: auto;
+      margin-top: 50px;
+      margin-bottom: 100px;
+      padding: 0 0;
+      grid-template-columns: 1fr 3fr;
     }
     .woocommerce-MyAccount-navigation {
+      margin-bottom: 35px;
+      @media #{$breakpoint-md-up} {
+        margin-bottom: 0px;
+      }
       ul {
         background-color: $color__footerBg;
         list-style: none;
         padding: 30px 20px;
+        display: flex;
+        flex-wrap: wrap;
+        @media #{$breakpoint-md-up} {
+          display: block;
+        }
       }
       li {
+        margin-right: 15px;
         margin-bottom: 15px;
+        @media #{$breakpoint-md-up} {
+          margin-bottom: 15px;
+        }
         a {
           font-weight: 500;
           color: #707070;
@@ -91,7 +108,16 @@
           }
         }
         &:last-of-type {
-          margin-top: 70px;
+          margin-right: 0px;
+          @media #{$breakpoint-md-up} {
+            margin-top: 70px;
+          }
+        }
+        &:first-of-type{
+          display: none;
+          @media #{$breakpoint-md-up} {
+            display: block;
+          }
         }
       }
     }
@@ -153,6 +179,15 @@
           cursor: pointer;
         }
       }
+    }
+  }
+  .lar-history-grid{
+    grid-template-columns: repeat(4,1fr);
+    .lar-history-grid-title{
+      font-size: 11px;
+    }
+    .lar-history-grid-value, .lar-history-grid-date, .lar-history-grid-number{
+      font-size: 13px;
     }
   }
 }

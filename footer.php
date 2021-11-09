@@ -18,8 +18,8 @@
 			<div class="site-footer__main site-footer__main-grid">
 				<div class="site-footer__left site-footer__grid-item">
 					<div class="site-footer__currency">
-						<p>Country</p>
-						<?php echo do_shortcode('[woo-currency-switcher]')?>
+						<p>Currency</p>
+						<?php echo do_shortcode('[woocommerce_currency_switcher_drop_down_box]')?>
 					</div>
 					<div class="site-footer__menus">
 						<div class="site-footer__menu"><?php get_template_part( 'components/navigation/footer1' ); ?></div>

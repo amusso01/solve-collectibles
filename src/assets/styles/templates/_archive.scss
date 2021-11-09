@@ -122,7 +122,7 @@
   }
   &-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     @media #{$breakpoint-sm-up} {
       grid-template-columns: 1fr 1fr;
     }
@@ -131,18 +131,29 @@
       border-bottom: 2px solid $color__dark;
       border-right: 2px solid $color__dark;
       display: grid;
-      grid-template-columns: 1fr 1.8fr;
+      grid-template-columns: 1fr;
       padding: 25px 1rem;
       align-items: center;
       column-gap: 15px;
+      justify-items: center;
+      @media #{$breakpoint-sm-up} {
+        grid-template-columns: 1fr 1.8fr;
+      }
       &:last-of-type {
         border-right: none;
       }
       .fd-woo__most-popular-description {
         text-align: center;
+        margin-top: 5px;
+        @media #{$breakpoint-sm-up} {
+          margin-top: 0px;
+        }
         > h2 {
-          font-size: 26px;
+          font-size: 16px;
           margin-bottom: 5px;
+          @media #{$breakpoint-sm-up} {
+            font-size: 26px;
+          }
         }
         .cat-title {
           font-size: 13px;
@@ -197,7 +208,7 @@
   }
   .products {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     border-top: 2px solid $color__dark;
     > li {
       border: 2px solid $color__dark;
@@ -375,7 +386,7 @@
   }
   .products {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     border-top: 2px solid $color__dark;
     > li {
       border: 2px solid $color__dark;
@@ -579,7 +590,7 @@
   }
   .fd-teams-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     border-top: 2px solid $color__dark;
     > li {
       border: 2px solid $color__dark;

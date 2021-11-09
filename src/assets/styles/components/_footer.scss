@@ -17,10 +17,12 @@ footer.site-footer {
       font-size: 13px;
       margin-bottom: 1rem;
     }
-    .chosen-container {
-      max-width: 360px !important;
-      border: 1px solid $color__dark;
+    .alg_currency_select {
+      max-width: 400px !important;
+      border: 2px solid $color__dark;
       background: $color__bright !important;
+      height: 50px;
+      padding: 0px 0px 0px 10px;
     }
     .chosen-container-active.chosen-with-drop .chosen-single {
       background-image: none !important;

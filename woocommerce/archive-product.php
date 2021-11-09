@@ -64,13 +64,13 @@ if(!is_search()) :
 				<img src="<?php echo $image ?>" alt="<?php echo  $FDcat->name ?>">
 			</div>
 		<?php else: ?>
-			<?php 
+			<!-- <?php 
 			$tagImage = get_field('thumbnail', 'product_tag_'.$FDcat->term_id ) ;
 			$tagImageUrl = wp_get_attachment_image( $tagImage, 'medium' );
 			?>
 			<div class="woo-products-header__image">
 				<?php echo $tagImageUrl ?>
-			</div>
+			</div> -->
 		<?php endif; ?>
 		<!-- Header description -->
 		<?php if($term->parent === 0) : ?>
@@ -409,80 +409,8 @@ if(!is_search()) :
 	<?php } ?>
 
 
-	<?php if($isParent && !is_product_category( array('new-in', 'match-attax-2021-22', 'euro-2020-stickers'))) { ?>
+  <!-- TAG COLLECTIONS -->
 
-
-	<!-- TAG COLLECTIONS -->
-	<?php
-	$tags_by_name = array();
-	$products_loop = new WP_Query( array(
-		'post_type' => 'product',
-		'showposts' => -1,
-		'tax_query' => array_merge( array(
-			'relation'  => 'AND',
-			array(
-				'taxonomy' => 'product_cat',
-				'terms'    => array( $FDcat->term_id ),
-				'field'   => 'term_id'
-			)
-		), WC()->query->get_tax_query() ),
-
-		'meta_query' => array_merge( array(
-
-			// You can optionally add extra meta queries here
-
-		), WC()->query->get_meta_query() )
-	) );
-
-
-
-	?>
-
-		<?php
-
-		while ( $products_loop->have_posts() ) {
-			$products_loop->the_post();
-		global $product;
-		
-		$tags = get_the_terms( $product->get_id(), 'product_tag' );
-		if($tags){
-			
-				
-				foreach($tags as $singleTag):
-					
-					if(!in_array($singleTag->name, $tags_by_name)){
-						$tags_by_name[$singleTag->slug] = $singleTag->name;
-					}
-				endforeach;
-			}
-		}
-		wp_reset_postdata(); 
-		?>
-
-		<?php if(!empty($tags_by_name)) : ?>
-		<section class="fd-tag-panini">
-			<h3>Collections</h3>
-			<ul class="fd-tags__grid">
-				<?php foreach($tags_by_name as $tagSlug => $tagName) :?>
-				<?php 
-				$tagId = get_term_by('slug', $tagSlug, 'product_tag');
-				$tagImage = get_field('thumbnail', $tagId ) ;
-				$tagImageUrl = wp_get_attachment_image( $tagImage, 'woocommerce_thumbnail' );
-				?>
-				<li>
-					<a href="<?php echo get_term_link($tagSlug, 'product_tag');  ?>"> 
-			
-							<?php echo $tagImageUrl; ?> 
-					
-						<p><?php echo $tagName ?></p>
-					</a>
-				</li>
-				<?php endforeach; ?>
-			</ul>
-		</section>
-		<?php endif ;?>
-
-	<?php } ?>
 
 	<?php if($isParent && !is_product_tag() && !is_product_category( array('new-in'))) { ?>
 	<!-- BEST SELLING -->
