@@ -113,11 +113,11 @@ get_header();
 	<section class="shopby">
 		<div class="shopby-single">
 			<h2>Shop by football team</h2>
-			<a href="<?php site_url( '/teams' ) ?>" class="button">VIEW ALL</a>
+			<a href="<?php echo  site_url( '/teams' ) ?>" class="button">VIEW ALL</a>
 		</div>
 		<div class="shopby-single">
-			<h2>Newest arrivals</h2>
-			<a href="<?php site_url( '/teams' ) ?>" class="button">SHOP NEW</a>
+			<h2>Who we are?</h2>
+			<a href="<?php echo  site_url( '/about' ) ?>" class="button">DISCOVER MORE</a>
 		</div>
 	</section>
 

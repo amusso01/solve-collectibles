@@ -268,34 +268,38 @@ if(!is_search()) :
 	<?php } elseif(is_product_category( array( 'individuals', $slugIndividuals ) )){?>
 
 		<section  class="fd-woo__shop-grid fd-woo__shop-grid-individuals">
-		<?php
-			woocommerce_product_loop_start();
+      <ul class="products-grid">
+        <?php
+      
 
-			if ( wc_get_loop_prop( 'total' ) ) {
-				while ( have_posts() ) {
-					the_post();
+        if ( wc_get_loop_prop( 'total' ) ) {
+          while ( have_posts() ) {
+            the_post();
 
-					/**
-					 * Hook: woocommerce_shop_loop.
-					 */
-					do_action( 'woocommerce_shop_loop' );
+            /**
+             * Hook: woocommerce_shop_loop.
+             */
+            do_action( 'woocommerce_shop_loop' );
 
-					wc_get_template_part( 'content', 'product' );
-				}
-			}
+            wc_get_template_part( 'content', 'product' );
+          }
+        }
 
-			woocommerce_product_loop_end();
 
-			/**
-			 * Hook: woocommerce_after_shop_loop.
-			 *
-			 * @hooked woocommerce_pagination - 10
-			 */
+
+        /**
+         * Hook: woocommerce_after_shop_loop.
+         *
+         * @hooked woocommerce_pagination - 10
+         */
+        ?>
+      </ul>
+      <?php
 			do_action( 'woocommerce_after_shop_loop' );
 
 		?>
 		</section> <!--  fd-woo__shop-grid-individuals  -->
-		<!-- <?php echo do_shortcode( '[ajax_load_more post_type="product" columns="4" container_type="ul" css_classes="products" posts_per_page="4" transition="fade"  taxonomy="product_cat" taxonomy_terms="'.$FDcat->name.'" taxonomy_operator="IN" button_label=""]' ) ?> -->
+
 	<?php } else{ ?>
 		<section  class="fd-woo__shop-grid fd-woo__shop-grid-sub-category">
 		<?php

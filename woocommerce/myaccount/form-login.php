@@ -42,7 +42,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 		<h2><?php esc_html_e( 'WELCOME BACK', 'woocommerce' ); ?></h2>
 
         <div class="social-login">
-            Social login here
+        <?php echo do_shortcode('[miniorange_social_login shape="square" theme="default" space="10" size="45"]'); ?>
         </div>
 
 
@@ -88,7 +88,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 		<h2><?php esc_html_e( 'JOIN SOLVE', 'woocommerce' ); ?></h2>
 
         <div class="social-login">
-            Social login here
+        <?php echo do_shortcode('[miniorange_social_login shape="square" theme="default" space="10" size="45"]'); ?>
         </div>
 
 

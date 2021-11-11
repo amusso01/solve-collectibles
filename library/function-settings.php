@@ -413,3 +413,17 @@ function ajax_next_posts() {
 	}
 	add_action('wp_ajax_ajax_next_posts', 'ajax_next_posts');
 	add_action('wp_ajax_nopriv_ajax_next_posts', 'ajax_next_posts');
+
+
+
+  // SECURITY DISABLE REST API
+  add_filter('rest_endpoints', function( $endpoints ) {
+
+    foreach( $endpoints as $route => $endpoint ){
+        if( 0 === stripos( $route, '/wp/' ) ){
+            unset( $endpoints[ $route ] );
+        }
+    }
+
+    return $endpoints;
+});

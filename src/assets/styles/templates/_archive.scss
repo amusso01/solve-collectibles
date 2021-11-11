@@ -206,7 +206,7 @@
     padding: 0 1rem;
     margin-bottom: 25px;
   }
-  .products {
+  .products, .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     border-top: 2px solid $color__dark;
@@ -384,7 +384,7 @@
     padding: 0 1rem;
     margin-bottom: 25px;
   }
-  .products {
+  .products, .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     border-top: 2px solid $color__dark;

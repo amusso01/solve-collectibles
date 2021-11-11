@@ -331,7 +331,6 @@ function ShowLinkToProduct($post_id, $categories_as_array, $label, $is_prev) {
     if ($r_single->have_posts()) {
         $r_single->the_post();
         global $product;
-		$cardShortcode = get_field('card_shortcode' , $product->get_id());
     ?>
     <ul class="product_list_widget <?php echo $is_prev ? 'prev' : 'next'; ?>">
         <li><a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_ID()); ?>">
@@ -341,7 +340,6 @@ function ShowLinkToProduct($post_id, $categories_as_array, $label, $is_prev) {
 			<?php endif; ?>            
 
             <?php if ( get_the_title() ) {
-					echo '<span class="shortcode" >'.$cardShortcode.' </span>';
 					echo '<span class="title">'. get_the_title().' </span>';
 			}  else {
 				the_ID(); }?>
@@ -658,10 +656,8 @@ function redirect_if_user_not_logged_in() {
 remove_action( 'woocommerce_shop_loop_item_title','woocommerce_template_loop_product_title', 10 );
 add_action('woocommerce_shop_loop_item_title', 'abChangeProductsTitle', 10 );
 function abChangeProductsTitle() {
-	$id = get_the_ID();
-	$shortcode = get_field('card_shortcode' , $id);
 
-    echo '<h2 class="woocommerce-loop-product__title">'. $shortcode. '-' . get_the_title() . '</h2>';
+    echo '<h2 class="woocommerce-loop-product__title">'. get_the_title() . '</h2>';
 }
 
 
@@ -680,3 +676,24 @@ function fd_add_product_description(){
 }
 
 
+// Alphabetical order woocommerce products
+// add_filter( 'woocommerce_get_catalog_ordering_args', 'custom_woocommerce_get_catalog_ordering_args' );
+
+// function custom_woocommerce_get_catalog_ordering_args( $args ) {
+//     $orderby_value = isset( $_GET['orderby'] ) ? woocommerce_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+
+//     if ( 'alphabetical' == $orderby_value ) {
+//         $args['orderby'] = 'title';
+//         $args['order'] = 'ASC';
+//     }
+
+//     return $args;
+// }
+
+// add_filter( 'woocommerce_default_catalog_orderby_options', 'custom_woocommerce_catalog_orderby' );
+// add_filter( 'woocommerce_catalog_orderby', 'custom_woocommerce_catalog_orderby' );
+
+// function custom_woocommerce_catalog_orderby( $sortby ) {
+//     $sortby['alphabetical'] = __( 'Alphabetical' );
+//     return $sortby;
+// }
