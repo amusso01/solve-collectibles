@@ -53,11 +53,11 @@
 
 					<div class="site-footer__social">
 						<ul>
-							<li><a href="#"><?php echo get_template_part( 'svg-template/svg', 'instagram' ) ?></a></li>
-							<li><a href="#"><?php echo get_template_part( 'svg-template/svg', 'twitter' ) ?></a></li>
-							<li><a href="#"><?php echo get_template_part( 'svg-template/svg', 'facebook' ) ?></a></li>
-							<li><a href="#"><?php echo get_template_part( 'svg-template/svg', 'youtube' ) ?></a></li>
-							<li><a href="#"><?php echo get_template_part( 'svg-template/svg', 'tik-tok' ) ?></a></li>
+							<li><a href="https://www.instagram.com/solvecollectibles/" rel=”noopener noreferrer” target="_blank"><?php echo get_template_part( 'svg-template/svg', 'instagram' ) ?></a></li>
+							<li><a href="https://twitter.com/SolveCollect" rel=”noopener noreferrer” target="_blank" ><?php echo get_template_part( 'svg-template/svg', 'twitter' ) ?></a></li>
+							<li><a href="https://www.facebook.com/SolveCollectibles" rel=”noopener noreferrer” target="_blank" ><?php echo get_template_part( 'svg-template/svg', 'facebook' ) ?></a></li>
+							<li><a href="https://www.youtube.com/c/SolveCollectibles" rel=”noopener noreferrer” target="_blank" ><?php echo get_template_part( 'svg-template/svg', 'youtube' ) ?></a></li>
+							<li><a href="https://www.tiktok.com/@luke_solvecollectibles" rel=”noopener noreferrer” target="_blank" ><?php echo get_template_part( 'svg-template/svg', 'tik-tok' ) ?></a></li>
 						</ul>
 					</div>
 				</div>

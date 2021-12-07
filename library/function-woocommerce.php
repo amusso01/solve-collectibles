@@ -669,7 +669,7 @@ function abChangeProductsTitle() {
 add_action('woocommerce_after_single_product', 'fd_add_product_description' );
 function fd_add_product_description(){
 	echo	'<section class="fd-single-description">';
-	echo	' <h3>About this card</h3>';
+	echo	' <h3>About this product</h3>';
 	the_content();
 	echo	'</section>';
 
@@ -696,4 +696,20 @@ function fd_add_product_description(){
 // function custom_woocommerce_catalog_orderby( $sortby ) {
 //     $sortby['alphabetical'] = __( 'Alphabetical' );
 //     return $sortby;
+// }
+
+
+// MOVE OUT OF STOCK AT THE END OF THE PAGE
+// From https://stackoverflow.com/questions/25113581/show-out-of-stock-products-at-the-end-in-woocommerce
+
+// add_filter('posts_clauses', 'order_by_stock_status');
+// function order_by_stock_status($posts_clauses) {
+//     global $wpdb;
+//     // only change query on WooCommerce loops
+//     if (is_woocommerce() && (is_shop() || is_product_category() || is_product_tag() || is_product_taxonomy())) {
+//         $posts_clauses['join'] .= " INNER JOIN $wpdb->postmeta istockstatus ON ($wpdb->posts.ID = istockstatus.post_id) ";
+//         $posts_clauses['orderby'] = " istockstatus.meta_value ASC, " . $posts_clauses['orderby'];
+//         $posts_clauses['where'] = " AND istockstatus.meta_key = '_stock_status' AND istockstatus.meta_value <> '' " . $posts_clauses['where'];
+//     }
+//     return $posts_clauses;
 // }

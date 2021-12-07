@@ -111,8 +111,13 @@ if(!is_search()) :
 			?>
 			<div class="woo-products-header__description">
 				<h1 class="woocommerce-products-header__title page-title"><?php echo $parentCatName->name ?></h1>
-				<p class="subTitle">Individual Cards</p>
+        <?php if(is_product_category( array('panini-premier-league-stickers-2021', 'panini-euro-2020-stickers', 'topps-champions-league-stickers-2020-21') )) : ?>
+				<p class="subTitle">Individual Stickers</p>
+        <?php else : ?>
+          <p class="subTitle">Individual Cards</p>
+        <?php endif; ?>
 			<?php
+
 			/**
 			 * Hook: woocommerce_archive_description.
 			 *
