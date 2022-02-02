@@ -137,7 +137,7 @@ function wc_qty_add_to_cart_validation( $passed, $product_id, $quantity, $variat
 
 	$product_min = wc_get_product_min_limit( $product_id );
 	$product_max = wc_get_product_max_limit( $product_id );
-
+  $new_min = '';
 	if ( ! empty( $product_min ) ) {
 		// min is empty
 		if ( false !== $product_min ) {

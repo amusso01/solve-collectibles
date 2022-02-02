@@ -166,6 +166,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    row-gap: 18px;
     .coupon {
       border: 2px solid $color__dark;
       .input-text {

@@ -20,8 +20,11 @@
   }
   form.checkout {
     display: grid;
-    grid-template-columns: 1.7fr 1fr;
+    grid-template-columns: 1fr;
     column-gap: 70px;
+    @media #{$breakpoint-md-up} {
+      grid-template-columns: 1.7fr 1fr;
+    }
     .woocommerce-NoticeGroup {
       grid-column: span 2;
       .woocommerce-error {

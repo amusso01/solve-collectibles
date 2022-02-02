@@ -416,14 +416,14 @@ function ajax_next_posts() {
 
 
 
-  // SECURITY DISABLE REST API
-  add_filter('rest_endpoints', function( $endpoints ) {
+// SECURITY DISABLE REST API
+//   add_filter('rest_endpoints', function( $endpoints ) {
 
-    foreach( $endpoints as $route => $endpoint ){
-        if( 0 === stripos( $route, '/wp/' ) ){
-            unset( $endpoints[ $route ] );
-        }
-    }
+//     foreach( $endpoints as $route => $endpoint ){
+//         if( 0 === stripos( $route, '/wp/' ) ){
+//             unset( $endpoints[ $route ] );
+//         }
+//     }
 
-    return $endpoints;
-});
+//     return $endpoints;
+// });

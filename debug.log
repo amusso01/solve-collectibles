@@ -1,0 +1,1 @@
+[17-Dec-2021 13:51:02 UTC] PHP Warning:  Trying to access array offset on value of type bool in /var/www/vhosts/solvecollectibles.com/httpdocs/wp-content/themes/fd-solve/woocommerce/archive-product.php on line 408
