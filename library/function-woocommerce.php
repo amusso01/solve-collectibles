@@ -713,3 +713,12 @@ function fd_add_product_description(){
 //     }
 //     return $posts_clauses;
 // }
+
+// Alter number of search posts per page. This is to fix 500 Server problem when try to search for too many post
+function pd_search_posts_per_page($query) {
+	if ( $query->is_search ) {
+			$query->set( 'posts_per_page', '20' );
+	}
+	return $query;
+}
+add_filter( 'pre_get_posts','pd_search_posts_per_page' );
