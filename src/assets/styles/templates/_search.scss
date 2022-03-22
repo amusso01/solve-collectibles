@@ -1,17 +1,17 @@
 .woocommerce-products-header.fd-woo__search-header {
-  min-height: 230px;
-  background-color: $color__footerBg;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-  border-bottom: 2px solid $color__dark;
-  h1 {
-    margin-bottom: 16px;
-  }
+	min-height: 230px;
+	background-color: $color__footerBg;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 30px;
+	border-bottom: 2px solid $color__dark;
+	h1 {
+		margin-bottom: 16px;
+	}
 }
 .noresult-search {
-  padding: 190px 30px;
-  text-align: center;
+	padding: 190px 30px;
+	text-align: center;
 }

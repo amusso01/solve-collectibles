@@ -2,22 +2,22 @@
 /––––––––––––––––––––––––*/
 
 .content-block {
-  //create the "container" with this applied to any row or any 100% width element
-  padding: 0 1rem;
-  @media #{$breakpoint-md-up} {
-    padding: 0 1.5rem;
-  }
+	//create the "container" with this applied to any row or any 100% width element
+	padding: 0 1rem;
+	@media #{$breakpoint-md-up} {
+		padding: 0 1.5rem;
+	}
 }
 
 .noscroll {
-  overflow: hidden;
+	overflow: hidden;
 }
 
 :focus {
-  outline: 0;
+	outline: 0;
 }
 
 .img-fluid {
-  max-width: 100%;
-  height: auto;
+	max-width: 100%;
+	height: auto;
 }

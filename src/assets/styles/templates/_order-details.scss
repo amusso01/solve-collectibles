@@ -1,30 +1,30 @@
 .woocommerce-order {
-  .woocommerce-notice--success {
-    margin-bottom: 15px;
-  }
-  .woocommerce-order-overview {
-    border-top: 2px solid $color__dark;
-    border-bottom: 2px solid $color__dark;
-    padding: 20px 0px;
-    margin-bottom: 10px;
-  }
-  .woocommerce-order-details {
-    .woocommerce-order-details__title {
-      margin-bottom: 10px;
-    }
-    .woocommerce-table--order-details {
-      width: 100%;
-      border-collapse: collapse;
-      th {
-        text-align: left;
-        padding: 5px 0px;
-      }
-      thead {
-        border-bottom: 1px solid $color__dark;
-      }
-      tfoot {
-        border-top: 1px solid $color__dark;
-      }
-    }
-  }
+	.woocommerce-notice--success {
+		margin-bottom: 15px;
+	}
+	.woocommerce-order-overview {
+		border-top: 2px solid $color__dark;
+		border-bottom: 2px solid $color__dark;
+		padding: 20px 0px;
+		margin-bottom: 10px;
+	}
+	.woocommerce-order-details {
+		.woocommerce-order-details__title {
+			margin-bottom: 10px;
+		}
+		.woocommerce-table--order-details {
+			width: 100%;
+			border-collapse: collapse;
+			th {
+				text-align: left;
+				padding: 5px 0px;
+			}
+			thead {
+				border-bottom: 1px solid $color__dark;
+			}
+			tfoot {
+				border-top: 1px solid $color__dark;
+			}
+		}
+	}
 }

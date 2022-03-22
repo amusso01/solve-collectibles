@@ -1,23 +1,23 @@
 .iziToast-body {
-  .alg-wc-wl-notification-link {
-    margin: 10px 0px;
-    font-size: 14px;
-    font-weight: 500;
-  }
-  .iziToast-buttons {
-    .iziToast-buttons-child.revealIn {
-      font-weight: 500;
-    }
-  }
+	.alg-wc-wl-notification-link {
+		margin: 10px 0px;
+		font-size: 14px;
+		font-weight: 500;
+	}
+	.iziToast-buttons {
+		.iziToast-buttons-child.revealIn {
+			font-weight: 500;
+		}
+	}
 }
 .iziToast-wrapper {
-  display: none !important;
+	display: none !important;
 }
 .alg-wc-wl-btn.add i,
 .alg-wc-wl-btn2.add i {
-  opacity: 0.4;
+	opacity: 0.4;
 }
 .alg-wc-wl-btn.remove i:first-child,
 .alg-wc-wl-btn2.remove i:first-child {
-  color: $color__dark;
+	color: $color__dark;
 }

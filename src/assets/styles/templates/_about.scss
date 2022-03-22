@@ -1,99 +1,99 @@
 .about-founder {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  border-top: 2px solid $color__dark;
-  .founder-image {
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    min-height: 400px;
-  }
-  .founder-item {
-    border: 2px solid $color__dark;
-    border-top: none;
-    border-left: none;
-    padding: 60px 40px;
-  }
-  .founder-meet {
-    background-color: $color__footerBg;
-    h3 {
-      text-align: center;
-      font-size: 26px;
-      margin-bottom: 10px;
-    }
-    .founder-name {
-      font-weight: 500;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    p {
-      text-align: center;
-      line-height: 23px;
-      a {
-        text-decoration: underline;
-        margin-top: 15px;
-        font-weight: 500;
-        display: inline-block;
-      }
-    }
-  }
-  .founder-info {
-    > p {
-      margin-bottom: 18px;
-      font-weight: 500;
-      > span {
-        display: block;
-        font-weight: 400;
-      }
-    }
-  }
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	border-top: 2px solid $color__dark;
+	.founder-image {
+		background-size: cover;
+		width: 100%;
+		height: 100%;
+		min-height: 400px;
+	}
+	.founder-item {
+		border: 2px solid $color__dark;
+		border-top: none;
+		border-left: none;
+		padding: 60px 40px;
+	}
+	.founder-meet {
+		background-color: $color__footerBg;
+		h3 {
+			text-align: center;
+			font-size: 26px;
+			margin-bottom: 10px;
+		}
+		.founder-name {
+			font-weight: 500;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+		p {
+			text-align: center;
+			line-height: 23px;
+			a {
+				text-decoration: underline;
+				margin-top: 15px;
+				font-weight: 500;
+				display: inline-block;
+			}
+		}
+	}
+	.founder-info {
+		> p {
+			margin-bottom: 18px;
+			font-weight: 500;
+			> span {
+				display: block;
+				font-weight: 400;
+			}
+		}
+	}
 }
 .our-affiliates {
-  margin-top: 70px;
-  h3 {
-    padding: 0 1rem;
-    margin-bottom: 25px;
-  }
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    border-top: 2px solid $color__dark;
-  }
-  .affiliate-item {
-    border: 2px solid $color__dark;
-    border-top: none;
-    border-left: none;
-    padding: 40px 40px 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: space-between;
-    .img {
-      margin-bottom: 15px;
-      img {
-        margin: auto;
-        margin-bottom: 30px;
-        display: inline-block;
-      }
-      > p {
-        font-weight: 500;
-        font-size: 26px;
-      }
-    }
-    .description {
-      margin-bottom: 60px;
-    }
-    .info {
-      > p {
-        margin-bottom: 20px;
-        font-weight: 500;
-        > span {
-          display: block;
-          font-weight: 400;
-          margin-bottom: 5px;
-        }
-      }
-    }
-  }
+	margin-top: 70px;
+	h3 {
+		padding: 0 1rem;
+		margin-bottom: 25px;
+	}
+	&__grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		border-top: 2px solid $color__dark;
+	}
+	.affiliate-item {
+		border: 2px solid $color__dark;
+		border-top: none;
+		border-left: none;
+		padding: 40px 40px 50px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		justify-content: space-between;
+		.img {
+			margin-bottom: 15px;
+			img {
+				margin: auto;
+				margin-bottom: 30px;
+				display: inline-block;
+			}
+			> p {
+				font-weight: 500;
+				font-size: 26px;
+			}
+		}
+		.description {
+			margin-bottom: 60px;
+		}
+		.info {
+			> p {
+				margin-bottom: 20px;
+				font-weight: 500;
+				> span {
+					display: block;
+					font-weight: 400;
+					margin-bottom: 5px;
+				}
+			}
+		}
+	}
 }
