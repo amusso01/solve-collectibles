@@ -714,6 +714,22 @@ function fd_add_product_description(){
 //     return $posts_clauses;
 // }
 
+/**
+ * @snippet       Sort Products By Stock Status - WooCommerce Shop
+ * @how-to        Get CustomizeWoo.com FREE
+ * @author        Rodolfo Melogli
+ * @compatible    WooCommerce 5
+ * @donate $9     https://businessbloomer.com/bloomer-armada/
+ */
+ 
+add_filter( 'woocommerce_get_catalog_ordering_args', 'bbloomer_first_sort_by_stock_amount', 9999 );
+ 
+function bbloomer_first_sort_by_stock_amount( $args ) {
+   $args['orderby'] = 'meta_value';
+   $args['meta_key'] = '_stock_status';
+   return $args;
+}
+
 // Alter number of search posts per page. This is to fix 500 Server problem when try to search for too many post
 function pd_search_posts_per_page($query) {
 	if ( $query->is_search ) {

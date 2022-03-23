@@ -7,6 +7,19 @@
 		border-bottom: 2px solid $color__dark;
 		column-gap: 50px;
 		row-gap: 30px;
+		position: relative;
+		.onsale {
+			position: absolute;
+			left: 17px;
+			top: 14px;
+			z-index: 5;
+			font-size: 14px;
+			font-weight: 500;
+			background-color: black;
+			color: white;
+			border-radius: 50%;
+			padding: 11px 6px;
+		}
 		@media #{$breakpoint-md-up} {
 			grid-template-columns: 0.9fr 1fr;
 		}
@@ -429,9 +442,10 @@
 						color: $color__bright;
 						font-weight: 700;
 					}
-					a {
-						pointer-events: none;
-					}
+					// a {
+					// PREVENT USER FROM CLICK THROUGH OUT OF STOCK PRODUCT
+					// pointer-events: none;
+					// }
 					.button {
 						background-color: #f0f3f5;
 						color: $color__dark;

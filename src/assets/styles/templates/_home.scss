@@ -170,9 +170,10 @@
 						color: $color__bright;
 						font-weight: 700;
 					}
-					a {
-						pointer-events: none;
-					}
+					// a {
+					// PREVENT USER FROM CLICK THROUGH OUT OF STOCK PRODUCT
+					// pointer-events: none;
+					// }
 					.button {
 						background-color: #f0f3f5;
 						color: $color__dark;
