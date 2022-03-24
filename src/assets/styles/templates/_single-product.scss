@@ -333,6 +333,17 @@
 						text-decoration: none;
 					}
 				}
+				.onsale {
+					position: absolute;
+					right: -13px;
+					font-size: 13px;
+					background-color: black;
+					border-radius: 50%;
+					color: white;
+					font-weight: 500;
+					padding: 9px 4px;
+					top: -13px;
+				}
 				.woocommerce-loop-product__link {
 					display: flex;
 					flex-direction: column;

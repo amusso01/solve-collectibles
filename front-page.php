@@ -18,6 +18,49 @@ get_header();
 
 <main class="main homepage-main" role="main">
 
+<section class="home-mostPopular">
+		<h3>Popular right now</h3>
+		<?php 
+		$query_args = array(
+			'post_type' => 'product',
+			'post_status' => 'publish',
+			'posts_per_page' => '5',
+			'tax_query' => array(
+				array(
+					'taxonomy'	=> 'product_cat',
+					'field'	=> 'slug',
+					'terms' => 'popular-right-now'
+				)
+			),
+			'meta_key' => 'total_sales',
+			'orderby' => 'meta_value_num',
+			'meta_query' => array( // (array) - Custom field parameters (available with Version 3.1).
+				'key' => '_stock_status',
+				'value' => 'outofstock',
+				'compare' => '!=',
+				),
+			// 'meta_query' => WC()->query->get_meta_query()
+		);
+	
+		$best_sell_products_query = new WP_Query($query_args );
+		// return $best_sell_products_query;
+		woocommerce_product_loop_start();
+
+		while ( $best_sell_products_query->have_posts() ) : $best_sell_products_query->the_post(); 
+			/**
+			 * Hook: woocommerce_shop_loop.
+			 */
+			do_action( 'woocommerce_shop_loop' );
+
+			wc_get_template_part( 'content', 'product' );
+		endwhile;
+
+		woocommerce_product_loop_end();	
+		wp_reset_query();
+		?>
+
+	</section>
+
 
 
 	<?php if ( have_posts() ) : ?>
@@ -92,41 +135,7 @@ get_header();
 		</div>
 	</section>
 
-	<section class="home-mostPopular">
-		<h3>Popular right now</h3>
-		<?php 
-		$query_args = array(
-			'post_type' => 'product',
-			'post_status' => 'publish',
-			'posts_per_page' => '5',
-			'meta_key' => 'total_sales',
-			'orderby' => 'meta_value_num',
-			'meta_query' => array( // (array) - Custom field parameters (available with Version 3.1).
-				'key' => '_stock_status',
-				'value' => 'outofstock',
-				'compare' => '!=',
-				),
-			// 'meta_query' => WC()->query->get_meta_query()
-		);
-	
-		$best_sell_products_query = new WP_Query($query_args );
-		// return $best_sell_products_query;
-		woocommerce_product_loop_start();
 
-		while ( $best_sell_products_query->have_posts() ) : $best_sell_products_query->the_post(); 
-			/**
-			 * Hook: woocommerce_shop_loop.
-			 */
-			do_action( 'woocommerce_shop_loop' );
-
-			wc_get_template_part( 'content', 'product' );
-		endwhile;
-
-		woocommerce_product_loop_end();	
-		wp_reset_query();
-		?>
-
-	</section>
 
 </main>
 
