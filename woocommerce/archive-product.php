@@ -108,10 +108,13 @@ if(!is_search()) :
 		<?php elseif(is_product_category( array( 'individuals', $slugIndividuals ) )) : ?>
 			<?php 
 			$parentCatName = get_term($FDcat->parent, 'product_cat');	
+			
+			$isStickers = get_field('is_stickers', 'term_'.$FDcat->parent );
+		
 			?>
 			<div class="woo-products-header__description">
 				<h1 class="woocommerce-products-header__title page-title"><?php echo $parentCatName->name ?></h1>
-        <?php if(is_product_category( array('panini-premier-league-stickers-2021', 'panini-euro-2020-stickers', 'topps-champions-league-stickers-2020-21') )) : ?>
+        <?php if($isStickers || is_product_category( array('panini-premier-league-stickers-2021', 'panini-euro-2020-stickers', 'topps-champions-league-stickers-2020-21') )) : ?>
 				<p class="subTitle">Individual Stickers</p>
         <?php else : ?>
           <p class="subTitle">Individual Cards</p>
@@ -449,10 +452,16 @@ if(!is_search()) :
 		);
 		$loop = new WP_Query( $args );
 
+		$isStickers = get_field('is_stickers', 'term_'.$FDcat->term_id );
+
 		if($loop->have_posts()) : ?>
 	<section  id="fd-bestSelling" class="fd-woo__shop-bestselling">
-		<h3>Bestselling individual cards</h3>
+	<?php if($isStickers || is_product_category( array('panini-premier-league-stickers-2021', 'panini-euro-2020-stickers', 'topps-champions-league-stickers-2020-21') )) : ?>
 
+		<h3>Bestselling individual stickers</h3>
+	<?php else : ?>
+		<h3>Bestselling individual cards</h3>
+	<?php endif; ?>
 <?php
 			woocommerce_product_loop_start();
 
@@ -478,15 +487,24 @@ if(!is_search()) :
 			'parent'      => get_queried_object_id()
 		]);
 
+		
+
 		// Loop through product subcategories WP_Term Objects
 		foreach ( $terms as $term ) {
 			$term_link = get_term_link( $term, $taxonomy );
 
 		}
 		?>
-		<?php if($terms) : ?>
+		<?php if($terms) : 
+		$isStickers = get_field('is_stickers', 'term_'.$term_id->term_id); ?>
+
 		<div class="fd-go-to-individuals">
-			<a href="<?php echo $term_link ?>">SHOP ALL THE INDIVIDUALS CARDS <span><?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span></a>
+			<?php if($isStickers || is_product_category( array('panini-premier-league-stickers-2021', 'panini-euro-2020-stickers', 'topps-champions-league-stickers-2020-21') )) : ?>
+				<a href="<?php echo $term_link ?>">SHOP ALL THE STICKERS <span><?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span></a>
+			<?php else : ?>
+				<a href="<?php echo $term_link ?>">SHOP ALL THE INDIVIDUALS CARDS <span><?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span></a>
+			<?php endif; ?>
+
 		</div>
 		<?php endif; ?> 
 	<section>

@@ -734,6 +734,16 @@ function bbloomer_first_sort_by_stock_amount( $args ) {
 function pd_search_posts_per_page($query) {
 	if ( $query->is_search ) {
 			$query->set( 'posts_per_page', '20' );
+			$query->set( 'orderby', 'meta_value' );
+			$query->set( 'order', 'ASC' );
+			$query->set( 'meta_key', '_stock_status' );
+
+			// REMOVE OUT OF STOCK FROM SEARCH
+			// $query->set( 'meta_query', array(array(
+			// 	'key'       => '_stock_status',
+			// 	'value'     => 'outofstock',
+			// 	'compare'   => 'NOT IN'
+			// 	)));
 	}
 	return $query;
 }

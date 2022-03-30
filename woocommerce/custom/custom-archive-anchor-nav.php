@@ -76,6 +76,8 @@ if ( is_product_category() ) {
 		}       
 	}
 		$sub_cats = get_categories( $args2);
+		$isStickers = get_field('is_stickers', 'term_'.$term_id->term_id );
+
         ?>
 
 <section class="fd-woo__archive-anchor">
@@ -96,7 +98,11 @@ if ( is_product_category() ) {
 
 
 <?php if($terms)  : ?>
-        <a class="anchor-item" href="<?php echo $term_link ?>">Individual cards <span>        <?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span></a>
+	<?php if($isStickers || is_product_category( array('panini-premier-league-stickers-2021', 'panini-euro-2020-stickers', 'topps-champions-league-stickers-2020-21') )) : ?>
+		<a class="anchor-item" href="<?php echo $term_link ?>">Individual stickers <span>        <?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span></a>
+	<?php else : ?>
+		<a class="anchor-item" href="<?php echo $term_link ?>">Individual cards <span>        <?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span></a>
+	<?php endif; ?>
 <?php endif; ?>
   
 
