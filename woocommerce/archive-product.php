@@ -509,6 +509,67 @@ if(!is_search()) :
 		<?php endif; ?> 
 	<section>
 
+	<?php 	$hasTable = get_field('has_custom_table', 'term_'.$term_id->term_id); ?> 
+	<?php 	$tableTitle = get_field('table_title', 'term_'.$term_id->term_id); ?> 
+	<?php 	$firstColumn = get_field('first_column', 'term_'.$term_id->term_id); ?> 
+	<?php 	$firstColumn =$firstColumn['column_element'] ?> 
+	<?php 	$secondColumn = get_field('second_column', 'term_'.$term_id->term_id); ?> 
+	<?php 	$secondColumn =$secondColumn['column_element'] ?> 
+	<?php 	$thirdColumn = get_field('third_column', 'term_'.$term_id->term_id); ?> 
+	<?php 	$thirdColumn =$thirdColumn['column_element'] ?> 
+
+<?php if($hasTable) : ?>
+	<section  class="fd-woo__shop-table">
+		<div class="fd-woo__shop-table-title content-block">
+			<h2><?php echo $tableTitle ?></h2>
+		</div>
+		<div class="fd-woo__shop-table-grid">
+			<div class="fd-woo__shop-table-grid-single">
+				<?php if($firstColumn) : ?>
+					<?php foreach($firstColumn as $element) :?>
+					<div class="fd-woo__shop-table-content">
+						<h3><?php echo $element['title'] ?></h3>
+						<ul>
+							<?php foreach($element['single_card'] as $card) : ?>
+							<li><?php echo $card['card_title'] ?></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+					<?php endforeach; ?>
+				<?php endif; //first column ?>
+			</div>
+			<div class="fd-woo__shop-table-grid-single">
+				<?php if($secondColumn) : ?>
+					<?php foreach($secondColumn as $element) :?>
+					<div class="fd-woo__shop-table-content">
+						<h3><?php echo $element['title'] ?></h3>
+						<ul>
+							<?php foreach($element['single_card'] as $card) : ?>
+							<li><?php echo $card['card_title'] ?></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+					<?php endforeach; ?>
+				<?php endif; //first column ?>			
+			</div>
+			<div class="fd-woo__shop-table-grid-single">
+				<?php if($thirdColumn) : ?>
+					<?php foreach($thirdColumn as $element) :?>
+					<div class="fd-woo__shop-table-content">
+						<h3><?php echo $element['title'] ?></h3>
+						<ul>
+							<?php foreach($element['single_card'] as $card) : ?>
+							<li><?php echo $card['card_title'] ?></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+					<?php endforeach; ?>
+				<?php endif; //first column ?>
+			</div>
+		</div>
+	</section>
+<?php endif; //Has Table??>
+
 	<?php } ?>
 
 
