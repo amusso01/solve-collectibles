@@ -16,7 +16,7 @@ get_header();
 ?>
 <header class="post-template__header">
     <h1><?php echo get_the_title(get_option('page_for_posts', true)) ?></h1>
-	<?php the_content(get_option('page_for_posts', true)); ?>
+		<p style="font-size: 18px; font-weight: 600; text-align:center;" >We do like to write a good article on the football card collecting industry - here you will find them all!</p>
 </header>
 
 
