@@ -733,7 +733,7 @@ function bbloomer_first_sort_by_stock_amount( $args ) {
 // Alter number of search posts per page. This is to fix 500 Server problem when try to search for too many post
 function pd_search_posts_per_page($query) {
 	if ( $query->is_search && !is_admin()) {
-			$query->set( 'posts_per_page', '20' );
+			$query->set( 'posts_per_page', '15' );
 			$query->set( 'orderby', 'meta_value' );
 			$query->set( 'order', 'ASC' );
 			$query->set( 'meta_key', '_stock_status' );
