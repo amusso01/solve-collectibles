@@ -267,27 +267,34 @@
 		left: 0px;
 		z-index: 10;
 		width: 100vw;
-		height: 0px;
+		height: 55px;
 		border-bottom: 2px solid $color__dark;
 		display: flex;
 		padding: 0 1.5rem;
-		opacity: 0;
-		pointer-events: none;
+		opacity: 1;
+		pointer-events: all;
 		transition: opacity 0.6s, height 0.7s;
 		&.showMobile {
 			pointer-events: all;
 			height: 55px;
 			opacity: 1;
 		}
-		&::after {
-			@include pseudo;
-			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17.232' height='17.232' viewBox='0 0 17.232 17.232'%3E%3Cg id='Group_7' data-name='Group 7' transform='translate(-1646.61 -58.939)'%3E%3Cpath id='Path_40' data-name='Path 40' d='M1652.814,58.939h.536c.213.03.426.058.639.092a6.431,6.431,0,0,1,4.522,9.823.358.358,0,0,0,.063.542c1.56,1.542,3.118,3.088,4.652,4.655a5.387,5.387,0,0,1,.616.971v.153a1.327,1.327,0,0,1-1,1h-.153a5.574,5.574,0,0,1-.976-.621c-1.227-1.19-2.427-2.407-3.63-3.621-.419-.422-.821-.861-1.223-1.283-.168.1-.255.151-.341.2a6.427,6.427,0,0,1-9.733-4.088c-.08-.356-.121-.721-.18-1.083v-.536a2.946,2.946,0,0,0,.066-.328,6.391,6.391,0,0,1,4.869-5.65C1651.961,59.062,1652.39,59.013,1652.814,58.939ZM1648.8,65.4a4.289,4.289,0,1,0,4.323-4.266A4.287,4.287,0,0,0,1648.8,65.4Z' transform='translate(0 0)'/%3E%3C/g%3E%3C/svg%3E%0A");
-			right: 1rem;
+		.search-form-button {
+			background-color: transparent;
+			border: none;
+			position: relative;
 			top: 50%;
-			transform: translateY(-50%);
-			width: 20px;
-			height: 20px;
+			transform: translateY(-47%);
 		}
+		// &::after {
+		// 	@include pseudo;
+		// 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17.232' height='17.232' viewBox='0 0 17.232 17.232'%3E%3Cg id='Group_7' data-name='Group 7' transform='translate(-1646.61 -58.939)'%3E%3Cpath id='Path_40' data-name='Path 40' d='M1652.814,58.939h.536c.213.03.426.058.639.092a6.431,6.431,0,0,1,4.522,9.823.358.358,0,0,0,.063.542c1.56,1.542,3.118,3.088,4.652,4.655a5.387,5.387,0,0,1,.616.971v.153a1.327,1.327,0,0,1-1,1h-.153a5.574,5.574,0,0,1-.976-.621c-1.227-1.19-2.427-2.407-3.63-3.621-.419-.422-.821-.861-1.223-1.283-.168.1-.255.151-.341.2a6.427,6.427,0,0,1-9.733-4.088c-.08-.356-.121-.721-.18-1.083v-.536a2.946,2.946,0,0,0,.066-.328,6.391,6.391,0,0,1,4.869-5.65C1651.961,59.062,1652.39,59.013,1652.814,58.939ZM1648.8,65.4a4.289,4.289,0,1,0,4.323-4.266A4.287,4.287,0,0,0,1648.8,65.4Z' transform='translate(0 0)'/%3E%3C/g%3E%3C/svg%3E%0A");
+		// 	right: 1rem;
+		// 	top: 50%;
+		// 	transform: translateY(-50%);
+		// 	width: 20px;
+		// 	height: 20px;
+		// }
 		.search-field {
 			width: 100%;
 			border: none;
@@ -297,5 +304,14 @@
 				color: $color__text;
 			}
 		}
+	}
+}
+
+// PUSH CONTENT 55 px down page for mobile
+#content {
+	position: relative;
+	top: 55px;
+	@media #{$breakpoint-md-up} {
+		position: static;
 	}
 }

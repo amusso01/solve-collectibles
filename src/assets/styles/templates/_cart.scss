@@ -78,6 +78,10 @@
 					height: auto;
 					margin: auto;
 				}
+				display: none;
+				@media #{$breakpoint-md-up} {
+					display: block;
+				}
 			}
 			.product-name-flex {
 				display: flex;
@@ -89,6 +93,13 @@
 					display: inline-block;
 					.shortcode {
 						font-weight: 500;
+						display: none;
+						@media #{$breakpoint-md-up} {
+							display: block;
+						}
+					}
+					&:last-of-type {
+						display: none;
 					}
 				}
 			}

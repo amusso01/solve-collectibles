@@ -276,9 +276,9 @@ if(!is_search()) :
 	<?php } elseif(is_product_category( array( 'individuals', $slugIndividuals ) )){?>
 
 		<section  class="fd-woo__shop-grid fd-woo__shop-grid-individuals">
-      <ul class="products-grid">
+      <!-- <ul class="products-grid"> -->
         <?php
-      
+      woocommerce_product_loop_start();
 
         if ( wc_get_loop_prop( 'total' ) ) {
           while ( have_posts() ) {
@@ -293,7 +293,7 @@ if(!is_search()) :
           }
         }
 
-
+				woocommerce_product_loop_end();
 
         /**
          * Hook: woocommerce_after_shop_loop.
@@ -301,7 +301,7 @@ if(!is_search()) :
          * @hooked woocommerce_pagination - 10
          */
         ?>
-      </ul>
+      <!-- </ul> -->
       <?php
 			do_action( 'woocommerce_after_shop_loop' );
 
