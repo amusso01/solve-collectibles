@@ -1,12 +1,22 @@
 // HERO SLIDER HOME
 .home-hero.glide-hero {
 	position: relative;
+
 	.slide {
 		z-index: 1;
 		min-height: 435px;
 		background-size: cover;
 		position: relative;
 		border-bottom: 2px solid $color__dark;
+		> a {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+		}
 		.slide-text {
 			position: absolute;
 			width: 100vw;

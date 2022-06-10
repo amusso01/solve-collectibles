@@ -12,16 +12,17 @@ $slides = get_field('hero_slider');
     <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides">
             <?php foreach($slides as $slide) : ?>
-
+               
                 <li class="slide" style="background-image:url(<?php echo $slide['slide_image'] ?>);">
+                    <a  href="<?php echo $slide['slide_cta']['url'] ?>">    
                     <div class="slide-text">
-                        <h2><?php echo $slide['slide_title'] ?></h2>
-                        <?php if($slide['slide_cta']) : ?>
-                        <a href="<?php echo $slide['slide_cta']['url'] ?>" class="button"><?php echo $slide['slide_cta']['title'] ?></a>
-                        <?php endif; ?>
-                    </div>
+                            <h2><?php echo $slide['slide_title'] ?></h2>
+                            <?php if($slide['slide_cta']) : ?>
+                            <a href="<?php echo $slide['slide_cta']['url'] ?>" class="button"><?php echo $slide['slide_cta']['title'] ?></a>
+                            <?php endif; ?>
+                        </div>
+                    </a>
                 </li>
-            
             <?php endforeach; ?>
            
         </ul>

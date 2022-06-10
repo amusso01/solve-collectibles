@@ -448,7 +448,7 @@ function new_loop_shop_per_page( $cols ) {
 add_filter( 'woocommerce_checkout_login_message', 'bbloomer_return_customer_message' );
  
 function bbloomer_return_customer_message() {
-return 'Already have an account?';
+return 'Already have an account? </br> <span> CLICK HERE </span>';
 }
 
 

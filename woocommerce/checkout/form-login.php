@@ -22,11 +22,11 @@ if ( is_user_logged_in() || 'no' === get_option( 'woocommerce_enable_checkout_lo
 }
 
 ?>
-<div class="woocommerce-form-login-toggle">
+<div class="woocommerce-form-login-toggle" id="openAccount">
 	<?php wc_print_notice( apply_filters( 'woocommerce_checkout_login_message', esc_html__( 'Returning customer?', 'woocommerce' ) ) , 'notice' ); ?>
 </div>
 
-<div class="social-login">
+<div class="social-login ">
   <?php echo do_shortcode('[miniorange_social_login shape="square" theme="default" space="10" size="45"]'); ?>
 </div>
 <?php
