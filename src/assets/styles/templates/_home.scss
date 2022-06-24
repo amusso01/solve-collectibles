@@ -267,10 +267,12 @@
 	.shopby {
 		display: grid;
 		grid-template-columns: 1fr;
+		margin-bottom: 57px;
 		@media #{$breakpoint-md-up} {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
 			border-top: 2px solid $color__dark;
+			margin-bottom: 0;
 		}
 		&-single {
 			justify-self: center;

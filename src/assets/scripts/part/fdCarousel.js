@@ -3,6 +3,7 @@ import Glide from '@glidejs/glide'
 export default function fdCarousel(){
     // Hero
     new Glide('.glide-hero').mount()
+    new Glide('.glide-hero-mobile').mount()
 
     // Collections
     new Glide('.glide-collection', {
