@@ -114,6 +114,7 @@
 					margin-right: auto;
 					margin-bottom: 8px;
 					border: none;
+		
 					cursor: pointer;
 					@media #{$breakpoint-md-up} {
 						width: 50%;
@@ -136,6 +137,7 @@
 						opacity: 0;
 						pointer-events: none;
 						transition: opacity 0.3s;
+						background-size: 12% ;
 					}
 					&::before {
 						content: "1 Card added";
