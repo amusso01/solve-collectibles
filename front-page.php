@@ -130,7 +130,7 @@ get_header();
 			<a href="<?php echo  site_url( '/teams' ) ?>" class="button">VIEW ALL</a>
 		</div>
 		<div class="shopby-single">
-			<h2>Who are Solve Collectables?</h2>
+			<h2>Who are Solve Collectibles?</h2>
 			<a href="<?php echo  site_url( '/about' ) ?>" class="button">DISCOVER MORE</a>
 		</div>
 	</section>
