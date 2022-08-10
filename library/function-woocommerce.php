@@ -733,7 +733,7 @@ function bbloomer_first_sort_by_stock_amount( $args ) {
 // Alter number of search posts per page. This is to fix 500 Server problem when try to search for too many post
 function pd_search_posts_per_page($query) {
 	if ( $query->is_search && !is_admin()) {
-			$query->set( 'posts_per_page', '7' );
+			$query->set( 'posts_per_page', '5' );
 			$query->set( 'orderby', 'meta_value' );
 			$query->set( 'order', 'ASC' );
 			$query->set( 'meta_key', '_stock_status' );
@@ -748,3 +748,16 @@ function pd_search_posts_per_page($query) {
 	return $query;
 }
 add_filter( 'pre_get_posts','pd_search_posts_per_page' );
+
+
+add_action( 'woocommerce_before_add_to_cart_button', 'mish_before_add_to_cart_btn' );
+
+function mish_before_add_to_cart_btn(){
+	echo '<div class="fd-selector-wrapper">';
+}
+
+add_action( 'woocommerce_after_add_to_cart_quantity', 'mish_after_add_to_cart_btn' );
+
+function mish_after_add_to_cart_btn(){
+	echo '</div>';
+}

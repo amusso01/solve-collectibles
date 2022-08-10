@@ -77,5 +77,14 @@
 				}
 			}
 		}
+		.entry-content{
+			a{
+				color: #2500f9;
+
+				&:hover{
+					text-decoration:underline;
+				}
+			}
+		}
 	}
 }
