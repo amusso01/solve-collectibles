@@ -49,6 +49,12 @@
 				}
 				.attachment-woocommerce_thumbnail {
 					height: auto;
+					max-width: 150px;
+
+					@media #{$breakpoint-md-up} {
+						max-width: 220px;
+					}
+
 				}
 				// .woocommerce-loop-product__link {
 				//   padding: 20px 30px;
@@ -57,6 +63,8 @@
 					font-size: 14px;
 					margin-bottom: 45px;
 					margin-top: 14px;
+					white-space: break-spaces;
+					text-align: center;
 				}
 				.woocommerce-Price-amount.amount {
 					font-size: 14px;

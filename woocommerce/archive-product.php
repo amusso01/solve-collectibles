@@ -381,6 +381,16 @@ if(!is_search()) :
 			$term_ids[] = (int) $term_objects->term_id;   	
 		}
 
+		$slugBuild = 'bundles-'.$FDcat->slug;
+		$term_objects = get_term_by( 'slug', 'bundles', $taxonomy );
+		if($term_objects){
+			$term_ids[] = (int) $term_objects->term_id;   	
+		}
+		$term_objects = get_term_by( 'slug', $slugBuild, $taxonomy );
+		if($term_objects){
+			$term_ids[] = (int) $term_objects->term_id;   	
+		}
+
 		$args2 = array(
 				'taxonomy'     => $taxonomy,
 				'child_of'     => 0,
@@ -421,8 +431,72 @@ if(!is_search()) :
 	<?php } ?>
 
 
-  <!-- TAG COLLECTIONS -->
+  <!-- BUNDLES COLLECTIONS -->
+	<?php if($isParent && !is_product_tag() && !is_product_category( array('new-in'))) : ?>
 
+
+		<?php
+		$term_id  = get_queried_object();
+		$slugBuild = 'bundles-'.$term_id->slug;
+		$args = array(
+			'post_type' => 'product',
+			'posts_per_page' => 5,
+			'tax_query' => array( 
+				array(
+				'taxonomy' => 'product_cat',
+				'field' => 'slug',
+				'terms' => $slugBuild,
+				'include_children' => false, // (bool) - Whether or not to include children for hierarchical taxonomies. Defaults to true.
+				'operator' => 'IN' // (string
+				)
+			),
+		
+		);
+		$loop = new WP_Query( $args ); 
+		if($loop->have_posts()) : ?>
+			<section id="fd-bestSelling" class="fd-woo__shop-bestselling">		
+				<h3>Cards Bundles</h3>
+
+		<?php
+					woocommerce_product_loop_start();
+		
+					while ( $loop->have_posts() ) : $loop->the_post(); 
+						/**
+						 * Hook: woocommerce_shop_loop.
+						 */
+						do_action( 'woocommerce_shop_loop' );
+		
+						wc_get_template_part( 'content', 'product' );
+					endwhile;
+		
+					woocommerce_product_loop_end();	
+					wp_reset_query();
+				endif;
+
+				$terms    = get_terms([
+					'taxonomy'    => 'product_cat',
+					'slug'       => array($slugBuild),
+					'parent'      => get_queried_object_id()
+				]);
+
+				// Loop through product subcategories WP_Term Objects
+				foreach ( $terms as $term ) {
+					$term_link = get_term_link( $term, 'product_cat' );
+
+				}		?>
+
+		<?php if($terms) : ?>
+		
+
+		<div class="fd-go-to-individuals" style="border-bottom:2px solid #000; margin-bottom: 120px">
+				<a href="<?php echo $term_link ?>">SHOP ALL THE BUNDLES <span><?php get_template_part( 'svg-template/svg', 'right-arrow' ) ?></span></a>
+		</div>
+		<?php endif; ?> 
+		
+
+
+	</section> <!-- Bundles -->
+	<?php endif;  ?>
 
 	<?php if($isParent && !is_product_tag() && !is_product_category( array('new-in'))) { ?>
 	<!-- BEST SELLING -->

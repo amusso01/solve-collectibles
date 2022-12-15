@@ -561,4 +561,10 @@
 			grid-template-columns: 1fr 1fr;
 		}
 	}
+	.woosb-thumb{
+		display: none;
+		@media #{$breakpoint-md-up} {
+			display: block;
+		}
+	}
 }
