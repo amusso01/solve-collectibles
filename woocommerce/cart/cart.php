@@ -81,9 +81,10 @@ do_action( 'woocommerce_before_cart' ); ?>
                                     <?php
                                     $shortcode = get_field('card_shortcode' , $_product->get_id() );
                                     $team = get_the_terms( $_product->get_id(), 'team' )[0];
-
+                                    
                                     $cat = get_the_terms( $_product->get_id(), 'product_cat' );
                                     $parentInt = $cat[0]->parent;
+                                    // dd($parentInt);
                                 
 
                                     if ( ! $product_permalink ) {
@@ -96,7 +97,8 @@ do_action( 'woocommerce_before_cart' ); ?>
                                         <a href="<?php echo get_term_link($team->term_id ) ?>"><?php echo $team->name ?></a>
                                     <?php endif; 
 
-                                    if($parentInt !== 0 ) : 
+                                    if($parentInt !== 0 && $cat !== false) : 
+                                        
                                         foreach ($cat as $categoria) {
                                             $parent = get_ancestors( $categoria->term_id, 'product_cat' );
                                             foreach($parent as $parentcat){
@@ -104,6 +106,10 @@ do_action( 'woocommerce_before_cart' ); ?>
                                             }
                                         }?>
                                         <a href="<?php echo get_term_link( $parent[0]) ?>"><?php echo $parentName ;   ?></a>
+
+                                    <?php elseif($cat === false) : ?>
+                                      
+                                        <a href="<?= get_permalink( $variationID ) ?>"><?= $_product->get_name() ?></a>
                                     <?php else : ?>
                                         <a href="<?php echo get_term_link( $cat[0] ) ?>"><?php echo $cat[0]->name   ?></a>
                                     <?php endif;

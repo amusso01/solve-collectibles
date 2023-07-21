@@ -81,14 +81,15 @@ if ( is_product_category() ) {
         ?>
 
 <section class="fd-woo__archive-anchor">
-
-    <?php if ( wc_get_loop_prop( 'total' ) ) : ?>
-        <a class="anchor-item" href="#packs-list">PACKS <span> <?php get_template_part( 'svg-template/svg', 'down-arrow' ) ?></span></a>
+		<?php global $wp_query;  ?>
+    <?php if ( wc_get_loop_prop( 'total' ) && $wp_query->query['product_cat'] !== 'breaks' ) : ?>
+			<a class="anchor-item" href="#packs-list">PACKS <span> <?php get_template_part( 'svg-template/svg', 'down-arrow' ) ?></span></a>
+		<?php else : ?>
+			<a class="anchor-item" href="#packs-list">BREAKS <span> <?php get_template_part( 'svg-template/svg', 'down-arrow' ) ?></span></a>
     <?php endif; ?>
 
 
    <?php if($sub_cats)  : ?>
-	<?php global $wp_query;  ?>
 		<?php if($wp_query->query['product_cat'] === 'minecraft-adventure-trading-cards') : ?>
       	  	<a class="anchor-item" href="#teams-list">Dungeons SquishMe's <span>        <?php get_template_part( 'svg-template/svg', 'down-arrow' ) ?></span></a>
 		<?php else: ?>

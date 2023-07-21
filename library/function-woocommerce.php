@@ -761,3 +761,104 @@ add_action( 'woocommerce_after_add_to_cart_quantity', 'mish_after_add_to_cart_bt
 function mish_after_add_to_cart_btn(){
 	echo '</div>';
 }
+
+
+// REDIRECT BEFORE CHECKOUT
+// add_action('template_redirect','check_if_logged_in');
+// function check_if_logged_in()
+// {
+// 	$pageid = get_option( 'woocommerce_checkout_page_id' );
+// 	$guest = $_GET['guest'];
+// 	if(!is_user_logged_in() && is_page($pageid) && $guest!= 'true')
+// 	{
+// 			wp_redirect(site_url('/guest-checkout/') );
+// 			exit;
+// 	}
+
+// 	if(is_user_logged_in())
+// 	{
+// 		if(is_page(get_option( 'woocommerce_myaccount_page_id' )))
+// 		{	
+// 				$redirect = $_GET['redirect_to'];
+// 				if (isset($redirect)) {
+// 				echo '<script>window.location.href = "'.esc_url($redirect).'";</script>';
+// 				}
+// 		}
+// 	}
+// }
+
+
+// ADD OUT OF STOCK ON VARIATIONS
+/**
+ * Disable out-of-stock variations
+ *
+ * Make sure you check "Manage Stock" on each variation.
+ * Set the stock level to zero and in the front-end drop-down variations list
+ * the variation will be greyed-out on the product drop-down
+ *
+ * @author Wil Brown zeropointdevelopment.com
+ * @param $active
+ * @param $variation
+ *
+ * @return boolean
+ */
+// function zpd_variation_is_active( $active, $variation ) {
+// 	if( ! $variation->is_in_stock() ) {
+// 		return false;
+// 	}
+// 	return $active;
+// }
+// add_filter( 'woocommerce_variation_is_active', 'zpd_variation_is_active', 10, 2 );
+
+/**
+ * Adds " - sold out" to the drop-down list for out-of-stock variatons.
+ *
+ * Make sure you check "Manage Stock" on each variation.
+ * Set the stock level to zero and in the front-end drop-down variations list
+ *
+ * @param $option
+ * @param $_
+ * @param $attribute
+ * @param $product
+ *
+ * @return mixed|string
+ */
+function zpd_add_sold_out_label_to_wc_product_dropdown( $option, $_, $attribute, $product ){
+  if( is_product() ){
+	$sold_out_text = ' - sold out';
+	$variations    = $product->get_available_variations();
+	$attributes = $product->get_attributes();
+	$attribute_slug = zpd_wc_get_att_slug_by_title( $attribute, $attributes );
+	if( empty( $attribute_slug ) ) return $option;
+
+	foreach ( $variations as $variation ) {
+		if ( $variation['attributes']['attribute_' . $attribute_slug] === $option && $variation['is_in_stock'] === FALSE ) {
+			$option .= $sold_out_text;
+		}
+	}
+  }
+  return $option;
+}
+add_filter( 'woocommerce_variation_option_name', 'zpd_add_sold_out_label_to_wc_product_dropdown', 1, 4 );
+
+/**
+ * Returns the slug of the WooCommerce attribute taxonomy
+ *
+ * @param $attribute_title
+ * @param $attributes
+ *
+ * @return int|string
+ */
+function zpd_wc_get_att_slug_by_title( $attribute_title, $attributes ){
+	if ( empty( $attribute_title ) || empty( $attributes )) __return_empty_string();
+	$att_slug = '';
+
+	foreach( $attributes as $tax => $tax_obj ){
+
+		if( $tax_obj[ 'name'] === $attribute_title ){
+			$att_slug = $tax;
+		}
+	}
+
+	return $att_slug;
+}

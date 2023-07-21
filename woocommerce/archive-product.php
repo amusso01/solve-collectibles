@@ -171,7 +171,7 @@ if(!is_search()) :
 	// ARCHIVE NAV BAR ANCHOR LINK
 	if(is_product_category()):
 		if ( $term->parent === 0 && !is_product_category( array('new-in') ) ) : 
-			wc_get_template_part( 'custom/custom', 'archive-anchor-nav' ); 		
+			wc_get_template_part( 'custom/custom', 'archive-anchor-nav' ); 	
 		elseif(is_product_category( array( 'individuals', $slugIndividuals ) )) :
 			wc_get_template_part( 'custom/custom', 'individuals-anchor-nav' ); 
 		else :
@@ -218,7 +218,11 @@ if(!is_search()) :
 
 				if ( wc_get_loop_prop( 'total' ) ) { ?>
 			<section id="packs-list" class="fd-woo__shop-grid">
+				<?php if(is_product_category( array('breaks'))) : ?>
+				<h3>Breaks</h3>
+				<?php else : ?>
 				<h3>Packs</h3>
+				<?php endif; ?>
 				<?php 
 					woocommerce_product_loop_start();
 					while ( have_posts() ) {
