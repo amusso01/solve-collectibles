@@ -281,6 +281,17 @@ if ( ! is_product() ) return;
 
 jQuery(document).ready(function($){
 
+var inputQty = $('form.cart input.qty');
+var btnPlus = $('form.cart button.plus');
+var btnMinus = $('form.cart button.minus');
+
+
+if(inputQty.attr('type') === 'hidden'){
+	console.log( btnMinus);
+	btnMinus.css({display: "none"});
+	btnPlus.css({display: "none"});
+}
+
 $('form.cart').on( 'click', 'button.plus, button.minus', function() {
 
 // Get current quantity values
@@ -826,18 +837,25 @@ function mish_after_add_to_cart_btn(){
 function zpd_add_sold_out_label_to_wc_product_dropdown( $option, $_, $attribute, $product ){
   if( is_product() ){
 	$sold_out_text = ' - sold out';
-	$variations    = $product->get_available_variations();
+	$variations    = $product->get_children();
 	$attributes = $product->get_attributes();
 	$attribute_slug = zpd_wc_get_att_slug_by_title( $attribute, $attributes );
+	
 	if( empty( $attribute_slug ) ) return $option;
 
+	
+
 	foreach ( $variations as $variation ) {
-		if ( $variation['attributes']['attribute_' . $attribute_slug] === $option && $variation['is_in_stock'] === FALSE ) {
-			$option .= $sold_out_text;
+		$variation_product = wc_get_product( $variation );
+		$variation_attributes = $variation_product->get_attributes(); 
+		//print_r($option);
+		if ( $variation_attributes['pyt-pyp'] == $option &&  !$variation_product->is_in_stock() ) {
+			$option .= $sold_out_text.$variation_product->is_in_stock(); 
 		}
+		
 	}
   }
-  return $option;
+  return $option; 
 }
 add_filter( 'woocommerce_variation_option_name', 'zpd_add_sold_out_label_to_wc_product_dropdown', 1, 4 );
 
@@ -855,9 +873,13 @@ function zpd_wc_get_att_slug_by_title( $attribute_title, $attributes ){
 
 	foreach( $attributes as $tax => $tax_obj ){
 
-		if( $tax_obj[ 'name'] === $attribute_title ){
-			$att_slug = $tax;
+		if( is_object($tax_obj) ){
+			
+			if( $tax_obj[ 'name'] === $attribute_title ){
+				$att_slug = $tax;
+			}
 		}
+		
 	}
 
 	return $att_slug;
